@@ -22,10 +22,11 @@ footer{margin-top:18px;border-top:1px solid #243e3310}
 @media(max-width:900px){.hero-art::before{width:410px;height:410px}.hero-art::after{width:450px;height:450px}}
 @media(max-width:560px){.hero-art::before{width:320px;height:320px}.hero-art::after{width:350px;height:350px}.status::before{left:-375px}.status::after{right:-375px}}/* Corner detail follows the concentric treatment in the green card. */
 body{background:var(--bg);overflow-x:clip}
-.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero{position:relative;isolation:isolate;overflow:visible}
 .hero-art{background:none;z-index:1}
 .hero-art::before,.hero-art::after,.orb{display:none}
 .hero::before,.hero::after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid #d6a86b35;box-shadow:0 0 0 25px #e6c79e24,0 0 0 50px #e6c79e12;background:radial-gradient(circle,#efcd9940,transparent 72%);pointer-events:none;z-index:-1}
-.hero::before{top:-210px;left:-200px}
-.hero::after{bottom:-205px;right:-195px;border-color:#91aa7635;box-shadow:0 0 0 25px #becda124,0 0 0 50px #becda112;background:radial-gradient(circle,#aabb8740,transparent 72%)}
-@media(max-width:560px){.hero::before{left:-235px;top:-210px}.hero::after{right:-225px;bottom:-220px}}
+.hero::before{top:-150px;left:calc((100% - 100vw)/2 - 180px)}
+.hero::after{bottom:-140px;right:calc((100% - 100vw)/2 - 180px);border-color:#91aa7635;box-shadow:0 0 0 25px #becda124,0 0 0 50px #becda112;background:radial-gradient(circle,#aabb8740,transparent 72%)}
+@media(max-width:560px){.hero::before{left:calc((100% - 100vw)/2 - 240px);top:-170px}.hero::after{right:calc((100% - 100vw)/2 - 240px);bottom:-150px}}
+header{border-bottom:0}
