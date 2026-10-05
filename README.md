@@ -26,9 +26,9 @@ The initial schema is saved in `supabase/schema.sql` and applied to the hosted p
 ## Setup still needed
 
 1. **Email delivery:** configure a custom SMTP provider, verified sender address, and sender domain for public signup and password resets. [Supabase SMTP guide](https://supabase.com/docs/guides/auth/auth-smtp).
-2. **Auth redirects:** add `maucuan://auth/callback` to Supabase Auth's allowed Redirect URLs. An owned HTTPS landing URL should become the Site URL. For code-based verification, include `{{ .Token }}` in the confirmation and recovery email templates; the app supports entering those codes. [Native callback guide](https://supabase.com/docs/guides/auth/native-mobile-deep-linking).
+2. **Auth email templates:** Supabase's Site URL is configured as `https://maucuan-finance.vercel.app`; both `maucuan://auth/callback` and the website's `/auth/callback` are allowed redirects. For code-based verification, include `{{ .Token }}` in the confirmation and recovery email templates; the app supports entering those codes. [Native callback guide](https://supabase.com/docs/guides/auth/native-mobile-deep-linking).
 3. **Receipt OCR:** on-device extraction is implemented with `expo-text-extractor@2.0.0`; validate it on real receipt photos after installing the native build. No OCR cloud credentials are required. DocRunic exposes documentation tools and was not connected as an OCR processor.
-4. **Build distribution:** Expo project [@medizeng/maucuan](https://expo.dev/accounts/medizeng/projects/maucuan) is linked for cloud builds. `eas.json` includes development, Android APK preview, and production profiles. Apple/Google developer accounts are needed for store release. Identifiers `com.medissl.maucuan` are provisional until confirmed.
+4. **Build distribution:** the app configuration is linked to Expo project [@medizeng/maucuan](https://expo.dev/accounts/medizeng/projects/maucuan). Expo's GitHub integration is connected to the existing `medissl/MauCuan` repository. No Android build has started. `eas.json` includes development, Android APK preview, and production profiles. Apple/Google developer accounts are needed for store release. Identifiers `com.medissl.maucuan` are provisional until confirmed.
 5. **Store readiness:** privacy/support URLs, account deletion/export workflows, physical-device accessibility checks, and the store listing. This initial implementation is a development build, not a store-ready release.
 
 ## Validation
@@ -45,4 +45,8 @@ Dependency audit: the current Expo/React Native toolchain includes unresolved up
 
 ## Website
 
-[Live MauCuan website](https://maucuan-finance.vercel.app) is deployed from `website/` to the Vercel Hobby project `maucuan`. Includes landing, support, privacy, and an optional native auth handoff page. Uses the spotted macan artwork. The free Vercel address is a website address, not a verified email sender domain. Custom sender/domain setup was deferred; SMTP is still pending.
+[Live MauCuan website](https://maucuan-finance.vercel.app) is deployed from `website/` to the Vercel Hobby project `maucuan-finance`. Vercel is connected to this GitHub repository; `main` publishes the website. Includes landing, support, privacy, and an optional native auth handoff page. Uses the spotted macan artwork with a static hero and no floating text cards. The free Vercel address is a website address, not a verified email sender domain. Custom sender/domain setup was deferred; SMTP is still pending.
+
+## Project documentation
+
+GitHub is the shared record for source, setup, and validation. See [implementation status](docs/implementation-status.md), [account email setup](docs/account-email-setup.md), and the original [Miko](docs/miko-art-direction.txt) and [icon](docs/icon-art-direction.txt) artwork prompts. Native implementation is on `codex/maucuan-native` in [draft PR #1](https://github.com/medissl/MauCuan/pull/1).

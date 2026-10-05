@@ -13,7 +13,7 @@ For a future dedicated sender, use Resend with a domain owned by the operator. V
 
 Do not put SMTP credentials or email provider keys in the mobile app, website, or repository. Keep email verification enabled. Test confirmation and password recovery with an address outside the Supabase organization before enabling public signup.
 
-Allow these auth redirects:
+Supabase's Site URL is configured as https://maucuan-finance.vercel.app. These auth redirects are configured and verified in the dashboard:
 
 - maucuan://auth/callback
 - https://maucuan-finance.vercel.app/auth/callback
