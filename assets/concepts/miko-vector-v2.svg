@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720" role="img" aria-labelledby="title desc">
+<title id="title">Miko refined vector concept</title><desc id="desc">A compact expressive leopard cub in orange and cream, with deliberate rosettes, rounded paws and a raised curled tail.</desc>
+<defs>
+<g id="ring" fill="none" stroke="#583A2A" stroke-width="7" stroke-linecap="round"><path d="M-8-8Q-16-2-11 7M-4 11Q4 15 10 6M11-2Q7-13-2-11"/></g>
+<g id="ear"><path d="M-44 20C-68-30-39-68-7-66C29-64 59-32 42 17Z" fill="#CA632D" stroke="#643B28" stroke-width="5" stroke-linejoin="round"/><path d="M-25 7C-40-23-22-46-5-45C15-44 32-22 24 5Z" fill="#F2C99A"/><path d="M-23-13Q-14-35-1-32" fill="none" stroke="#FBE7C9" stroke-width="5" stroke-linecap="round"/></g>
+<g id="eye"><path d="M-27 7C-27-22-9-36 8-31C22-27 28-10 25 8C9 20-10 20-27 7Z" fill="#FFF1D9"/><ellipse cx="1" cy="-4" rx="13" ry="22" fill="#513629"/><circle cx="-3" cy="-12" r="4" fill="#FFF8EB"/><path d="M-28 7C-29-12-16-33-1-33C13-33 26-20 27-4" fill="none" stroke="#513629" stroke-width="5" stroke-linecap="round"/></g>
+</defs>
+<!-- The tail and body use deliberate flat shadow shapes, not airbrushed shading. -->
+<path d="M435 547C528 563 602 509 587 440C579 407 550 405 547 434C545 451 562 456 565 434" fill="none" stroke="#643B28" stroke-width="54" stroke-linecap="round"/>
+<path d="M435 547C528 563 602 509 587 440C579 407 550 405 547 434C545 451 562 456 565 434" fill="none" stroke="#D97735" stroke-width="44" stroke-linecap="round"/>
+<g fill="#704127"><ellipse cx="474" cy="540" rx="6" ry="8" transform="rotate(15 474 540)"/><ellipse cx="516" cy="528" rx="6" ry="8" transform="rotate(35 516 528)"/><ellipse cx="557" cy="502" rx="6" ry="8" transform="rotate(45 557 502)"/><ellipse cx="585" cy="465" rx="7" ry="6"/></g>
+<path d="M279 381C252 414 228 462 234 517C190 518 181 579 223 594H467C509 579 500 518 456 517C462 462 438 414 411 381Z" fill="#D97735" stroke="#643B28" stroke-width="5" stroke-linejoin="round"/>
+<path d="M426 405C454 460 457 502 441 539L460 558L430 581H378C414 536 425 471 411 415Z" fill="#BF5F2D"/>
+<path d="M306 399Q345 422 384 399C403 446 396 521 345 551C294 521 287 446 306 399Z" fill="#F8E6C7"/>
+<g><use href="#ring" x="273" y="439"/><use href="#ring" x="257" y="486"/><use href="#ring" x="416" y="439"/><use href="#ring" x="431" y="486"/></g>
+<path d="M272 472Q268 520 276 548M418 472Q422 520 414 548" stroke="#995028" stroke-width="4" fill="none" stroke-linecap="round"/>
+<!-- Compact head and softer cheek silhouette; ear geometry is mirrored explicitly. -->
+<use href="#ear" transform="translate(222 212) rotate(-13)"/><use href="#ear" transform="translate(468 212) rotate(13) scale(-1 1)"/>
+<path d="M191 258C190 190 252 161 345 161S500 190 499 258C532 299 505 382 460 400C418 423 386 422 345 419C304 422 272 423 230 400C185 382 158 299 191 258Z" fill="#E58C43" stroke="#643B28" stroke-width="5" stroke-linejoin="round"/>
+<path d="M191 290C195 346 220 387 274 402C222 405 175 371 179 322Q180 303 191 290Z" fill="#D47735"/>
+<path d="M499 290C495 346 470 387 416 402C468 405 515 371 511 322Q510 303 499 290Z" fill="#D47735"/>
+<!-- Three distinct forehead marks form the recurring identity. -->
+<g fill="#583A2A"><ellipse cx="345" cy="195" rx="7" ry="10"/><ellipse cx="324" cy="216" rx="6" ry="8" transform="rotate(-20 324 216)"/><ellipse cx="366" cy="216" rx="6" ry="8" transform="rotate(20 366 216)"/></g>
+<use href="#ring" x="247" y="219"/><use href="#ring" x="443" y="219"/>
+<use href="#ring" x="210" y="298"/><use href="#ring" x="480" y="298"/>
+<g fill="#583A2A"><ellipse cx="208" cy="257" rx="5" ry="7"/><ellipse cx="482" cy="257" rx="5" ry="7"/></g>
+<!-- Eyes reuse one component with identical scale and baseline. -->
+<use href="#eye" x="286" y="292"/><use href="#eye" transform="translate(404 292) scale(-1 1)"/>
+<path d="M260 246Q278 237 296 241M394 241Q412 237 430 246" fill="none" stroke="#643B28" stroke-width="6" stroke-linecap="round"/>
+<path d="M254 340C254 313 300 310 345 328C390 310 436 313 436 340C436 383 390 405 345 403C300 405 254 383 254 340Z" fill="#F8E6C7"/>
+<path d="M324 326Q345 318 366 326Q363 337 349 344Q345 347 341 344Q327 337 324 326Z" fill="#643B28"/>
+<path d="M345 346V353M345 353Q322 373 302 357M345 353Q368 373 388 357" fill="none" stroke="#643B28" stroke-width="4" stroke-linecap="round"/>
+<path d="M323 368Q345 394 367 368" fill="#643B28"/>
+<path d="M334 383Q345 375 356 383Q345 388 334 383Z" fill="#CB8065"/>
+<g fill="#C18F63"><circle cx="278" cy="341" r="3"/><circle cx="291" cy="334" r="3"/><circle cx="412" cy="341" r="3"/><circle cx="399" cy="334" r="3"/></g>
+<!-- Paws have rounded top planes and one clear shadow color. -->
+<path d="M234 543C214 543 204 560 209 579C214 599 258 605 312 601C326 600 328 587 321 572C312 548 273 537 234 543Z" fill="#F8E6C7" stroke="#643B28" stroke-width="5"/>
+<path d="M456 543C476 543 486 560 481 579C476 599 432 605 378 601C364 600 362 587 369 572C378 548 417 537 456 543Z" fill="#F8E6C7" stroke="#643B28" stroke-width="5"/>
+<path d="M212 581Q258 591 320 584Q326 599 312 601Q231 608 212 581M478 581Q432 591 370 584Q364 599 378 601Q459 608 478 581" fill="#E6C99F"/>
+<path d="M240 566L239 585M265 568L266 588M425 568L424 588M450 566L451 585" stroke="#B5885E" stroke-width="4" stroke-linecap="round"/>
+</svg>
