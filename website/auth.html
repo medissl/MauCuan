@@ -1,0 +1,12 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>Buka MauCuan</title><link rel="icon" href="/assets/icon.png"><link rel="stylesheet" href="/style.css"></head><body><div class="wrap"><header><a class="brand" href="/">MauCuan<span class="brand-dot">.</span></a></header><main class="document"><p class="eyebrow">KEMBALI KE APLIKASI</p><h1>Lanjut di MauCuan.</h1><p>Jika MauCuan sudah terpasang, buka aplikasi untuk melanjutkan. Jika kamu menerima kode email, kode tersebut juga bisa dimasukkan langsung di aplikasi.</p><a id="open-app" class="button" href="maucuan://auth/callback">Buka MauCuan ↗</a><p>Belum punya versi uji? <a href="/support">Hubungi bantuan</a>.</p></main></div><script>
+const query = new URLSearchParams(location.search);
+const fragment = new URLSearchParams(location.hash.slice(1));
+const callback = new URLSearchParams();
+for (const key of ['code','access_token','refresh_token','type','error_description']) {
+  const value = query.get(key) || fragment.get(key);
+  if (value) callback.set(key, value);
+}
+const button = document.getElementById('open-app');
+button.href = 'maucuan://auth/callback' + (callback.size ? '?' + callback.toString() : '');
+history.replaceState(null, '', location.pathname);
+</script></body></html>
