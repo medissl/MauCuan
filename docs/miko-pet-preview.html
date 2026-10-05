@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="id">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Miko · MauCuan</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f8f5ef;color:#143e3d;font:16px system-ui,sans-serif}button{font:inherit;cursor:pointer}main{max-width:1000px;margin:auto;padding:32px 24px}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px}.brand{font-size:24px;font-weight:800;letter-spacing:-1px}.brand span{color:#ef7924}.tag{font-size:13px;color:#647572}.layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}.habitat{position:relative;min-height:460px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#eee9df;border-radius:40px;padding:24px;overflow:hidden}.speech{z-index:2;background:#fffdf9;border-radius:18px;padding:14px 20px;max-width:320px;text-align:center;min-height:52px;font-size:14px;box-shadow:0 5px 20px #143e3d08}.pet{border:0;background:none;padding:0;width:310px;max-width:100%;position:relative;margin-top:18px;outline-offset:5px}.breathing{animation:breathe 4s ease-in-out infinite;transform-origin:50% 95%}.pet img{display:block;width:100%;height:auto}.happy{position:absolute;inset:0;opacity:0;transition:opacity .13s}.pet[data-mood="happy"] .happy{opacity:1}.pet[data-mood="happy"] .idle{opacity:0}.idle{transition:opacity .13s}.pet.react{animation:bounce .65s ease}.hint{font-size:12px;color:#637570;margin:10px 0 0}.content h1{font-size:42px;line-height:1.12;letter-spacing:-1.8px;margin:0 0 16px}.content p{line-height:1.65;color:#627471;margin:0 0 24px}.actions{display:grid;gap:12px}.action{border:1px solid #dce1d7;border-radius:18px;background:#fffdf9;color:#143e3d;display:flex;align-items:center;text-align:left;padding:16px 18px;gap:14px}.action:hover{border-color:#ef7924;transform:translateY(-1px)}.action b{display:block;font-size:15px}.action small{display:block;font-size:12px;color:#647572;margin-top:4px}.icon{display:grid;place-items:center;background:#fbe4cb;color:#cb651b;width:42px;height:42px;flex-shrink:0;border-radius:13px}.icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.stats{display:flex;gap:24px;margin:24px 0;color:#647572;font-size:13px}.stats strong{display:block;color:#143e3d;font-size:20px;margin-bottom:3px}.note{font-size:12px!important;margin:28px 0 0!important}.reset{border:0;background:none;color:#647572;text-decoration:underline;font-size:12px;padding:0}.portrait{margin-top:42px;padding-top:24px;border-top:1px solid #dde0d5;display:flex;align-items:center;gap:16px;font-size:14px;color:#627471}.portrait img{width:64px;height:64px;object-fit:contain;background:white;border-radius:18px}.portrait b{color:#143e3d;display:block;margin-bottom:4px}@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.018,1.025)}}@keyframes bounce{0%,100%{transform:translateY(0)}35%{transform:translateY(-13px) rotate(-3deg)}70%{transform:translateY(-5px) rotate(2deg)}}@media(max-width:720px){main{padding:22px 18px}.layout{grid-template-columns:1fr;gap:28px}header{margin-bottom:22px}.habitat{min-height:410px}.pet{width:265px}.content h1{font-size:34px}.portrait{margin-top:28px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+<style>.emotions{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.emotions button{border:1px solid #dce1d7;border-radius:12px;background:#fffdf9;color:#143e3d;padding:9px 12px;font-size:13px}.emotions button[aria-pressed="true"]{background:#143e3d;color:#fffdf9}.icon-sizes{display:flex;align-items:center;gap:16px;margin-top:20px}.icon-sizes img{border-radius:22%;object-fit:contain}.icon-sizes small{color:#627471}.portrait img{object-fit:cover}</style>
+<link rel="preload" as="image" href="../assets/concepts/miko-pet-happy.png">
+<link rel="preload" as="image" href="../assets/concepts/miko-pet-wink.png">
+<link rel="preload" as="image" href="../assets/concepts/miko-pet-focused.png">
+<link rel="preload" as="image" href="../assets/concepts/miko-pet-rest.png">
+<main>
+<header><div class="brand">MauCuan<span>.</span></div><span class="tag">Pratinjau pet interaktif</span></header>
+<div class="layout">
+<section class="habitat" aria-label="Miko, pet MauCuan">
+<div class="speech" id="speech" role="status" aria-live="polite">Hai! Aku Miko. Senang kamu mampir.</div>
+<button class="pet" id="pet" aria-label="Sapa Miko" data-mood="idle"><div class="breathing"><img id="sprite" src="../assets/concepts/miko-pet-idle.png" alt="Miko, macan tutul kecil dengan syal teal"></div></button>
+<p class="hint">Ketuk Miko untuk menyapa</p>
+</section>
+<section class="content"><h1>Teman kecil.<br>Kebiasaan besar.</h1><p>Miko merayakan kamu yang kembali, mengecek catatan, dan pelan-pelan mendekati tujuan.</p>
+<div class="actions">
+<button class="action" id="checkin"><span class="icon"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="4"/><path d="M8 3v4m8-4v4M8 14l3 3 5-6"/></svg></span><span><b>Check-in hari ini</b><small>Sudah mengecek catatanmu?</small></span></button>
+<button class="action" id="savings"><span class="icon"><svg viewBox="0 0 24 24"><path d="M4 7h14a2 2 0 0 1 2 2v10H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11M16 12h5v4h-5z"/></svg></span><span><b>Coba reaksi target tabungan</b><small>Simulasi satu langkah mendekati impian</small></span></button>
+<button class="action" id="nospend"><span class="icon"><svg viewBox="0 0 24 24"><path d="M19 4C8 3 3 8 6 15s13 4 13-11ZM6 19l9-10"/></svg></span><span><b>Hari tanpa belanja</b><small>Tetap boleh check-in. Tetap dihargai.</small></span></button>
+</div>
+<div class="stats"><div><strong id="xp">0 XP</strong>Check-in simulasi</div><div><strong id="goal">35%</strong>Target contoh</div></div>
+<button class="reset" id="reset">Ulangi pratinjau</button>
+<div class="emotions" aria-label="Coba ekspresi Miko">
+<button id="emotion-idle" aria-pressed="true">Santai</button><button id="emotion-happy" aria-pressed="false">Senang</button><button id="emotion-wink" aria-pressed="false">Menyapa</button><button id="emotion-focused" aria-pressed="false">Fokus</button><button id="emotion-rest" aria-pressed="false">Istirahat</button>
+</div>
+<p class="note">Ini demo perilaku pet, bukan data akunmu. XP hanya bertambah sekali untuk check-in di sesi demo ini. Menambah transaksi tidak memberi XP.</p>
+</section></div>
+<div class="portrait"><img src="../assets/concepts/maucuan-miko-icon.png" alt="Ikon MauCuan dengan Miko"><div><b>Ikon baru, Miko yang sama.</b>Wajah dan syal yang mudah dikenali, termasuk saat ukurannya kecil.</div></div>
+<div class="icon-sizes"><img src="../assets/concepts/maucuan-miko-icon.png" width="96" height="96" alt="Ikon pada 96 piksel"><img src="../assets/concepts/maucuan-miko-icon.png" width="60" height="60" alt="Ikon pada 60 piksel"><img src="../assets/concepts/maucuan-miko-icon.png" width="32" height="32" alt="Ikon pada 32 piksel"><small>96 · 60 · 32 px</small></div>
+</main>
+<script>
+const pet=document.getElementById('pet'),speech=document.getElementById('speech');
+const sprite=document.getElementById('sprite');
+const moods=['idle','happy','wink','focused','rest'];
+const descriptions={idle:'Miko tersenyum santai',happy:'Miko merayakan dengan mata bahagia',wink:'Miko mengedipkan satu mata',focused:'Miko memperhatikan catatan',rest:'Miko beristirahat dengan mata tertutup'};
+let checked=false,progress=35,timer;
+function setMood(mood){pet.dataset.mood=mood;sprite.src='../assets/concepts/miko-pet-'+mood+'.png';sprite.alt=descriptions[mood];for(const value of moods)document.getElementById('emotion-'+value).setAttribute('aria-pressed',String(value===mood))}
+function react(message,mood='happy'){clearTimeout(timer);speech.textContent=message;setMood(mood);pet.classList.remove('react');void pet.offsetWidth;if(mood==='happy'||mood==='wink')pet.classList.add('react');timer=setTimeout(()=>{setMood('idle');pet.classList.remove('react')},2400)}
+function checkIn(noSpend=false){if(checked){react('Check-in hari ini sudah dihitung. Aku tetap senang kamu di sini!');return}checked=true;document.getElementById('xp').textContent='20 XP';react(noSpend?'Tanpa belanja juga boleh. Terima kasih sudah check-in!':'Catatan dicek, langkah kecil dirayakan. +20 XP!')}
+pet.addEventListener('click',()=>react('Hehe, hai juga! Mau cek catatan bareng?','wink'));
+const messages={idle:'Hai! Aku Miko. Senang kamu mampir.',happy:'Langkah kecilmu layak dirayakan!',wink:'Hai juga! Senang ketemu kamu.',focused:'Kita cek jumlah dan tanggalnya pelan-pelan, ya.',rest:'Istirahat sebentar. Kita lanjut saat kamu siap.'};
+for(const mood of moods)document.getElementById('emotion-'+mood).addEventListener('click',()=>{clearTimeout(timer);pet.classList.remove('react');setMood(mood);speech.textContent=messages[mood]});
+document.getElementById('checkin').addEventListener('click',()=>checkIn());
+document.getElementById('nospend').addEventListener('click',()=>checkIn(true));
+document.getElementById('savings').addEventListener('click',()=>{progress=Math.min(100,progress+5);document.getElementById('goal').textContent=progress+'%';react(progress===100?'Target contoh tercapai. Kita rayakan!':'Sedikit demi sedikit, impianmu makin dekat.')});
+document.getElementById('reset').addEventListener('click',()=>{clearTimeout(timer);checked=false;progress=35;setMood('idle');pet.classList.remove('react');document.getElementById('xp').textContent='0 XP';document.getElementById('goal').textContent='35%';speech.textContent=messages.idle});
+</script>
+</html>
+
