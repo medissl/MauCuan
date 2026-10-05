@@ -1,6 +1,6 @@
 # MauCuan
 
-A native Android and iOS app for recording income and spending, setting savings goals, and building consistent habits with Miko the tiger. Built with Expo / React Native and Supabase.
+A native Android and iOS app for recording income and spending, setting savings goals, and building consistent habits with Miko the spotted macan. Built with Expo / React Native and Supabase.
 
 ## Run locally
 
@@ -13,7 +13,7 @@ For full native email callbacks, install a development build. Expo Go can previe
 - Email/password account creation, verification handling, sign-in/out, password recovery, and native encrypted session persistence.
 - First-use profile and wallet setup; real transactions with editing, deletion, filters, and monthly category insights.
 - Savings goals and atomic allocations that do not count as new spending.
-- Camera/gallery receipt attachments, stored in a private Supabase bucket. **Automatic OCR is not connected yet; receipt fields are currently filled manually.**
+- Camera/gallery receipt attachments, stored in a private Supabase bucket. On-device OCR suggests merchant, IDR total, and date using ML Kit (Android) / Vision (iOS). Users must review before saving; unreadable or conflicting fields remain manual. Requires a new native build, not Expo Go.
 - Server-authoritative daily check-ins, XP, levels, leaves, and cosmetic collection redemptions. Extra transactions do not earn extra daily rewards.
 - Original rendered Miko character, orange/ivory/forest design, glass navigation, and reduced-motion setting.
 
@@ -27,8 +27,8 @@ The initial schema is saved in `supabase/schema.sql` and applied to the hosted p
 
 1. **Email delivery:** configure a custom SMTP provider, verified sender address, and sender domain for public signup and password resets. [Supabase SMTP guide](https://supabase.com/docs/guides/auth/auth-smtp).
 2. **Auth redirects:** add `maucuan://auth/callback` to Supabase Auth's allowed Redirect URLs. An owned HTTPS landing URL should become the Site URL. For code-based verification, include `{{ .Token }}` in the confirmation and recovery email templates; the app supports entering those codes. [Native callback guide](https://supabase.com/docs/guides/auth/native-mobile-deep-linking).
-3. **Receipt OCR:** choose a provider and spending cap. Its credential must remain on the server. Do not send private receipts to a third party until that integration is selected. The app never pretends OCR has succeeded.
-4. **Build distribution:** an Expo account/EAS project is needed for cloud development builds. `eas.json` includes development, Android APK preview, and production profiles. Apple/Google developer accounts are needed for store release. Identifiers `com.medissl.maucuan` are provisional until confirmed.
+3. **Receipt OCR:** on-device extraction is implemented with `expo-text-extractor@2.0.0`; validate it on real receipt photos after installing the native build. No OCR cloud credentials are required. DocRunic exposes documentation tools and was not connected as an OCR processor.
+4. **Build distribution:** Expo project [@medizeng/maucuan](https://expo.dev/accounts/medizeng/projects/maucuan) is linked for cloud builds. `eas.json` includes development, Android APK preview, and production profiles. Apple/Google developer accounts are needed for store release. Identifiers `com.medissl.maucuan` are provisional until confirmed.
 5. **Store readiness:** privacy/support URLs, account deletion/export workflows, physical-device accessibility checks, and the store listing. This initial implementation is a development build, not a store-ready release.
 
 ## Validation
@@ -39,6 +39,10 @@ Android and iOS JavaScript/Hermes bundle exports have passed. Database security 
 
 ## Current limits
 
-One IDR wallet; online-first recording; daily check-ins; a static rendered mascot with breathing animation. No bank transfers, bank sync, automatic OCR, reminders, pet pose animation, accessory rendering, or recurring transactions yet. Large ledgers will need server pagination and aggregates before scale.
+One IDR wallet; online-first recording; daily check-ins; a static rendered mascot with breathing animation. No bank transfers, bank sync, cloud OCR, reminders, pet pose animation, accessory rendering, or recurring transactions yet. Large ledgers will need server pagination and aggregates before scale.
 
 Dependency audit: the current Expo/React Native toolchain includes unresolved upstream `braces`, `node-forge`, and Router's transitive URI parser advisories. Patched braces/forge versions were unavailable when checked; the parser repair currently requires a Router major upgrade, outside SDK 57 compatibility. Do not expose the Metro development server publicly; revisit upstream fixes before release. The compatible `uuid` fix is pinned through an override.
+
+## Website
+
+[Live MauCuan website](https://maucuan-finance.vercel.app) is deployed from `website/` to the Vercel Hobby project `maucuan`. Includes landing, support, privacy, and an optional native auth handoff page. Uses the spotted macan artwork. The free Vercel address is a website address, not a verified email sender domain. Custom sender/domain setup was deferred; SMTP is still pending.

@@ -17,6 +17,7 @@
     "expo-router": "~57.0.24",
     "expo-secure-store": "57.0.4",
     "expo-status-bar": "57.0.1",
+    "expo-text-extractor": "2.0.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.3",
@@ -38,7 +39,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test tests/finance.test.cjs",
+    "test": "node --experimental-strip-types --test tests/*.test.cjs",
     "export:android": "expo export --platform android",
     "export:ios": "expo export --platform ios",
     "lint": "expo lint"

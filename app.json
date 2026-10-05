@@ -35,6 +35,18 @@
       ],
       "expo-router"
     ],
-    "scheme": "maucuan"
+    "scheme": "maucuan",
+    "owner": "medizeng",
+    "githubUrl": "https://github.com/medissl/MauCuan",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "2e5ac3c3-095a-46a0-a99c-ce1dfaa285da"
+      }
+    }
   }
 }
