@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="720" viewBox="0 0 640 720" role="img" aria-labelledby="title desc">
+<title id="title">Miko, constructed vector concept</title><desc id="desc">An orange spotted leopard cub with aligned matte eyes, rounded paws, consistent rosettes, and a curled tail. Editable vector artwork.</desc>
+<defs>
+  <g id="rosette" fill="none" stroke="#593C28" stroke-width="8" stroke-linecap="round"><path d="M-10-8Q-17 0-10 8M-3 12Q6 15 12 6M12-3Q8-13-2-12"/></g>
+  <g id="spot" fill="#593C28"><ellipse rx="6" ry="8"/></g>
+  <g id="ear"><circle r="56" fill="#DC8A43" stroke="#493629" stroke-width="8"/><circle r="34" fill="#F2D9AE"/><path d="M-23 10Q0-23 23 10" fill="none" stroke="#CDAC81" stroke-width="5" stroke-linecap="round"/></g>
+  <g id="eye"><ellipse rx="24" ry="30" fill="#493629"/><circle cx="-7" cy="-10" r="5" fill="#FFF4DF"/></g>
+  <clipPath id="head"><path d="M174 195C174 131 229 104 320 104S466 131 466 195V248C466 325 405 364 320 364S174 325 174 248Z"/></clipPath>
+  <clipPath id="body"><path d="M237 355Q320 323 403 355L435 542Q451 606 407 623H233Q189 606 205 542Z"/></clipPath>
+</defs>
+<!-- Tail is drawn behind the torso, with separated spots away from its contour. -->
+<path d="M416 564C526 583 552 540 529 491C513 456 548 428 566 454C603 511 579 616 447 617" fill="#DC8A43" stroke="#493629" stroke-width="8" stroke-linejoin="round"/>
+<g fill="#593C28"><ellipse cx="545" cy="480" rx="8" ry="11" transform="rotate(-20 545 480)"/><ellipse cx="551" cy="520" rx="8" ry="11"/><ellipse cx="531" cy="558" rx="11" ry="8" transform="rotate(-25 531 558)"/><ellipse cx="492" cy="583" rx="11" ry="8"/></g>
+<!-- Body pattern uses one reusable rosette geometry. -->
+<path d="M237 355Q320 323 403 355L435 542Q451 606 407 623H233Q189 606 205 542Z" fill="#DC8A43" stroke="#493629" stroke-width="8"/>
+<g clip-path="url(#body)"><g transform="translate(250 403) scale(.6)"><use href="#rosette"/></g><g transform="translate(390 403) scale(.6)"><use href="#rosette"/></g><g transform="translate(242 458) scale(.6)"><use href="#rosette"/></g><g transform="translate(398 458) scale(.6)"><use href="#rosette"/></g><g transform="translate(238 515) scale(.6)"><use href="#rosette"/></g><g transform="translate(402 515) scale(.6)"><use href="#rosette"/></g><g transform="translate(252 560) scale(.6)"><use href="#rosette"/></g><g transform="translate(388 560) scale(.6)"><use href="#rosette"/></g></g>
+<path d="M271 365Q320 386 369 365L375 516Q369 579 320 597Q271 579 265 516Z" fill="#F7E6C6"/>
+<!-- Ears share identical geometry, placed at equal offsets from the center. -->
+<use href="#ear" x="190" y="137"/><use href="#ear" x="450" y="137"/>
+<path d="M174 195C174 131 229 104 320 104S466 131 466 195V248C466 325 405 364 320 364S174 325 174 248Z" fill="#E39A51" stroke="#493629" stroke-width="8"/>
+<g clip-path="url(#head)">
+  <!-- Intentional forehead signature: three isolated spots. -->
+  <use href="#spot" x="320" y="133"/><use href="#spot" x="299" y="154"/><use href="#spot" x="341" y="154"/>
+  <use href="#rosette" x="221" y="168"/><use href="#rosette" x="419" y="168"/>
+  <use href="#spot" x="197" y="213"/><use href="#spot" x="443" y="213"/>
+  <use href="#rosette" x="207" y="267"/><use href="#rosette" x="433" y="267"/>
+</g>
+<!-- Shared eye shape and baseline. No gradients or glossy iris rendering. -->
+<path d="M249 198Q267 189 283 197M357 197Q373 189 391 198" fill="none" stroke="#493629" stroke-width="7" stroke-linecap="round"/>
+<use href="#eye" x="267" y="231"/><use href="#eye" x="373" y="231"/>
+<path d="M244 288C244 259 282 253 320 270C358 253 396 259 396 288C396 324 354 341 320 341S244 324 244 288Z" fill="#F7E6C6"/>
+<path d="M301 273Q320 266 339 273L325 291Q320 296 315 291Z" fill="#493629"/>
+<path d="M320 294V304M320 304Q300 320 282 307M320 304Q340 320 358 307" fill="none" stroke="#493629" stroke-width="5" stroke-linecap="round"/>
+<g fill="#96714D"><circle cx="266" cy="287" r="3"/><circle cx="277" cy="281" r="3"/><circle cx="374" cy="287" r="3"/><circle cx="363" cy="281" r="3"/></g>
+<!-- Front legs and paws remain simple editable shapes. -->
+
+<path d="M219 582Q204 635 255 644H301Q317 643 313 616Q305 578 273 578Z" fill="#F7E6C6" stroke="#493629" stroke-width="8"/>
+<path d="M421 582Q436 635 385 644H339Q323 643 327 616Q335 578 367 578Z" fill="#F7E6C6" stroke="#493629" stroke-width="8"/>
+<path d="M243 616V634M267 615V637M373 615V637M397 616V634" stroke="#96714D" stroke-width="5" stroke-linecap="round"/>
+</svg>
