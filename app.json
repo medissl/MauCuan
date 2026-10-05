@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "MauCuan",
+    "slug": "maucuan",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/maucuan-icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.medissl.maucuan"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/maucuan-icon.png",
+        "backgroundColor": "#F76B24"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.medissl.maucuan"
+    },
+    "web": {
+      "favicon": "./assets/maucuan-icon.png"
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-font",
+      "expo-dev-client",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "MauCuan membutuhkan foto struk yang kamu pilih.",
+          "cameraPermission": "MauCuan menggunakan kamera untuk memotret struk.",
+          "microphonePermission": false
+        }
+      ],
+      "expo-router"
+    ],
+    "scheme": "maucuan"
+  }
+}

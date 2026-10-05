@@ -33,7 +33,7 @@ The initial schema is saved in `supabase/schema.sql` and applied to the hosted p
 
 ## Validation
 
-`npm run typecheck` checks TypeScript. `npm test` validates financial arithmetic, amount/date parsing, Jakarta dates, and pet progress. `supabase/security-tests.sql` checks cross-user and anonymous access, opening balance immutability, no-spend validation, allocation limits, and duplicate daily reward behavior; all fixtures roll back.
+`npm run lint` checks the source; `npm run typecheck` checks TypeScript. `npm test` validates financial arithmetic, amount/date parsing, Jakarta dates, and pet progress. `supabase/security-tests.sql` checks cross-user and anonymous access, opening balance immutability, no-spend validation, allocation limits, and duplicate daily reward behavior; all fixtures roll back.
 
 Android and iOS JavaScript/Hermes bundle exports have passed. Database security tests passed on the hosted project, and Supabase's security advisor reported no findings. These checks do not substitute for real-device testing or end-to-end email delivery.
 
@@ -41,4 +41,4 @@ Android and iOS JavaScript/Hermes bundle exports have passed. Database security 
 
 One IDR wallet; online-first recording; daily check-ins; a static rendered mascot with breathing animation. No bank transfers, bank sync, automatic OCR, reminders, pet pose animation, accessory rendering, or recurring transactions yet. Large ledgers will need server pagination and aggregates before scale.
 
-Dependency audit: the current Expo/React Native toolchain includes unresolved upstream `braces` and `node-forge` advisories. No patched versions were published when checked. Do not expose the Metro development server publicly; revisit upstream fixes before release. The compatible `uuid` fix is pinned through an override.
+Dependency audit: the current Expo/React Native toolchain includes unresolved upstream `braces`, `node-forge`, and Router's transitive URI parser advisories. Patched braces/forge versions were unavailable when checked; the parser repair currently requires a Router major upgrade, outside SDK 57 compatibility. Do not expose the Metro development server publicly; revisit upstream fixes before release. The compatible `uuid` fix is pinned through an override.

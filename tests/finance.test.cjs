@@ -1,0 +1,6 @@
+const test=require('node:test');const assert=require('node:assert/strict');
+const { parseAmount,isValidDate,jakartaDay,totals,petProgress }=require('../src/lib/finance.ts');
+test('integer rupiah input rejects malformed and unsafe values',()=>{assert.equal(parseAmount('48000'),48000);for(const n of ['48.000','1e6','-5','12.5','','99999999999999999'])assert.throws(()=>parseAmount(n));});
+test('dates reject impossible dates and align to Jakarta midnight',()=>{assert.equal(isValidDate('2026-02-30'),false);assert.equal(isValidDate('2028-02-29'),true);assert.equal(jakartaDay(new Date('2026-10-05T17:00:00Z')),'2026-10-06');});
+test('savings allocations do not inflate spending or reduce total balance',()=>{const result=totals(1000000,[{kind:'income',amount:500000},{kind:'expense',amount:200000}],[{amount:300000}]);assert.deepEqual(result,{balance:1300000,allocated:300000,available:1000000});});
+test('pet rewards derive from server checkins, never transaction amounts',()=>{const days=Array.from({length:12},(_,i)=>({day:`2026-01-${String(i+1).padStart(2,'0')}`,no_spend:true}));const result=petProgress(days,[{accessory:'explorer_hat',cost:80}]);assert.equal(result.xp,240);assert.equal(result.level,2);assert.equal(result.progress,40);assert.equal(result.leaves,40);});
