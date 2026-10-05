@@ -1,0 +1,157 @@
+{
+  "palette": {
+    "body": "#ff8808",
+    "spots": "#00323e",
+    "cream": "#fff4e7",
+    "scarf": "#009cb4",
+    "eyes": "#ffffff",
+    "bodyFold": "#d96c08",
+    "tongue": "#ff7a63"
+  },
+  "files": [
+    {
+      "file": "miko-pet-idle.png",
+      "width": 1312,
+      "height": 1199,
+      "alphaUnchanged": true,
+      "backgroundPixelsPreserved": 0,
+      "changedPixels": 686231,
+      "boundaryBlendPixels": 26493,
+      "materialPixels": {
+        "body": 284584,
+        "spots": 154350,
+        "cream": 162630,
+        "scarf": 58080,
+        "eyes": 19140,
+        "bodyFold": 10196,
+        "tongue": 0
+      }
+    },
+    {
+      "file": "miko-pet-happy.png",
+      "width": 1312,
+      "height": 1199,
+      "alphaUnchanged": true,
+      "backgroundPixelsPreserved": 0,
+      "changedPixels": 692961,
+      "boundaryBlendPixels": 24381,
+      "materialPixels": {
+        "body": 316277,
+        "spots": 145996,
+        "cream": 159131,
+        "scarf": 58395,
+        "eyes": 0,
+        "bodyFold": 10471,
+        "tongue": 2732
+      }
+    },
+    {
+      "file": "miko-pet-wink.png",
+      "width": 1312,
+      "height": 1199,
+      "alphaUnchanged": true,
+      "backgroundPixelsPreserved": 0,
+      "changedPixels": 692367,
+      "boundaryBlendPixels": 25251,
+      "materialPixels": {
+        "body": 302336,
+        "spots": 149147,
+        "cream": 161883,
+        "scarf": 58424,
+        "eyes": 11159,
+        "bodyFold": 10528,
+        "tongue": 0
+      }
+    },
+    {
+      "file": "miko-pet-focused.png",
+      "width": 1312,
+      "height": 1199,
+      "alphaUnchanged": true,
+      "backgroundPixelsPreserved": 0,
+      "changedPixels": 696860,
+      "boundaryBlendPixels": 26445,
+      "materialPixels": {
+        "body": 290562,
+        "spots": 155308,
+        "cream": 162840,
+        "scarf": 58292,
+        "eyes": 20760,
+        "bodyFold": 10741,
+        "tongue": 0
+      }
+    },
+    {
+      "file": "miko-pet-rest.png",
+      "width": 1312,
+      "height": 1199,
+      "alphaUnchanged": true,
+      "backgroundPixelsPreserved": 0,
+      "changedPixels": 696523,
+      "boundaryBlendPixels": 23892,
+      "materialPixels": {
+        "body": 323200,
+        "spots": 141502,
+        "cream": 162928,
+        "scarf": 58878,
+        "eyes": 0,
+        "bodyFold": 10469,
+        "tongue": 0
+      }
+    },
+    {
+      "file": "maucuan-miko-premium-icon.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaUnchanged": true,
+      "backgroundPixelsPreserved": 710389,
+      "changedPixels": 860081,
+      "boundaryBlendPixels": 23762,
+      "materialPixels": {
+        "body": 354220,
+        "spots": 202733,
+        "cream": 169856,
+        "scarf": 95944,
+        "eyes": 33893,
+        "bodyFold": 5481,
+        "tongue": 0
+      }
+    },
+    {
+      "file": "maucuan-miko-adaptive-foreground.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaUnchanged": true,
+      "backgroundPixelsPreserved": 0,
+      "changedPixels": 508869,
+      "boundaryBlendPixels": 17665,
+      "materialPixels": {
+        "body": 204452,
+        "spots": 123740,
+        "cream": 94953,
+        "scarf": 62213,
+        "eyes": 20321,
+        "bodyFold": 5346,
+        "tongue": 0
+      }
+    },
+    {
+      "file": "maucuan-miko-icon.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaUnchanged": true,
+      "backgroundPixelsPreserved": 711445,
+      "changedPixels": 857752,
+      "boundaryBlendPixels": 24937,
+      "materialPixels": {
+        "body": 354561,
+        "spots": 200163,
+        "cream": 172406,
+        "scarf": 95851,
+        "eyes": 33770,
+        "bodyFold": 4320,
+        "tongue": 0
+      }
+    }
+  ]
+}

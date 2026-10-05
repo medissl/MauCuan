@@ -12,8 +12,8 @@ All new expressions use the approved idle character as their sole reference. Kee
 
 Never display rest or a negative emotion as punishment for absence. Repeated greetings and expression selections never earn XP. A no-spend day uses the same daily check-in rule. Savings animation is a celebration, not a reward for adding transactions.
 
-The icon uses a close-up of the same character on an opaque cream square. Its displayed rounded corners belong to the platform, not the source artwork. The delivered master is 1254 × 1254 pixels; final store exports should be checked against platform dimensions before release. All five pet images share a 1312 × 1199 transparent canvas.
+The current premium icon uses the same character on an opaque deep-teal square. Its displayed rounded corners belong to the platform, not the source artwork. The delivered master is 1254 × 1254 pixels; final store exports should be checked against platform dimensions before release. All five pet images share a 1312 × 1199 transparent canvas.
 
-Preview supports all five states, tap greetings, once-per-session simulated check-in, savings progress, and reduced motion. Demo counters are not connected to real accounts. Generated assets retain slight tonal variation from the approved master.
+Preview supports all five states, tap greetings, once-per-session simulated check-in, savings progress, and reduced motion. Demo counters are not connected to real accounts. Expression colors were normalized to the shared palette documented in miko-fixed-palette.md.
 
-Assets and this guide are ready for the next native pet integration. Existing live app artwork and app configuration remain unchanged; no EAS build was started.
+These assets are integrated in native source and website. Existing queued builds use their recorded source commit; new asset changes require a replacement APK.
