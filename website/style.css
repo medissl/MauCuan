@@ -35,3 +35,4 @@ footer{margin-top:18px;border-top:1px solid #243e3310}
 .orb{background:radial-gradient(ellipse at 40% 35%,#fff0cf85,#f6cf932b 65%,transparent 76%);box-shadow:none}
 @media(max-width:900px){.hero::before{inset:0 -25px;background:radial-gradient(ellipse 85% 50% at 65% 70%,#edb46c66,transparent 85%),radial-gradient(ellipse at 0% 0%,#d9e2cb40,transparent 65%)}}
 @media(max-width:560px){.hero::before{inset:0 -22px}}
+body{overflow-x:clip}
