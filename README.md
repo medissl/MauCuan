@@ -50,3 +50,8 @@ Dependency audit: the current Expo/React Native toolchain includes unresolved up
 ## Project documentation
 
 GitHub is the shared record for source, setup, and validation. See [implementation status](docs/implementation-status.md), [account email setup](docs/account-email-setup.md), and the original [Miko](docs/miko-art-direction.txt) and [icon](docs/icon-art-direction.txt) artwork prompts. Native implementation is on `codex/maucuan-native` in [draft PR #1](https://github.com/medissl/MauCuan/pull/1).
+
+## Current Android preview
+
+The approved replacement Android preview build includes the teal-blue theme and all 0.2.0 fixes. Build ID: 46f7be09-b6af-4cb3-a72d-31faa90141d9. Source commit: 62ca462655eb7e757f1acd35e577534f859c2ef1. Status when recorded: queued. Build page: https://expo.dev/accounts/medizeng/projects/maucuan/builds/46f7be09-b6af-4cb3-a72d-31faa90141d9 . An APK download appears only after success. The prior 8e30df9d build was cancelled while queued. No store submission.
+

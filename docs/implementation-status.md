@@ -31,3 +31,8 @@ One IDR wallet, online-first data, no bank sync/transfers, reminders, recurring 
 ## Teal-blue visual update
 
 The app and website now use deep teal surfaces and pale teal tints to match Miko’s scarf, with orange actions. The website mascot breathes gently, winks when greeted and returns to idle. Reduced-motion preferences disable the breathing. Native colors are centralized in the existing shared UI palette. Thirteen tests, lint and TypeScript pass after this theme change. The replacement APK must be built from this updated source.
+
+## Current Android preview
+
+The approved replacement Android preview build includes the teal-blue theme and all 0.2.0 fixes. Build ID: 46f7be09-b6af-4cb3-a72d-31faa90141d9. Source commit: 62ca462655eb7e757f1acd35e577534f859c2ef1. Status when recorded: queued. Build page: https://expo.dev/accounts/medizeng/projects/maucuan/builds/46f7be09-b6af-4cb3-a72d-31faa90141d9 . An APK download appears only after success. The prior 8e30df9d build was cancelled while queued. No store submission.
+
