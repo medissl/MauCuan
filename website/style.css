@@ -20,23 +20,12 @@ header{border-bottom:1px solid #243e3310}
 .status>*{position:relative;z-index:1}
 footer{margin-top:18px;border-top:1px solid #243e3310}
 @media(max-width:900px){.hero-art::before{width:410px;height:410px}.hero-art::after{width:450px;height:450px}}
-@media(max-width:560px){.hero-art::before{width:320px;height:320px}.hero-art::after{width:350px;height:350px}.status::before{left:-375px}.status::after{right:-375px}}
-
-/* A distinct navigation surface and one textured hero panel. */
+@media(max-width:560px){.hero-art::before{width:320px;height:320px}.hero-art::after{width:350px;height:350px}.status::before{left:-375px}.status::after{right:-375px}}/* Corner detail follows the concentric treatment in the green card. */
 body{background:var(--bg);overflow-x:clip}
-header{margin-top:20px;padding:18px 24px;background:#fffdf9;border:1px solid #243e3312;border-radius:20px;box-shadow:0 3px 14px #243e3304}
-nav .nav-cta{background:#284537;color:#fff;border-color:#284537}
-nav .nav-cta:hover{background:#365845}
-.hero{margin:22px 0 48px;padding:38px 44px;min-height:560px;gap:12px;border-radius:32px;background:#f2dfc5;border:1px solid #b9895220;box-shadow:inset 0 1px 0 #fff8,0 12px 35px #8a5a2706;isolation:isolate;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:url('/assets/paper-grain.svg') repeat;opacity:.2;pointer-events:none;z-index:-1}
-.hero h1{font-size:clamp(42px,4.5vw,59px);margin:0 0 24px;letter-spacing:-2.5px}
-.hero .lead{color:#526153;font-size:14px;max-width:410px}
-.hero .little-note{color:#53614e}
-.hero-art{height:470px;background:none;z-index:1}
+.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero-art{background:none;z-index:1}
 .hero-art::before,.hero-art::after,.orb{display:none}
-.miko{width:390px;height:440px;filter:drop-shadow(0 24px 16px #72502c20)}
-.features{border-top:0;padding-top:25px}
-.features::before{display:none}
-@media(max-width:1100px) and (min-width:901px){.hero{padding:35px 30px}.hero h1{font-size:47px}.miko{width:330px}}
-@media(max-width:900px){header{padding:16px 20px}.hero{padding:44px 34px 12px;min-height:0;gap:10px}.hero h1{font-size:54px}.hero-art{height:410px}.miko{width:340px;height:390px}}
-@media(max-width:560px){header{margin-top:14px;padding:15px 17px;border-radius:16px}.hero{margin:16px 0 34px;padding:32px 24px 0;border-radius:25px}.hero h1{font-size:39px;letter-spacing:-1.8px}.hero .lead{font-size:13px;line-height:1.8}.hero-art{height:350px}.miko{width:290px;height:325px}.hero .button{padding:14px 18px;font-size:11px}.features{padding-top:18px}}
+.hero::before,.hero::after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid #d6a86b35;box-shadow:0 0 0 25px #e6c79e24,0 0 0 50px #e6c79e12;background:radial-gradient(circle,#efcd9940,transparent 72%);pointer-events:none;z-index:-1}
+.hero::before{top:-210px;left:-200px}
+.hero::after{bottom:-205px;right:-195px;border-color:#91aa7635;box-shadow:0 0 0 25px #becda124,0 0 0 50px #becda112;background:radial-gradient(circle,#aabb8740,transparent 72%)}
+@media(max-width:560px){.hero::before{left:-235px;top:-210px}.hero::after{right:-225px;bottom:-220px}}
