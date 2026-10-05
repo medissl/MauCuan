@@ -2,6 +2,8 @@
 
 A native Android and iOS app for recording income and spending, setting savings goals, and building consistent habits with Miko the spotted macan. Built with Expo / React Native and Supabase.
 
+Latest approved Android preview: [corrected-Miko build 6767c626](https://expo.dev/accounts/medizeng/projects/maucuan/builds/6767c626-e823-47f1-a649-17caeeeea74d), queued from commit cac3ee2. Includes all 0.2.0 fixes, teal-blue theme and fixed-palette Miko artwork. See [current preview details](docs/android-preview.md). Earlier queue records below are historical.
+
 ## Run locally
 
 Requires Node 22+ and npm. Copy `.env.example` to `.env`, run `npm ci`, then `npm start`. The example contains only the project's public client connection, not a privileged key. Never add a Supabase secret or service-role key to the app.
