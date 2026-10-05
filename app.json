@@ -2,7 +2,7 @@
   "expo": {
     "name": "MauCuan",
     "slug": "maucuan",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "orientation": "portrait",
     "icon": "./assets/maucuan-icon.png",
     "userInterfaceStyle": "light",
@@ -12,8 +12,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/maucuan-icon.png",
-        "backgroundColor": "#F76B24"
+        "foregroundImage": "./assets/maucuan-adaptive-foreground.png",
+        "backgroundColor": "#123D43"
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.medissl.maucuan"

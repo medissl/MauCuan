@@ -1,6 +1,6 @@
 {
   "name": "maucuan",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "expo-router/entry",
   "dependencies": {
     "@expo-google-fonts/plus-jakarta-sans": "0.4.2",
@@ -31,6 +31,7 @@
     "@types/react": "19.2.18",
     "eslint": "^9.0.0",
     "eslint-config-expo": "~57.0.2",
+    "react-test-renderer": "19.2.3",
     "typescript": "6.0.3"
   },
   "scripts": {

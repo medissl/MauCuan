@@ -1,0 +1,10 @@
+Mode: built-in image generation / reference edit.
+Final main icon: assets/maucuan-miko-premium-icon.png
+Android foreground: assets/maucuan-miko-adaptive-foreground.png
+
+Edit target: the approved Miko app-icon portrait in the reference. Change ONLY the background from cream to a uniform solid premium deep petrol teal #123D43. Preserve the exact orange Miko face, forehead and cheek spots, ear shapes, muzzle, whiskers, eyes, friendly closed smile and teal scarf. Same flat 2D character identity and centered square framing. Do not add highlights or shading. Keep all ears, hair and scarf within a generous icon-mask safe margin: the head should occupy at most 72% of canvas width. Full-bleed opaque background on the entire square; no border, rounded corners, gradient, glow, cast shadow, text, coins or badges. A refined high-contrast app icon that reads clearly on a phone home screen. 1024 by 1024 square PNG.
+
+Adaptive foreground prompt:
+Edit target: existing Miko app icon. Produce the Android adaptive FOREGROUND image only on a truly transparent square canvas. Preserve Miko's exact approved orange face, four teal forehead spots, teal cheek spots, cream muzzle and ears, friendly eyes, teal scarf and current drawing style. Remove the solid teal background. Scale the COMPLETE head and scarf together to occupy ONLY 58% of canvas width AND at most 58% of canvas height, precisely centered. Leave at least 21% completely empty transparent margin on all four sides. Do not crop any ears or scarf. No new shapes, shadows, text or background. This is a technical padded adaptive-icon layer, not a redesigned mascot.
+
+Generated main raster is 1254x1254; foreground is 1254x1254. Prompt sizing is a request, not a guarantee. Expo handles native output sizes. The foreground contains additional transparent margins for launcher masks.

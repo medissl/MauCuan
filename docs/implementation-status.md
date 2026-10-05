@@ -1,35 +1,29 @@
 # MauCuan implementation status
 
-Last verified: 5 October 2026.
+Updated 6 October 2026.
 
-## Source and connected services
+## Connected services
 
-- Repository: https://github.com/medissl/MauCuan
-- Native source: `codex/maucuan-native`, draft PR https://github.com/medissl/MauCuan/pull/1
-- Website source: `main`, `website/`; GitHub-connected Vercel production deployment
-- Website: https://maucuan-finance.vercel.app
+- Source: https://github.com/medissl/MauCuan
+- Native branch: codex/maucuan-native, draft PR https://github.com/medissl/MauCuan/pull/1
+- Website: main, website/, https://maucuan-finance.vercel.app
 - Expo: https://expo.dev/accounts/medizeng/projects/maucuan
-- Expo project ID: `2e5ac3c3-095a-46a0-a99c-ce1dfaa285da`
 - Supabase: https://supabase.com/dashboard/project/dftqtktmtcfobggjviqp
 
-The existing repository is used for both code and documentation. The local app configuration points to the Expo project. Expo's GitHub settings confirm the existing `medissl/MauCuan` repository is connected; the base directory is the repository root. Build from `codex/maucuan-native`, preview profile, Android. `main` currently contains the website, not the native app. The one approved [Android preview build](https://expo.dev/accounts/medizeng/projects/maucuan/builds/67505a34-8438-4947-bca2-f01e1e35115b) was queued from commit `18c6573` at 12:49 UTC. Build ID: `67505a34-8438-4947-bca2-f01e1e35115b`. The build failed at 20:36 WIB during dependency installation: npm ci reported three missing @emnapi lock entries. The repaired lockfile adds those entries without changing existing package versions. A fresh npm 10.9.8 install and a Linux/x64 installation dry run pass. The user approved one replacement Android preview build. Build `6cf9587f-a9d9-4d37-92ac-da61826bead4` is queued from repaired commit `0d7af33`: https://expo.dev/accounts/medizeng/projects/maucuan/builds/6cf9587f-a9d9-4d37-92ac-da61826bead4 . No APK is available yet. No store submission was authorized.
+## Current implementation
 
-## Implemented and checked
+Native accounts, code-based signup and password recovery, encrypted sessions, onboarding, income/expense CRUD, receipt camera/gallery and on-device OCR review, savings goals/allocations, insights, server-controlled daily rewards and cosmetic collection redemptions. Recording more spending gives no extra rewards.
 
-The mascot and icon use a spotted macan cub. The website hero is static and its floating text cards are removed. Supabase's Site URL uses the new website address; native and HTTPS auth callbacks are allowed.
+Version 0.2.0 adds explicit Expo Router screens, functioning home destinations for settings/balance/pet/scan/manual entry, balance details, profile/password editing, fixed Rp prefixes and automatic thousands grouping, opaque bottom safe area, clean date/greeting, approved 2D Miko expressions and a deep-teal icon. Native touch behavior must still be retested on the installed new build.
 
-Native account handling, income/spending records, savings allocations, private receipt storage, and server-checked daily rewards are implemented. Daily review and no-spend days earn rewards; additional spending does not increase rewards.
+Gmail SMTP was saved by the operator. Signup and recovery email templates now use numeric tokens; templates and previews were verified. End-to-end delivery is not yet verified.
 
-Receipt reading runs on-device through `expo-text-extractor@2.0.0` (Android ML Kit / iOS Vision). Suggested merchant, IDR amount, and date require review before saving. Ambiguous amounts stay blank. No DocRunic OCR integration or cloud OCR credential is needed.
+## Builds and checks
 
-Validation passed: lint, TypeScript, Expo Doctor (21/21), eight finance/receipt parser tests, Android/iOS JavaScript and Hermes exports, hosted database security tests, and Supabase security advisor with no findings. The website production deployment is READY and its public page was inspected.
+The first Android build failed on missing dependency lock entries. Replacement 6cf9587f-a9d9-4d37-92ac-da61826bead4 finished successfully; it is the older 0.1.0 APK. Current source needs a fresh, explicitly approved one-build allowance before creating its new preview APK. No store submission was authorized.
 
-## Remaining before public release
+Lint, TypeScript, finance/receipt/component interaction tests, Android/iOS Hermes exports and clean npm 10.9.8 installation were checked. Component tests use mocked platform and backend; real-device verification remains required. Hosted schema/security checks passed earlier and no database schema changed in this UI/auth update.
 
-- Run and verify the approved Android APK build from the connected repository.
-- Test the installed app on real devices, including camera OCR, auth callbacks, and accessibility.
-- Configure a dedicated SMTP sender after obtaining an owned sender domain. The free website hostname cannot verify an email sender. Email confirmation remains enabled; public email delivery has not been validated.
-- Complete account deletion/export in the app and store requirements.
-- Revisit the upstream dependency advisories documented in README before release.
+## Remaining limits
 
-See [account email setup](account-email-setup.md) for future SMTP configuration. Never commit privileged Supabase keys, SMTP credentials, signing secrets, or provider tokens.
+One IDR wallet, online-first data, no bank sync/transfers, reminders, recurring records or cloud OCR. Mascot uses expression images with gentle motion; accessory collection redemption is stored, but accessory rendering is not implemented. Account deletion/export, device accessibility, transactional email provider, and store listing still need work before public store release. See README for upstream dependency advisories.

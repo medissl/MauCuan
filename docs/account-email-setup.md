@@ -1,25 +1,23 @@
 # MauCuan account email setup
 
-The free website is https://maucuan-finance.vercel.app. It is usable as the Supabase Site URL, but its vercel.app hostname cannot serve as an owned sender domain. The domain purchase was deferred at the user's request. Account email delivery remains unconfigured.
+Updated 6 October 2026.
 
-For a future dedicated sender, use Resend with a domain owned by the operator. Verify the DNS records Resend supplies, then enter these in Supabase Authentication → Emails → SMTP Settings:
+The operator saved Gmail SMTP in Supabase. Credentials are entered only in the hosted dashboard and are never committed or bundled in the app.
 
-- Host: smtp.resend.com
-- Port: 465
-- Username: resend
-- Password: the Resend API key, entered only in the hosted secret field
-- Sender: a verified address on the owned domain
+- Sender: mediantozeng@gmail.com
 - Sender name: MauCuan
+- Host: smtp.gmail.com
+- Port: 465
+- Username: mediantozeng@gmail.com
+- Password: a Google App Password, entered privately by the operator
 
-Do not put SMTP credentials or email provider keys in the mobile app, website, or repository. Keep email verification enabled. Test confirmation and password recovery with an address outside the Supabase organization before enabling public signup.
+Confirmation subject: **Kode verifikasi MauCuan**. Recovery subject: **Kode pemulihan MauCuan**. Both saved templates display `{{ .Token }}` and instruct users to enter the code in the app. They have no confirmation-link button. Source copies live in `supabase/templates/confirmation.html` and `supabase/templates/recovery.html`. The app validates numeric codes, has resend cooldowns, and uses Supabase verifyOtp with email or recovery type.
 
-Supabase's Site URL is configured as https://maucuan-finance.vercel.app. These auth redirects are configured and verified in the dashboard:
+The templates were checked in the dashboard source and preview. Inbox delivery and the complete real-device recovery flow remain to be verified after installing the updated APK. Do not disable email confirmation.
 
-- maucuan://auth/callback
-- https://maucuan-finance.vercel.app/auth/callback
+Gmail's personal SMTP warning means it is suited to small-scale testing, not a dependable transactional sender for public launch. The free Vercel hostname is a website address, not an owned email-sender domain. A later dedicated provider needs an owned domain and verified DNS records. No domain purchase was made.
 
-The HTTPS callback page forwards only auth callback fields to the installed native app after an explicit tap, removes callback fields from browser history, and has a no-referrer policy. Keep token-bearing URLs out of logs and analytics.
+Site URL: https://maucuan-finance.vercel.app
+Allowed redirects: maucuan://auth/callback and https://maucuan-finance.vercel.app/auth/callback. Older link callbacks remain supported for compatibility.
 
-The native app also accepts email codes. Include `{{ .Token }}` in the confirmation and recovery templates if using this path. The templates should link with Supabase's `{{ .ConfirmationURL }}`; do not construct a substitute confirmation URL.
-
-Reference: https://supabase.com/docs/guides/auth/auth-smtp and https://resend.com/docs/send-with-smtp.
+References: https://supabase.com/docs/guides/auth/auth-smtp and https://supabase.com/docs/guides/auth/auth-email-templates
