@@ -20,7 +20,7 @@ Gmail SMTP was saved by the operator. Signup and recovery email templates now us
 
 ## Builds and checks
 
-The first Android build failed on missing dependency lock entries. Replacement 6cf9587f-a9d9-4d37-92ac-da61826bead4 finished successfully; it is the older 0.1.0 APK. Current source needs a fresh, explicitly approved one-build allowance before creating its new preview APK. No store submission was authorized.
+The first Android build failed on missing dependency lock entries. Replacement 6cf9587f-a9d9-4d37-92ac-da61826bead4 finished successfully; it is the older 0.1.0 APK. The user approved a fresh one-build allowance. Updated Android preview build 8e30df9d-4fc6-435d-9cdc-e1c2ea9c51d4 is queued from commit 839098e: https://expo.dev/accounts/medizeng/projects/maucuan/builds/8e30df9d-4fc6-435d-9cdc-e1c2ea9c51d4 . No updated APK is available yet. No store submission was authorized.
 
 Lint, TypeScript, finance/receipt/component interaction tests, Android/iOS Hermes exports and clean npm 10.9.8 installation were checked. Component tests use mocked platform and backend; real-device verification remains required. Hosted schema/security checks passed earlier and no database schema changed in this UI/auth update.
 
