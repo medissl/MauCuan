@@ -27,3 +27,11 @@ header{border-bottom:1px solid #243e3310}
 footer{margin-top:18px;border-top:1px solid #243e3310}
 @media(max-width:900px){.hero-art::before{width:410px;height:410px}.hero-art::after{width:450px;height:450px}}
 @media(max-width:560px){.hero-art::before{width:320px;height:320px}.hero-art::after{width:350px;height:350px}.status::before{left:-375px}.status::after{right:-375px}}
+
+/* Give the hero its own warm atmosphere without outlining the mascot. */
+.hero::before{content:"";position:absolute;inset:0 calc((min(1240px,100vw) - 100vw)/2 - 48px);background:radial-gradient(ellipse 54% 76% at 83% 45%,#edb46c66 0%,#f3cc963d 46%,transparent 78%),radial-gradient(ellipse 55% 65% at 2% 25%,#d9e2cb40,transparent 78%),linear-gradient(125deg,#f4f2e900,#f8e7d44d);pointer-events:none;z-index:0}
+.hero-art::before,.hero-art::after{display:none}
+.hero-art{z-index:1}
+.orb{background:radial-gradient(ellipse at 40% 35%,#fff0cf85,#f6cf932b 65%,transparent 76%);box-shadow:none}
+@media(max-width:900px){.hero::before{inset:0 -25px;background:radial-gradient(ellipse 85% 50% at 65% 70%,#edb46c66,transparent 85%),radial-gradient(ellipse at 0% 0%,#d9e2cb40,transparent 65%)}}
+@media(max-width:560px){.hero::before{inset:0 -22px}}
