@@ -20,10 +20,14 @@ Gmail SMTP was saved by the operator. Signup and recovery email templates now us
 
 ## Builds and checks
 
-The first Android build failed on missing dependency lock entries. Replacement 6cf9587f-a9d9-4d37-92ac-da61826bead4 finished successfully; it is the older 0.1.0 APK. The user approved a fresh one-build allowance. Updated Android preview build 8e30df9d-4fc6-435d-9cdc-e1c2ea9c51d4 is queued from commit 839098e: https://expo.dev/accounts/medizeng/projects/maucuan/builds/8e30df9d-4fc6-435d-9cdc-e1c2ea9c51d4 . No updated APK is available yet. No store submission was authorized.
+The first Android build failed on missing dependency lock entries. Replacement 6cf9587f-a9d9-4d37-92ac-da61826bead4 finished successfully; it is the older 0.1.0 APK. The user approved a fresh one-build allowance. Android preview build 8e30df9d-4fc6-435d-9cdc-e1c2ea9c51d4 was cancelled while queued at the operator request, so its replacement can include the teal-blue theme: https://expo.dev/accounts/medizeng/projects/maucuan/builds/8e30df9d-4fc6-435d-9cdc-e1c2ea9c51d4 . No updated APK is available yet. No store submission was authorized.
 
 Lint, TypeScript, finance/receipt/component interaction tests, Android/iOS Hermes exports and clean npm 10.9.8 installation were checked. Component tests use mocked platform and backend; real-device verification remains required. Hosted schema/security checks passed earlier and no database schema changed in this UI/auth update.
 
 ## Remaining limits
 
 One IDR wallet, online-first data, no bank sync/transfers, reminders, recurring records or cloud OCR. Mascot uses expression images with gentle motion; accessory collection redemption is stored, but accessory rendering is not implemented. Account deletion/export, device accessibility, transactional email provider, and store listing still need work before public store release. See README for upstream dependency advisories.
+
+## Teal-blue visual update
+
+The app and website now use deep teal surfaces and pale teal tints to match Miko’s scarf, with orange actions. The website mascot breathes gently, winks when greeted and returns to idle. Reduced-motion preferences disable the breathing. Native colors are centralized in the existing shared UI palette. Thirteen tests, lint and TypeScript pass after this theme change. The replacement APK must be built from this updated source.

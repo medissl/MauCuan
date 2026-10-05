@@ -4,7 +4,7 @@ import Animated, { cancelAnimation, Easing, useAnimatedStyle, useReducedMotion, 
 import { currencyInput, formatAmountInput } from '../lib/finance';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export const colors = { bg: '#FAF8F4', ink: '#20251F', muted: '#6D746B', orange: '#F76B24', forest: '#183C2E', pale: '#FFF0DF', sage: '#E7EEDC', line: '#E8E9E1', white: '#FFFFFF' };
+export const colors = { bg: '#FAF8F4', ink: '#123D43', muted: '#62767A', orange: '#F76B24', teal: '#123D43', accent: '#08A4B8', pale: '#FFF0DF', mist: '#E3F2F3', line: '#DCE5E6', white: '#FFFFFF', positive: '#19616C', onTealMuted: '#C1E4E8' };
 export const type = StyleSheet.create({
   title: { fontFamily: 'JakartaExtraBold', color: colors.ink, fontSize: 29, lineHeight: 38, letterSpacing: -1 },
   heading: { fontFamily: 'JakartaBold', color: colors.ink, fontSize: 17, letterSpacing: -.4 },
@@ -15,8 +15,8 @@ export const type = StyleSheet.create({
 export function Card({ children, tone = 'white', style }: { children: React.ReactNode; tone?: keyof typeof colors; style?: ViewStyle }) {
   return <View style={[styles.card, { backgroundColor: colors[tone] }, style]}>{children}</View>;
 }
-export function Badge({ text, green = false }: { text: string; green?: boolean }) {
-  return <View style={[styles.badge, green && { backgroundColor: '#E3F0E8' }]}><Text style={[styles.badgeText, green && { color: '#28664E' }]}>{text}</Text></View>;
+export function Badge({ text, positive = false }: { text: string; positive?: boolean }) {
+  return <View style={[styles.badge, positive && { backgroundColor: colors.mist }]}><Text style={[styles.badgeText, positive && { color: colors.positive }]}>{text}</Text></View>;
 }
 export function Button({ text, onPress, secondary = false, disabled = false }: { text: string; onPress: () => void; secondary?: boolean; disabled?: boolean }) {
   return <Pressable accessibilityRole="button" disabled={disabled} onPress={onPress} style={({ pressed }) => [styles.button, secondary && styles.secondary, { opacity: disabled ? .5 : pressed ? .8 : 1 }]}><Text style={[styles.buttonText, secondary && { color: colors.ink }]}>{text}</Text></Pressable>;
@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
   field: { backgroundColor: 'white', borderWidth: 1, borderColor: colors.line, borderRadius: 18, paddingHorizontal: 16, paddingVertical: 12, gap: 5 },
   input: { fontFamily: 'JakartaSemiBold', fontSize: 15, color: colors.ink, minHeight: 32 },
   track: { height: 7, borderRadius: 8, backgroundColor: colors.line, overflow: 'hidden' },
-  fill: { height: 7, borderRadius: 8, backgroundColor: colors.orange },
+  fill: { height: 7, borderRadius: 8, backgroundColor: colors.accent },
   back: { height: 44, width: 40, alignItems: 'center', justifyContent: 'center' },
   nav: { position: 'absolute', left: 16, right: 16, height: 70, borderRadius: 28, borderWidth: 1, borderColor: colors.line, overflow: 'hidden', backgroundColor: 'white', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' },
   tab: { minWidth: 52, height: 52, alignItems: 'center', justifyContent: 'center', gap: 4 },
