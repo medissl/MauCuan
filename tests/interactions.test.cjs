@@ -4,7 +4,7 @@ global.IS_REACT_ACT_ENVIRONMENT=true;
 const {act}=Renderer;
 const routes=[],calls=[];
 const pickerMock={launchImageLibraryAsync:async()=>({canceled:false,assets:[{uri:'file:///data/cache/receipt%20photo.jpg',base64:'dGVzdA==',mimeType:'image/jpeg'}]})};
-const ocrMock={isSupported:true,extractTextFromImage:async path=>{calls.push(['ocrPath',path]);return ['Jl. Merdeka 15\nKOPI SENJA\n06/10/2026\n2 x LATTE 48.000\nTOTAL Rp 48.000']}};
+const ocrMock={isSupported:true,extractReceiptLayout:async path=>{calls.push(['ocrPath',path]);return {width:600,height:800,fragments:['KOPI SENJA','Jl. Merdeka 15','06/10/2026','2 x LATTE 48.000','TOTAL Rp 48.000'].map((text,i)=>({text,x:20,y:20+i*40,width:500,height:20}))}}};
 const profile={id:'test-user',nickname:'Medi',pet_name:'Miko',opening_balance:1000000,onboarding_complete:true,reduce_motion:true};
 const ledger={profile,transactions:[],goals:[],contributions:[],checkins:[],accessories:[],loading:false,error:'',refresh:async()=>{}};
 const api={auth:{getSession:async()=>({data:{session:{user:{id:'test-user',email:'tester@example.com'}}}}),onAuthStateChange:()=>({data:{listener:{},subscription:{unsubscribe(){}}}}),signUp:async args=>{calls.push(['signup',args]);return{data:{session:null},error:null}},verifyOtp:async args=>{calls.push(['verify',args]);return{data:{},error:null}},resend:async()=>({error:null}),resetPasswordForEmail:async()=>({error:null})}};
@@ -13,7 +13,7 @@ const rn={...hosts,StyleSheet:{create:v=>v},Platform:{OS:'android'},Alert:{alert
 const cache={};
 function load(file){file=path.resolve(__dirname,file);if(cache[file])return cache[file].exports;const module={exports:{}};cache[file]=module;
 const code=ts.transpileModule(fs.readFileSync(file,'utf8'),{fileName:file,compilerOptions:{jsx:ts.JsxEmit.ReactJSX,module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;
-const customRequire=name=>{if(name==='@expo/ui/community/datetime-picker')return{DateTimePicker:'DateTimePicker'};if(name==='react-native-svg')return{__esModule:true,default:'Svg',Circle:'Circle',Ellipse:'Ellipse',G:'G',Path:'Path',Rect:'Rect',Line:'Line'};if(name==='react-native-worklets')return{scheduleOnRN:(fn,...args)=>fn(...args)};if(name==='react-native-gesture-handler'){const pan={hooks:{},activateAfterLongPress(ms){this.delay=ms;return this},onStart(fn){this.hooks.start=fn;return this},onUpdate(fn){this.hooks.update=fn;return this},onFinalize(fn){this.hooks.finalize=fn;return this}};return{Gesture:{Pan:()=>pan},GestureDetector:'GestureDetector',GestureHandlerRootView:'GestureHandlerRootView'}};if(/\.(png|ttf)$/.test(name))return 1;if(name==='react-native')return rn;if(name==='react-native-safe-area-context')return{SafeAreaProvider:'SafeAreaProvider',useSafeAreaInsets:()=>({top:24,bottom:24})};if(name==='expo-router')return{router:{navigate:href=>routes.push(href),replace:href=>routes.push(href)}};if(name==='expo-status-bar')return{StatusBar:'StatusBar'};if(name==='expo-linking')return{getInitialURL:async()=>null,addEventListener:()=>({remove(){}}),parse:()=>({}),openURL:async()=>{}};if(name==='expo-image-picker')return pickerMock;if(name==='expo-text-extractor')return ocrMock;if(name==='expo-font')return{useFonts:()=>[true,null]};if(name==='@expo/vector-icons/Ionicons')return 'Icon';if(name==='react-native-reanimated')return{__esModule:true,default:{View:'AnimatedView'},cancelAnimation(){},Easing:{inOut:n=>n,ease:0},useReducedMotion:()=>true,useSharedValue:n=>React.useMemo(()=>({value:n,get(){return this.value},set(v){this.value=v}}),[]),useAnimatedStyle:fn=>fn(),withTiming:n=>n,withRepeat:n=>n,withSequence:(...n)=>n.at(-1)};if(name.endsWith('/lib/supabase')||name==='../lib/supabase')return{supabase:api,AUTH_REDIRECT:'maucuan://auth/callback'};if(name==='./hooks/useLedger')return{useLedger:()=>ledger};if(name.startsWith('.')){let resolved=path.resolve(path.dirname(file),name);if(fs.existsSync(resolved+'.tsx'))return load(path.relative(__dirname,resolved+'.tsx'));if(fs.existsSync(resolved+'.ts'))return require(resolved+'.ts')}return require(name)};
+const customRequire=name=>{if(name.endsWith('/hooks/usePetWidget'))return{usePetWidget(){},requestPetWidget:()=>false};if(name.endsWith('/hooks/usePetReminders'))return{usePetReminders:()=>({state:{enabled:false,automatic:true,hour:20,activity:[]},error:'',toggle:async()=>{},setHour(){},setAutomatic(){},record:async()=>{}})};if(name==='@expo/ui/community/datetime-picker')return{DateTimePicker:'DateTimePicker'};if(name==='react-native-svg')return{__esModule:true,default:'Svg',Circle:'Circle',Ellipse:'Ellipse',G:'G',Path:'Path',Rect:'Rect',Line:'Line'};if(name==='react-native-worklets')return{scheduleOnRN:(fn,...args)=>fn(...args)};if(name==='react-native-gesture-handler'){const pan={hooks:{},activateAfterLongPress(ms){this.delay=ms;return this},onStart(fn){this.hooks.start=fn;return this},onUpdate(fn){this.hooks.update=fn;return this},onFinalize(fn){this.hooks.finalize=fn;return this}};return{Gesture:{Pan:()=>pan,Tap:()=>({maxDuration(){return this},onEnd(fn){this.end=fn;return this}}),Exclusive:(...gestures)=>({gestures})},GestureDetector:'GestureDetector',GestureHandlerRootView:'GestureHandlerRootView'}};if(/\.(png|ttf)$/.test(name))return 1;if(name==='react-native')return rn;if(name==='react-native-safe-area-context')return{SafeAreaProvider:'SafeAreaProvider',useSafeAreaInsets:()=>({top:24,bottom:24})};if(name==='expo-router')return{router:{navigate:href=>routes.push(href),replace:href=>routes.push(href)}};if(name==='expo-status-bar')return{StatusBar:'StatusBar'};if(name==='expo-linking')return{getInitialURL:async()=>null,addEventListener:()=>({remove(){}}),parse:()=>({}),openURL:async()=>{}};if(name==='expo-image-picker')return pickerMock;if(name==='expo-text-extractor')return ocrMock;if(name==='expo-font')return{useFonts:()=>[true,null]};if(name==='@expo/vector-icons/Ionicons')return 'Icon';if(name==='react-native-reanimated')return{__esModule:true,default:{View:'AnimatedView'},cancelAnimation(){},Easing:{inOut:n=>n,ease:0},useReducedMotion:()=>true,useSharedValue:n=>React.useMemo(()=>({value:n,get(){return this.value},set(v){this.value=v}}),[]),useAnimatedStyle:fn=>fn(),withTiming:n=>n,withRepeat:n=>n,withSequence:(...n)=>n.at(-1)};if(name.endsWith('/lib/supabase')||name==='../lib/supabase')return{supabase:api,AUTH_REDIRECT:'maucuan://auth/callback'};if(name==='./hooks/useLedger')return{useLedger:()=>ledger};if(name.startsWith('.')){let resolved=path.resolve(path.dirname(file),name);if(fs.existsSync(resolved)&&resolved.endsWith('.ts'))return require(resolved);if(fs.existsSync(resolved+'.tsx'))return load(path.relative(__dirname,resolved+'.tsx'));if(fs.existsSync(resolved+'.ts'))return require(resolved+'.ts')}return require(name)};
 vm.runInThisContext('(function(require,module,exports){'+code+'\n})',{filename:file})(customRequire,module,module.exports);return module.exports}
 const Main=load('../src/Main.tsx'),Auth=load('../src/components/Auth.tsx').Auth,UI=load('../src/components/ui.tsx');
 const Dates=load('../src/components/date-field.tsx'),Pets=load('../src/components/pet-habitat.tsx');
@@ -43,20 +43,20 @@ test('shop locks level gifts, equips owned items, and removes equipped items',as
  await act(async()=>button('Lepas').props.onPress());assert.deepEqual(actions.at(-1),['equip','head',null]);
  await act(async()=>button('Ambil hadiah level').props.onPress());assert.deepEqual(actions.at(-1),['buy','rug_cloud']);await act(async()=>r.unmount());
 });
-test('accessible petting reacts without a reward RPC and quiz can complete',async()=>{
+test('scene accessibility actions replace the redundant petting button and quiz can complete',async()=>{
  let r;await act(async()=>{r=Renderer.create(screen('pet'))});const button=text=>r.root.findAllByType('Pressable').find(n=>texts({root:n})===text);
- await act(async()=>button('Elus Miko').props.onPress());assert(texts(r).includes('Miko senang!'));
+ assert.equal(button('Elus Miko'),undefined); const scene=r.root.findAllByType('AnimatedView').find(n=>n.props.onAccessibilityAction); await act(async()=>scene.props.onAccessibilityAction({nativeEvent:{actionName:'pet'}}));assert(texts(r).includes('Miko senang!'));
  await act(async()=>button('Main kuis').props.onPress());
  const {moneyQuiz}=require('../src/lib/pet.ts');for(const q of moneyQuiz){await act(async()=>button(q.answers[q.correct]).props.onPress());assert(texts(r).includes(q.explanation));await act(async()=>button('Lanjut').props.onPress())}
  assert(texts(r).includes('5 dari 5 benar'));await act(async()=>r.unmount());
 });
 test('long hold and enough strokes trigger Miko happiness; short movement does not',async()=>{
  let r;await act(async()=>{r=Renderer.create(screen('pet'))});
- const gesture=r.root.findByType('GestureDetector').props.gesture;assert.equal(gesture.delay,550);
+ const gesture=r.root.findByType('GestureDetector').props.gesture.gestures[0];assert.equal(gesture.delay,550);
  await act(async()=>gesture.hooks.start({x:40,y:80}));assert(texts(r).includes('Miko menikmati elusanmu'));
  await act(async()=>gesture.hooks.update({x:65,y:80}));assert(!texts(r).includes('Miko senang!'));
  await act(async()=>gesture.hooks.update({x:230,y:80}));assert(texts(r).includes('Miko senang!'));
- assert.equal(r.root.findByType('GestureDetector').props.gesture,gesture,'gesture survives expression changes');
+ assert.equal(r.root.findByType('GestureDetector').props.gesture.gestures[0],gesture,'gesture survives expression changes');
  await act(async()=>gesture.hooks.finalize());await act(async()=>r.unmount());
 });
 test('gallery scan passes a usable Android path, opens editable rows and saves reviewed items',async()=>{
@@ -71,4 +71,15 @@ test('gallery scan passes a usable Android path, opens editable rows and saves r
  await act(async()=>field('Barang 1').props.onChangeText('Latte besar'));
  await act(async()=>button('Simpan transaksi').props.onPress());assert.equal(routes.at(-1),'/saved');assert.equal(payload.amount,48000);assert.equal(payload.occurred_on,'2026-10-06');assert.deepEqual(payload.receipt_items,[{name:'Latte besar',quantity:2,amount:48000}]);
  await act(async()=>r.unmount());delete api.from;delete api.storage;
+});
+
+
+test('tap-to-tos, ball play and chat rotate Miko reactions without rewarding transactions',async()=>{
+ let r;await act(async()=>{r=Renderer.create(screen('pet'))});const button=text=>r.root.findAllByType('Pressable').find(n=>texts({root:n})===text);
+ const tap=r.root.findByType('GestureDetector').props.gesture.gestures[1];await act(async()=>tap.end({},false));assert(!texts(r).includes('Tos!'));
+ await act(async()=>tap.end({},true));assert(texts(r).includes('Tos!'));
+ await act(async()=>button('Lempar bola').props.onPress());assert(button('Miko mengejar bola…').props.disabled);assert(texts(r).includes('aku siap'));
+ await act(async()=>new Promise(resolve=>setTimeout(resolve,1200)));assert(button('Lempar bola'));assert(!texts(r).includes('aku siap'));
+ const before=texts(r);await act(async()=>button('Ajak ngobrol').props.onPress());assert.notEqual(texts(r),before);
+ assert.equal(button('Elus Miko'),undefined);assert(!texts(r).includes('Level 1 —'));await act(async()=>r.unmount());
 });

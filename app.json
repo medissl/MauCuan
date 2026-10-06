@@ -2,7 +2,7 @@
   "expo": {
     "name": "MauCuan",
     "slug": "maucuan",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "orientation": "portrait",
     "icon": "./assets/maucuan-icon.png",
     "userInterfaceStyle": "light",
@@ -22,6 +22,7 @@
       "favicon": "./assets/maucuan-icon.png"
     },
     "plugins": [
+      "./plugins/with-miko-widget.cjs",
       "expo-secure-store",
       "expo-font",
       "expo-dev-client",
@@ -33,7 +34,8 @@
           "microphonePermission": false
         }
       ],
-      "expo-router"
+      "expo-router",
+      "expo-notifications"
     ],
     "scheme": "maucuan",
     "owner": "medizeng",

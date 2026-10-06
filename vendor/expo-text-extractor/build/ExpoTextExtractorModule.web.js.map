@@ -1,0 +1,1 @@
+{"version":3,"file":"ExpoTextExtractorModule.web.js","sourceRoot":"","sources":["../src/ExpoTextExtractorModule.web.ts"],"names":[],"mappings":"AAAA,eAAe;IACb,WAAW,EAAE,KAAK;IAClB,oBAAoB,EAAE,KAAK,EAAE,GAAW,EAAE,EAAE,CAAC,EAAE;CAChD,CAAC","sourcesContent":["export default {\n  isSupported: false,\n  extractTextFromImage: async (uri: string) => [],\n};\n"]}

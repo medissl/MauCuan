@@ -11,7 +11,7 @@ select public.equip_pet_item('head','explorer_hat');
 select public.equip_pet_item('floor','rug_cloud');
 insert into public.transactions(user_id,kind,amount,title,category,occurred_on,receipt_items) values(auth.uid(),'expense',48000,'Kopi Senja','Makan & minum',current_date,'[{"name":"Latte","quantity":2,"amount":48000}]');
 do $$begin
- if (select count(*) from public.pet_catalog)<>23 then raise exception 'FAIL catalog'; end if;
+ if (select count(*) from public.pet_catalog)<>69 then raise exception 'FAIL catalog'; end if;
  if (select sum(cost) from public.pet_accessories where user_id=auth.uid())<>80 then raise exception 'FAIL duplicate charge'; end if;
  if (select pet_room->>'head' from public.profiles where id=auth.uid())<>'explorer_hat' then raise exception 'FAIL head persistence'; end if;
  if (select pet_room->>'floor' from public.profiles where id=auth.uid())<>'rug_cloud' then raise exception 'FAIL level gift'; end if;

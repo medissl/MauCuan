@@ -33,9 +33,9 @@ export function Progress({ value }: { value: number }) {
 export function Header({ title, sub, onBack }: { title: string; sub?: string; onBack?: () => void }) {
   return <View style={{ gap: 10 }}><View style={styles.row}>{onBack && <Pressable accessibilityLabel="Kembali" onPress={onBack} style={styles.back}><Ionicons name="chevron-back" size={23} color={colors.ink} /></Pressable>}<Text style={[type.title, { fontSize: 24 }]}>{title}</Text></View>{sub && <Text style={type.body}>{sub}</Text>}</View>;
 }
-const petImages = { idle: require('../../assets/miko/miko-pet-idle.png'), happy: require('../../assets/miko/miko-pet-happy.png'), wink: require('../../assets/miko/miko-pet-wink.png'), focused: require('../../assets/miko/miko-pet-focused.png'), rest: require('../../assets/miko/miko-pet-rest.png') };
+const petImages = { waiting: require('../../assets/miko/miko-pet-waiting.png'), idle: require('../../assets/miko/miko-pet-idle.png'), happy: require('../../assets/miko/miko-pet-happy.png'), wink: require('../../assets/miko/miko-pet-wink.png'), focused: require('../../assets/miko/miko-pet-focused.png'), rest: require('../../assets/miko/miko-pet-rest.png') };
 export type PetMood = keyof typeof petImages;
-export function Miko({ size = 210, reduced = false, mood = 'idle', interactive = false, onPress }: { size?: number; reduced?: boolean; mood?: PetMood; interactive?: boolean; onPress?: () => void }) {
+export function Miko({ size = 210, reduced = false, mood = 'idle', interactive = false, onPress, name = 'Miko' }: { name?: string; size?: number; reduced?: boolean; mood?: PetMood; interactive?: boolean; onPress?: () => void }) {
   const systemReduced = useReducedMotion();
   const translate = useSharedValue(0);
   const [greeting, setGreeting] = useState(false);
@@ -47,7 +47,7 @@ export function Miko({ size = 210, reduced = false, mood = 'idle', interactive =
   }, [translate, reduced, systemReduced]);
   useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
   const motion = useAnimatedStyle(() => ({ transform: [{ translateY: translate.get() }] }));
-  const picture = <Animated.View style={motion}><Image source={petImages[greeting ? 'wink' : mood]} accessibilityLabel="Miko, teman macan tutulmu" style={{ width: size, height: size }} resizeMode="contain" /></Animated.View>;
+  const picture = <Animated.View style={motion}><Image source={petImages[greeting ? 'wink' : mood]} accessibilityLabel={`${name}, teman macan tutulmu`} style={{ width: size, height: size }} resizeMode="contain" /></Animated.View>;
   return interactive || onPress ? <Pressable accessibilityRole="button" accessibilityLabel={onPress ? 'Buka habitat Miko' : 'Sapa Miko'} onPress={() => { if (onPress) return onPress(); if (timer.current) clearTimeout(timer.current); setGreeting(true); timer.current = setTimeout(() => setGreeting(false), 2400); }} style={({ pressed }) => ({ opacity: pressed ? .85 : 1 })}>{picture}</Pressable> : picture;
 }
 export const tabs = [

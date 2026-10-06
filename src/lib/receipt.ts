@@ -14,8 +14,10 @@ export function ocrImagePath(uri: string, platform: string) {
 }
 const summary = /\b(?:sub\s*total|total|jumlah|tunai|cash|debit|kartu|change|kembal\w*|discount|diskon|tax|pajak|ppn|pb1|service|bayar|payment|balance|qty|item)\b/i;
 const totalLabel = /\b(?:grand\s*total|total(?:\s+(?:bayar|pembayaran|belanja|akhir))?|jumlah(?:\s+(?:bayar|pembayaran))?|amount\s+due|net\s+total)\b/i;
-const address = /\b(?:jl\.?|jln\.?|jalan|street|road|rt|rw|kelurahan|kecamatan|kota|kabupaten|alamat|telp|phone|npwp|kasir|cashier|www|https|invoice|receipt|struk|nota|tanggal|date)\b|@|\+62/i;
-export function parseReceipt(blocks: string[]): ReceiptSuggestion {
+const address = /\b(?:jl\.?|jln\.?|jalan|street|road|rt|rw|kelurahan|kecamatan|kota|kabupaten|alamat|telp|phone|npwp|kasir|cashier|www|https|invoice|receipt|struk|nota|tanggal|date|no\.?|nomor|store|cabang|outlet|kode|terminal|member|pelanggan|customer|transaksi|sales|operator)\b|@|\+62/i;
+const footer = /terima\s*kasih|thank|selamat\s*(?:datang|belanja)|kunjungan|kembali\s*lagi|kritik|saran|layanan|hubungi|follow|instagram|facebook|promo|barang.*(?:kembali|tukar)|\b(?:jogja|yogyakarta|jakarta|bandung|surabaya|semarang|bantul|sleman|depok|bekasi|tangerang|bogor|medan|denpasar|indonesia)\b/i;
+const header = /^(?:nama\s*)?(?:barang|produk|description|deskripsi|item|qty|quantity|harga|price|jumlah|amount)(?:\s|$)/i;
+export function parseReceipt(blocks: string[], allowNextLineItems = true): ReceiptSuggestion {
   const groups = blocks.map(b => b.slice(0, 50000).split(/\r?\n/).map(s => s.trim()).filter(Boolean));
   // Pair columns only when their row counts match unambiguously.
   for (let g = 0; g < groups.length - 1; g++) {
@@ -29,7 +31,7 @@ export function parseReceipt(blocks: string[]): ReceiptSuggestion {
   const nextAmount = (index: number) => owners[index] === owners[index + 1] || groups[owners[index + 1]]?.length === 1 ? receiptAmount(lines[index + 1] || '') : undefined;
   const result: ReceiptSuggestion = {};
   const firstSummary = lines.findIndex(l => totalLabel.test(l));
-  result.title = lines.slice(0, Math.min(8, firstSummary < 0 ? 8 : firstSummary)).find(s => /[a-z]{3}/i.test(s) && !address.test(s) && !summary.test(s) && !/\d{4}|\d[.,]\d{3}\s*$/.test(s))?.slice(0, 80);
+  result.title = lines.slice(0, Math.min(5, firstSummary < 0 ? 5 : firstSummary)).find(s => /[a-z]{3}/i.test(s) && !address.test(s) && !footer.test(s) && !summary.test(s) && !header.test(s) && !/\d{3}|\d[.,]\d{3}\s*$/.test(s))?.slice(0, 80);
   for (const line of lines) {
     const iso = line.match(/\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b/);
     const local = line.match(/\b(\d{1,2})[-/.](\d{1,2})[-/.](20\d{2})\b/);
@@ -41,18 +43,20 @@ export function parseReceipt(blocks: string[]): ReceiptSuggestion {
   }
   if (lines.some(s => /\b(?:USD|EUR|SGD|MYR)\b|[$€£]/i.test(s))) return result;
   const candidates: { value: number; rank: number }[] = [], items: ReceiptItem[] = [];
+  const endItems = lines.findIndex(l => /\b(?:sub\s*total|grand\s*total|total|tunai|cash|pajak|ppn|terima\s*kasih|thank)\b/i.test(l));
+  const tableHeader = lines.findIndex((l, i) => (endItems < 0 || i < endItems) && header.test(l) && /\b(?:barang|produk|qty|quantity|harga|description)\b/i.test(l));
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i], label = line.match(totalLabel);
+    const line = lines[i].replace(/^\d{8,14}\s+/, ''), label = line.match(totalLabel);
     if (label && !/sub\s*total|diskon|discount|pajak|tax|cash|tunai|kembal|qty|total\s+item/i.test(line)) {
       const after = line.slice(label.index! + label[0].length).replace(/^\s*[:=\-]\s*/, '').trim();
       const value = receiptAmount(after) ?? (!after ? nextAmount(i) : undefined);
       if (value) candidates.push({ value, rank: /grand|net|bayar|pembayaran|akhir|amount/i.test(label[0]) ? 2 : 1 });
     }
-    if (summary.test(line) || address.test(line) || line === result.title || /\d{1,2}[:/]\d{1,2}/.test(line)) continue;
+    if ((tableHeader >= 0 && i <= tableHeader) || (endItems >= 0 && i >= endItems) || summary.test(line) || address.test(line) || footer.test(line) || header.test(line) || line === result.title || /\d{1,2}[:/]\d{1,2}/.test(line)) continue;
     const match = line.match(/^(.+?)\s+(?:Rp\.?\s*)?(\d[\d.,]*)\s*$/i);
     let name = match?.[1], price = match ? receiptAmount(match[2]) : undefined;
-    if (!match && /[a-z]{3}/i.test(line) && nextAmount(i)) { name = line; price = nextAmount(i); i++; }
-    if (!name || !price || !/[a-z]{2}/i.test(name)) continue;
+    if (allowNextLineItems && !match && /[a-z]{3}/i.test(line) && nextAmount(i)) { name = line; price = nextAmount(i); i++; }
+    if (!name || !price || price < 100 || !/[a-z]{2}/i.test(name)) continue;
     let quantity = 1;
     const q = name.match(/^(\d{1,3})\s*[xX*]\s*(.+)$/) || name.match(/^(.+?)\s+(\d{1,3})\s*[xX*](?:\s*[\d.,]+)?$/);
     if (q) { const leading = /^\d/.test(q[0]); quantity = Number(leading ? q[1] : q[2]); name = leading ? q[2] : q[1]; }
@@ -68,5 +72,36 @@ export function parseReceipt(blocks: string[]): ReceiptSuggestion {
   if (values.length > 1) warnings.push('Ada lebih dari satu total berbeda. Pilih total pada struk.');
   if (items.length && result.amount && items.reduce((n, item) => n + item.amount, 0) !== result.amount) warnings.push('Jumlah barang berbeda dari total. Cek pajak, diskon, atau barang yang belum terbaca.');
   if (warnings.length) result.warnings = warnings;
+  return result;
+}
+
+export interface ReceiptFragment { text: string; x: number; y: number; width: number; height: number; angle?: number; confidence?: number; }
+export interface ReceiptLayout { width: number; height: number; fragments: ReceiptFragment[]; }
+// OCR block order is not reading order. Deskew centres and join only fragments
+// occupying the same physical row; a footer can never borrow a price above it.
+export function receiptRows(layout: ReceiptLayout): string[] {
+  const valid = layout.fragments.slice(0, 2000).filter(f => f.text.trim() && [f.x, f.y, f.width, f.height].every(Number.isFinite) && f.width > 0 && f.height > 0 && (f.confidence === undefined || f.confidence >= .35));
+  const angles = valid.map(f => f.angle || 0).filter(a => Math.abs(a) < .45).sort((a, b) => a - b);
+  const angle = angles[Math.floor(angles.length / 2)] || 0;
+  const fragments = valid.map(f => {
+    const x = f.x + f.width / 2, y = f.y + f.height / 2;
+    return { ...f, cx: x * Math.cos(angle) + y * Math.sin(angle), cy: y * Math.cos(angle) - x * Math.sin(angle) };
+  }).sort((a, b) => a.cy - b.cy);
+  const rows: { cy: number; height: number; parts: typeof fragments }[] = [];
+  for (const f of fragments) {
+    const last = rows.at(-1);
+    if (last && Math.abs(last.cy - f.cy) <= Math.min(last.height, f.height) * .48) {
+      last.cy = (last.cy * last.parts.length + f.cy) / (last.parts.length + 1); last.parts.push(f); last.height = Math.min(last.height, f.height);
+    } else rows.push({ cy: f.cy, height: f.height, parts: [f] });
+  }
+  return rows.map(row => row.parts.sort((a, b) => a.cx - b.cx).map(f => f.text.trim()).join(' '));
+}
+export function parseReceiptLayout(layout: ReceiptLayout): ReceiptSuggestion {
+  const rows = receiptRows(layout);
+  const result = parseReceipt([rows.join('\n')], false);
+  // Do not guess the shop from the item list when the logo wasn't recognised.
+  if (result.title && /\d|\b(?:qty|harga|jumlah)\b/i.test(result.title)) delete result.title;
+  if (!result.items?.length) result.warnings = [...(result.warnings || []), 'Baris barang belum cocok dengan harga. Jangan isi dari alamat atau angka toko; tambah barang dari foto.'];
+  if (layout.fragments.some(f => f.confidence !== undefined && f.confidence < .5)) result.warnings = [...(result.warnings || []), 'Sebagian teks kurang jelas. Ambil ulang foto atau periksa angka pada foto.'];
   return result;
 }

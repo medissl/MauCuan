@@ -1,9 +1,13 @@
+# Version 0.3.1
+
+Source is implemented and checked; a fresh Android preview build is pending its one-build allowance. Includes the Android widget and bundled receipt recognition module, so older APKs cannot receive these changes without an update. No store submission.
+
 # Current Android preview
 
 The repaired 0.3.0 Android preview was dispatched on 6 October 2026 from commit `1c61d540fdb12361c104852339def155c8eaf5f6`:
 https://expo.dev/accounts/medizeng/projects/maucuan/builds/8a2d1d8a-3082-47d6-addb-053133ee99f8
 
-Status at dispatch: queued. This includes the dependency lock repair and all 0.3.0 features. The operator approved a maximum of one replacement build; that allowance has been consumed. Internal APK distribution only, with no store submission. Download the APK from this page once the build finishes successfully and install it as an update.
+Status checked 6 October: FINISHED successfully. This includes the dependency lock repair and all 0.3.0 features. The operator approved a maximum of one replacement build; that allowance has been consumed. Internal APK distribution only, with no store submission. Download the APK from this page once the build finishes successfully and install it as an update.
 
 # Android preview build history
 

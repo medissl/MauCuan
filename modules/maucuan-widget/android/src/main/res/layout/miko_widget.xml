@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/miko_widget_root"
+  android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
+  android:gravity="center" android:padding="12dp" android:background="@drawable/miko_widget_background">
+  <TextView android:id="@+id/miko_widget_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Teman Macan" android:textColor="#00323E" android:textSize="16sp" android:textStyle="bold" android:gravity="center" android:maxLines="1" android:ellipsize="end"/>
+  <ImageView android:id="@+id/miko_widget_face" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:minHeight="64dp" android:src="@drawable/miko_widget_paw" android:scaleType="fitCenter" android:contentDescription="Teman macanmu"/>
+  <TextView android:id="@+id/miko_widget_body" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Kita cek hari ini, pelan-pelan?" android:textColor="#00323E" android:textSize="12sp" android:gravity="center" android:maxLines="2" android:ellipsize="end" android:layout_marginBottom="8dp"/>
+  <TextView android:id="@+id/miko_widget_action" android:layout_width="match_parent" android:layout_height="36dp" android:text="Cek hari ini" android:textColor="#FFF4E7" android:textSize="12sp" android:textStyle="bold" android:gravity="center" android:maxLines="1" android:ellipsize="end" android:background="@drawable/miko_widget_button"/>
+</LinearLayout>
