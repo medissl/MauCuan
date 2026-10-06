@@ -1,6 +1,6 @@
 # Version 0.4.0
 
-Source changes and hosted daily quiz rules are ready. The updated Android APK has not been dispatched yet; the previous one-build allowance was used by 0.3.3. A fresh maximum-one-build preview approval is required. No store submission is included.
+The approved Android preview was dispatched on 6 October 2026 at 17:31 WIB from commit fab4f080df3fa010d5c5681910999586a7b4ab04. Build: https://expo.dev/accounts/medizeng/projects/maucuan/builds/6c06a4c2-e391-4973-b908-6da82276650b . Verified status at dispatch: IN_QUEUE. The one-build allowance 01a110c4-0ca2-7ec9-8f8c-ba932505dd55 has been consumed. Internal APK only, no store submission. Download appears on this page after successful completion; physical-device validation remains pending.
 
 # Version 0.3.3
 
