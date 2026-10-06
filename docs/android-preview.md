@@ -1,6 +1,6 @@
 # Version 0.3.1
 
-Source is implemented and checked; a fresh Android preview build is pending its one-build allowance. Includes the Android widget and bundled receipt recognition module, so older APKs cannot receive these changes without an update. No store submission.
+The approved 0.3.1 Android preview was queued on 6 October 2026 from commit ad078174b64a6b2677075154414e51136cdb2668. Build: https://expo.dev/accounts/medizeng/projects/maucuan/builds/c0ac44aa-257b-489a-b350-c0233d34499c . Includes the Android widget, habit reminders, long-term pet collection and bundled receipt layout recognition. The one-build allowance 01a10fce-2042-7c0e-b9b2-5a0ac4d29612 has been used. Internal APK only, no store submission. Download the APK after the build finishes successfully; installation and real-device verification remain pending.
 
 # Current Android preview
 
