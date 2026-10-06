@@ -10,4 +10,4 @@ Regression fixtures recover all three reported examples: Indomie goreng (Rp36,00
 
 Validation: 45 tests, lint, TypeScript, Android and iOS production Hermes bundle exports. A static component-based browser layout review checks placement only; it does not establish native sheet behavior or camera accuracy. Native installation testing remains required.
 
-Source version: 0.3.2. The finished 0.3.1 APK does not contain these changes. A fresh EAS preview build allowance is required for the new APK; no store submission is planned.
+Source version: 0.3.2. The finished 0.3.1 APK does not contain these changes. The approved Android preview was dispatched from d049dedc68e2e64e2f1af43da8c13984b2517636 on 6 October 2026: build 3190f91a-16c2-4cc1-8dff-2c32bcba27a3, IN_PROGRESS at dispatch. Its one-build allowance is consumed; no store submission is included. See android-preview.md for the build link.

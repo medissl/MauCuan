@@ -1,6 +1,6 @@
 # Version 0.3.2
 
-Source prepared on 6 October 2026 with two-line receipt item fixes and the revised pet room/quiz UX. The finished 0.3.1 build below does not include these changes. A new one-build preview allowance is needed before dispatching 0.3.2.
+The approved 0.3.2 Android preview was dispatched on 6 October 2026 from commit d049dedc68e2e64e2f1af43da8c13984b2517636, with two-line receipt item fixes and the revised pet room/quiz UX. Build: https://expo.dev/accounts/medizeng/projects/maucuan/builds/3190f91a-16c2-4cc1-8dff-2c32bcba27a3 . Status at dispatch: IN_PROGRESS. The one-build allowance 01a10ffe-2f22-7794-915a-7a76014553f7 has been used. Internal APK only, no store submission. Download becomes available after successful completion. The finished 0.3.1 build below does not include these changes.
 
 # Version 0.3.1
 
