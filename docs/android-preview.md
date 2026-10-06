@@ -5,7 +5,7 @@ Updated 6 October 2026 (Asia/Jakarta).
 The current approved 0.3.0 preview build is **b9890126-0225-4f56-a1ce-a23568ebdaf6**:
 https://expo.dev/accounts/medizeng/projects/maucuan/builds/b9890126-0225-4f56-a1ce-a23568ebdaf6
 
-Status checked after dispatch: **IN_PROGRESS**. There is no downloadable APK until it finishes successfully. Build source is commit `72c76ad7c311976de65d68e32f3ea03bc9d52cb0` on `codex/maucuan-native`, Android `preview` profile, internal distribution. No store submission.
+Status: **FAILED** during `npm ci --include=dev`, before native compilation. There is no downloadable APK until it finishes successfully. Build source is commit `72c76ad7c311976de65d68e32f3ea03bc9d52cb0` on `codex/maucuan-native`, Android `preview` profile, internal distribution. No store submission.
 
 Includes native date calendars, corrected Android OCR image paths, merchant/total parsing and editable receipt items, Miko's hold-to-pet reactions, room customization with 22 cosmetics, level gifts, contextual recorded-finance tips and a finance quiz. See [release notes and validation](release-0.3.0.md).
 
@@ -19,3 +19,9 @@ The previous 0.2.0 build was `6767c626-e823-47f1-a649-17caeeeea74d`, from commit
 https://expo.dev/accounts/medizeng/projects/maucuan/builds/6767c626-e823-47f1-a649-17caeeeea74d
 
 It included account codes, navigation, settings, currency formatting, bottom safe-area fixes, the teal-blue theme and fixed-palette Miko artwork. It does not include the 0.3.0 features above. The earlier preview queue entry `46f7be09-b6af-4cb3-a72d-31faa90141d9` was cancelled before that replacement.
+
+## Dependency-install repair
+
+The failed build reported missing root lock entries for `@emnapi/core@1.11.3` and `@emnapi/runtime@1.11.3`, peers of the optional WASM resolver runtime. The earlier lock was written with npm 11.6.2 on Windows. Regenerating it with npm 10.9.3 in an isolated folder restored those entries without changing application dependencies or existing package versions.
+
+Verified: an actual `npm ci --include=dev --ignore-scripts` with npm 10.9.3 passed, as did a separate Linux/x64 dependency-selection dry run. Lint and TypeScript checks passed. This checks dependency installation; native compilation still needs the replacement EAS build. Fresh build allowance required before retrying.

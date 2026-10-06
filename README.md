@@ -2,7 +2,7 @@
 
 A native Android and iOS app for recording income and spending, setting savings goals, and building consistent habits with Miko the spotted macan. Built with Expo / React Native and Supabase.
 
-Current app source: **0.3.0**. Adds native date calendars, repaired Android receipt reading with editable items, and Miko's interactive room, 22 cosmetics, level gifts and finance quiz. See [release notes and validation](docs/release-0.3.0.md). The [0.3.0 Android preview build](https://expo.dev/accounts/medizeng/projects/maucuan/builds/b9890126-0225-4f56-a1ce-a23568ebdaf6) has started; older builds do not include these changes.
+Current app source: **0.3.0**. Adds native date calendars, repaired Android receipt reading with editable items, and Miko's interactive room, 22 cosmetics, level gifts and finance quiz. See [release notes and validation](docs/release-0.3.0.md). The [0.3.0 Android preview build](https://expo.dev/accounts/medizeng/projects/maucuan/builds/b9890126-0225-4f56-a1ce-a23568ebdaf6) failed during dependency installation; the lock file is repaired and awaiting a replacement build. Older builds do not include these changes.
 
 ## Run locally
 
@@ -30,7 +30,7 @@ The initial schema is saved in `supabase/schema.sql`; apply `supabase/enhancemen
 1. **Email delivery:** Gmail SMTP has been saved in the hosted dashboard by the operator. Confirmation and password recovery templates use numeric `{{ .Token }}` codes, with no verification-link button. Copies are in `supabase/templates/`. End-to-end inbox delivery still needs testing; use a dedicated transactional sender before public launch.
 2. **Auth redirects:** Site URL is `https://maucuan-finance.vercel.app`; `maucuan://auth/callback` and the website callback remain allowed for compatibility. The current signup and recovery screens use email codes.
 3. **Receipt OCR:** on-device extraction is implemented with `expo-text-extractor@2.0.0`; validate it on real receipt photos after installing the native build. No OCR cloud credentials are required. DocRunic exposes documentation tools and was not connected as an OCR processor.
-4. **Build distribution:** Expo project [@medizeng/maucuan](https://expo.dev/accounts/medizeng/projects/maucuan) is connected to this repository. The 0.3.0 Android preview build is in progress. Download its APK from the build page once it finishes successfully. Previous previews and their source revisions are in [build history](docs/android-preview.md). No store submission is included.
+4. **Build distribution:** Expo project [@medizeng/maucuan](https://expo.dev/accounts/medizeng/projects/maucuan) is connected to this repository. The first 0.3.0 Android preview failed during dependency installation. Its repaired lock file is awaiting a replacement build. Previous previews and their source revisions are in [build history](docs/android-preview.md). No store submission is included.
 
 ## Validation
 
