@@ -1,84 +1,171 @@
 import { money, type Transaction, type Goal, type Contribution } from './finance.ts';
-import { petTips, type PetRoom } from './pet.ts';
+import { type PetRoom } from './pet.ts';
 export interface MikoLine { text: string; action?: string; route?: string; kind: 'personal' | 'record'; }
 // Miko is curious, playful and quietly supportive. She never shames a missed
 // day, claims to see a bank account, or rewards spending or pet-care taps.
 export const mikoPersonality = [
-  'Aku tadi mencoba menghitung totolku. Ekor bergerak, hitungannya mulai lagi.',
-  'Syal biruku sudah rapi. Sekarang aku siap menemani kamu.',
-  'Tempat favoritku? Di dekat jendela, pas sinarnya hangat.',
-  'Aku punya ide besar: tidur kecil dulu. Tapi kalau kamu mau ngobrol, aku di sini.',
-  'Telingaku kelihatan serius. Padahal aku sedang mendengar suara bola menggelinding.',
-  'Kamu boleh punya hari biasa saja. Aku juga tidak berpetualang setiap hari.',
-  'Aku sedang berlatih tos. Jangan kaget kalau cakarku sedikit geli.',
-  'Kalau benang bisa ngomong, pasti dia bilang: Miko, jangan kusutkan aku!',
-  'Ada hal kecil yang bikin kamu senang hari ini? Simpan dulu dalam ingatan.',
-  'Aku tidak jago pura-pura galak. Senyumku selalu keburu keluar.',
-  'Aku suka warna biru. Rasanya seperti langit yang bisa dipakai jadi syal.',
-  'Tidak perlu punya jawaban untuk semuanya hari ini.',
-  'Satu langkah cukup. Langkah kecil juga meninggalkan jejak.',
-  'Kalau kamu capek, duduk sebentar bersamaku.',
-  'Aku tadi mengejar bayangan sendiri. Ternyata cepat juga dia.',
-  'Ada yang ingin kamu pelajari? Aku juga masih belajar.',
-  'Aku bisa menemani diam-diam. Kita tidak harus selalu sibuk.',
-  'Minum air dulu kalau perlu. Aku tunggu di sini.',
-  'Bahumu boleh turun sedikit. Tidak harus tegang terus.',
-  'Bola itu bulat. Kenapa susah sekali berhenti tepat di kakiku?',
-  'Aku penasaran, besok kamu akan cerita apa ya?',
-  'Hariku lebih seru kalau ada teman menggelindingkan bola.',
-  'Aku mencoba menyusun buku dari yang paling tinggi. Lalu tergoda membuka satu.',
-  'Hari yang berantakan masih boleh diakhiri dengan istirahat.',
-  'Aku tidak menghitung berapa lama kamu pergi. Senang kamu mampir.',
-  'Totolku tidak perlu seragam. Tapi syalku wajib rapi.',
-  'Kalau ada lomba menemukan tempat nyaman, aku mau daftar.',
-  'Aku suka rencana. Aku juga suka kalau rencananya boleh berubah.',
-  'Penasaran itu bagus. Bertanya juga bagian dari belajar.',
-  'Kita bisa mulai lagi tanpa menyalahkan hari kemarin.',
-  'Aku punya langkah kecil dan rasa ingin tahu yang besar.',
-  'Kadang keberanian itu cuma mencoba sekali lagi dengan lebih pelan.',
-  'Aku sedang membayangkan piknik. Bawa air, buku, dan tempat teduh.',
-  'Kamu tidak perlu mengejar semua hal sekaligus.',
-  'Kalau kamu sedang fokus, aku akan duduk manis. Mungkin.',
-  'Aku menemukan sudut yang pas untuk meringkuk. Mau istirahat juga?',
-  'Senyum kecil boleh. Menguap juga boleh.',
-  'Aku bangga pada usahamu, bahkan yang tidak kelihatan di layar.',
-  'Hari ini kita pilih langkah yang masuk akal, ya.',
-  'Aku mau jadi teman yang membantu, bukan teman yang menambah tugas.',
-  'Mengatur kamar itu seru. Tapi kita tidak harus punya semua koleksi.',
-  'Aku suka kejutan kecil. Seperti bola yang tiba-tiba kembali ke sini.',
-  'Buku favoritku belum selesai. Tidak apa-apa, besok masih bisa lanjut.',
-  'Aku menunggu angin dari jendela. Syalku sepertinya juga penasaran.',
-  'Kalau hari ini terasa panjang, kita ambil satu hal dulu.',
-  'Aku tidak butuh kamu selalu sempurna. Aku senang kita bisa belajar bersama.',
-  'Aku tadi hampir tertidur sambil duduk. Hampir. Jangan bilang bantalnya.',
-  'Tos dulu? Sentuh aku sebentar. Kalau mau elus, tahan lalu usap.',
-  'Aku mencoba melompat seperti awan. Ternyata awan tidak melompat.',
-  'Cerita kecil juga layak didengar. Tidak harus pencapaian besar.',
-  'Aku suka saat kamar terasa tenang dan kamu tidak terburu-buru.',
-  'Kamu sudah melakukan banyak hal di luar aplikasi ini. Istirahat juga berarti.',
-  'Kadang aku cuma ingin melihat langit berubah warna.',
-  'Tidak ada tenggat untuk menjadi teman baik bagi diri sendiri.',
-  'Aku tahu satu trik: berhenti sebentar sebelum menjawab terlalu cepat.',
-  'Ayo simpan sedikit ruang hari ini untuk hal yang kamu suka.',
-  'Aku sedang belajar menunggu. Bola itu melatih kesabaranku.',
-  'Kamu punya caramu sendiri. Kita cari ritme yang nyaman.',
-  'Aku kecil, tapi aku siap jadi teman untuk rencana besarmu.',
-  'Terima kasih sudah mampir. Sekarang, apa yang ingin kita lakukan?',
+  "Eh, aku tadi hitung totolku. Lupa lagi gara-gara ekorku gerak!",
+  "Syal sudah rapi. Siap nemenin kamu!",
+  "Tempat paling enak itu dekat jendela. Hangat banget.",
+  "Rencana besarku hari ini: tidur sebentar. Habis itu main!",
+  "Dengar itu? Kayaknya bolaku menggelinding sendiri.",
+  "Hari kamu gimana? Aku tadi sibuk pilih bantal.",
+  "Tos dulu, yuk! Cakarku sudah siap.",
+  "Benangnya kusut. Aku cuma menyentuhnya sedikit… kayaknya.",
+  "Ada cerita seru hari ini? Aku pasang telinga!",
+  "Aku coba pasang muka galak. Malah jadi senyum.",
+  "Syal biru ini cocok, kan? Aku suka banget.",
+  "Mau ngobrol atau duduk bareng dulu?",
+  "Sini, duduk dekat aku.",
+  "Capek? Kita rebahan sebentar, yuk.",
+  "Aku mengejar bayanganku tadi. Dia jago kabur!",
+  "Kamu lagi belajar apa? Aku mau ikut lihat.",
+  "Aku bisa duduk manis. Coba hitung sampai tiga!",
+  "Sudah minum? Aku habis main, jadi haus.",
+  "Huft, enak juga duduk santai begini.",
+  "Bolanya berhenti di bawah ekor. Pantas aku cari ke mana-mana!",
+  "Besok ceritain harimu lagi, ya?",
+  "Satu lemparan lagi? Yang pelan saja!",
+  "Buku yang tinggi aku taruh di bawah. Jadi tangga kecil!",
+  "Kalau hari ini ribet, kita rapikan satu-satu.",
+  "Eh, kamu datang! Aku baru mau cari kamu.",
+  "Ada totol kecil di telingaku. Lucu, ya?",
+  "Aku menemukan tempat tidur baru. Di atas buku… ups.",
+  "Hari ini mau ngapain? Aku ikut!",
+  "Aku penasaran sama semua tombol di sini.",
+  "Yuk, mulai lagi. Aku sudah siap.",
+  "Kakiku kecil, tapi larinya lumayan!",
+  "Coba sekali lagi? Kali ini aku bantu semangatin.",
+  "Piknik di dekat jendela juga seru, lho.",
+  "Pelan-pelan saja. Aku tungguin.",
+  "Aku duduk diam kalau kamu fokus. Ekorku agak susah diatur.",
+  "Bantal ini empuk banget. Coba lihat!",
+  "Aku menguap dulu. Huaa… selesai!",
+  "Wah, kamu mampir. Hariku jadi lebih seru.",
+  "Satu hal dulu, yuk. Habis itu main sebentar.",
+  "Aku suka nemenin kamu. Apalagi kalau ada tos.",
+  "Kamar kita mau dihias apa lagi?",
+  "Aku suka kejutan. Asal bolanya nggak kena hidung!",
+  "Aku baru baca dua halaman. Gambarnya bagus.",
+  "Anginnya bikin syalku goyang. Kayak bendera kecil!",
+  "Ada yang bikin kamu senyum hari ini?",
+  "Kamu boleh cerita apa saja. Aku dengerin.",
+  "Aku hampir tidur sambil duduk. Hampir!",
+  "Ketuk aku buat tos. Mau elus? Tahan, lalu usap.",
+  "Hup! Lompatanku tadi lumayan tinggi, kan?",
+  "Cerita hal kecil juga boleh. Aku penasaran.",
+  "Kamar kita nyaman banget sekarang.",
+  "Kamu habis sibuk, ya? Duduk dulu sini.",
+  "Langit sore cantik. Aku mau lihat dari jendela.",
+  "Hari ini kamu ingin ditemenin ngapain?",
+  "Aku jawab cepat tadi. Ternyata salah dengar. Hehe.",
+  "Kita sisakan waktu buat main, ya?",
+  "Bolanya aku jaga. Jangan khawatir!",
+  "Aku suka cara kita main bareng.",
+  "Aku kecil, tapi semangatku besar!",
+  "Hai lagi! Mau mulai dari mana?"
 ];
 export const mikoReactions = {
-  pet: ['Miko senang! Elusanmu hangat sekali.', 'Miko senang! Aku boleh duduk dekat kamu sebentar?', 'Miko senang! Rasanya seperti menemukan tempat paling nyaman.', 'Miko senang! Syalku sedikit miring, tapi aku suka.', 'Miko senang! Terima kasih sudah menemani.'],
-  touch: ['Pelan-pelan… Miko menikmati elusanmu.', 'Pelan-pelan… bagian atas kepalaku paling nyaman.', 'Pelan-pelan… aku bisa mengantuk kalau begini.'],
-  highfive: ['Tos! Tim langkah kecil siap berangkat.', 'Tos berhasil. Cakarku pas dengan tanganmu!', 'Tos! Kita tidak perlu sempurna untuk jadi tim yang baik.', 'Tos hangat dari macan kecilmu.'],
+  pet: ['Hehe, enak banget dielus!', 'Aku boleh duduk dekat kamu sebentar?', 'Mmm, aku betah banget di sini.', 'Syalku sedikit miring, tapi aku suka.', 'Makasih sudah nemenin aku!'],
+  touch: ['Mmm… terusin, ya. Enak banget.', 'Pelan-pelan… bagian atas kepalaku paling nyaman.', 'Pelan-pelan… aku bisa mengantuk kalau begini.'],
+  highfive: ['Tos! Kita kompak banget!', 'Tos berhasil. Cakarku pas dengan tanganmu!', 'Tos! Kompak terus, ya!', 'Tos hangat dari macan kecilmu.'],
   ball: ['Ketangkap! Bola ini lebih cepat daripada kelihatannya.', 'Bola kembali! Aku mulai paham cara mengarahkannya.', 'Hup! Hampir kena syal. Kita coba lagi kapan-kapan.', 'Aku suka main sebentar. Terima kasih sudah menemani.'],
 };
 export const bondDialogue = [
-  ['Aku masih belajar jadi temanmu. Kamu boleh mengajariku ritme yang nyaman.', 'Aku sedikit penasaran dan sedikit malu. Senang bisa kenalan pelan-pelan.', 'Kita belum perlu cerita banyak. Tos kecil juga cukup untuk hari ini.', 'Aku sedang mencari tempat favorit di rumah baru kita.', 'Kamu boleh panggil aku dengan nama yang terasa seperti teman.', 'Aku belum tahu semua kebiasaanmu. Kita mulai dari yang sederhana.', 'Aku suka perkenalan yang tidak terburu-buru.', 'Kalau belum sempat banyak mencatat, tidak apa-apa. Kita belajar dulu.', 'Aku sedang membiasakan diri dengan suara bola di sini.', 'Terima kasih sudah memberi aku tempat di harimu.', 'Kita tidak perlu langsung dekat. Aku senang berjalan pelan.', 'Aku akan mencoba jadi teman yang tidak merepotkan.'],
-  ['Aku mulai merasa nyaman di sini. Obrolan kecil kita jadi hal yang kusuka.', 'Tos kita makin lancar. Aku masih bisa geli sedikit.', 'Aku suka kita punya ritme, tanpa harus jadi rutinitas yang berat.', 'Ada banyak hari kecil di balik level kita. Aku suka itu.', 'Aku tidak ingin menambah tugasmu. Aku ingin menemani yang sudah ada.', 'Aku mulai punya sudut favorit. Tapi duduk dekat kamu tetap paling nyaman.', 'Aku senang kita belajar jujur pada catatan, bukan terlihat sempurna.', 'Kamu boleh datang dengan cerita baik atau hari yang melelahkan.', 'Rasanya rumah ini makin seperti milik kita.', 'Aku semakin santai kalau kamu mampir sebentar.', 'Kita sudah mencoba banyak langkah kecil. Tidak semuanya harus besar.', 'Aku ingin tetap penasaran seperti waktu pertama kenal kamu.'],
-  ['Kita sudah cukup jauh untuk tahu: hari yang berat tidak menghapus kemajuan.', 'Aku tidak cuma menunggu catatan. Aku juga senang kamu memberi waktu untuk diri sendiri.', 'Tempat duduk di dekatku selalu ada, bahkan saat kamu lama sibuk.', 'Kita punya perjalanan sendiri. Tidak perlu dibandingkan dengan orang lain.', 'Aku makin suka cara kita memberi ruang untuk mulai lagi.', 'Kalau aku bisa menyimpan sesuatu, aku ingin menyimpan tos kecil kita.', 'Aku merasa seperti teman lama yang masih penasaran pada cerita baru.', 'Kamu boleh mengubah rencana. Aku tetap menemani kamu meninjaunya.', 'Kita sudah sering belajar sedikit demi sedikit. Aku ingin terus begitu.', 'Aku senang kamu punya hidup di luar layar ini. Mampir saat waktunya pas.', 'Rumah kita punya koleksi, tapi yang paling berarti tetap perjalanan kita.', 'Aku tidak butuh kunjungan sempurna. Aku senang kunjungan yang nyaman.'],
-  ['Kita sudah melewati banyak musim kecil. Aku masih senang setiap kali kamu mampir.', 'Kadang rencana lama berubah. Persahabatan kecil kita bisa ikut tumbuh.', 'Aku ingin tetap jadi sudut yang tenang dalam harimu.', 'Lama berteman tidak berarti harus selalu bersama. Kamu boleh punya ruang.', 'Kita tidak perlu mengulang dari nol saat hidup berubah.', 'Aku sudah jadi bagian kecil dari perjalananmu. Terima kasih untuk ruang itu.', 'Aku masih suka bola jingga yang sama. Beberapa hal kecil tetap menyenangkan.', 'Kita bisa mengenang kemajuan tanpa memaksa hari ini sama dengan dulu.', 'Tidak semua musim terasa ringan. Kita beri diri sendiri waktu.', 'Aku suka kita masih punya hal baru untuk dipelajari bersama.', 'Berteman lama membuat obrolan sederhana terasa hangat.', 'Aku tetap macan kecil yang penasaran, dan tetap senang menemani kamu.'],
+  [
+    "Hai, aku masih hafalin kamar baru kita.",
+    "Boleh duduk dekat kamu? Aku agak malu.",
+    "Tos pertama kita! Jangan kencang-kencang, ya.",
+    "Aku cari sudut buat tidur. Yang ini enak!",
+    "Nama baruku bagus. Kamu yang pilih, kan?",
+    "Pelan-pelan kenalannya, ya. Aku penasaran sama kamu.",
+    "Kamu suka main bola juga?",
+    "Mau lihat-lihat dulu? Aku temenin.",
+    "Bola di rumah baru bunyinya beda, lho.",
+    "Makasih sudah kasih aku tempat.",
+    "Aku senang kita ketemu.",
+    "Kalau butuh teman, panggil aku saja."
+  ],
+  [
+    "Aku mulai hafal langkahmu. Eh, kamu lagi!",
+    "Tos kita makin kompak!",
+    "Senang deh kita punya waktu bareng.",
+    "Sudah banyak hari kecil kita lewati.",
+    "Kamu mampir pas aku lagi mikirin kamu.",
+    "Sudut ini favoritku. Tapi dekat kamu lebih enak.",
+    "Catatannya kita rapikan bareng, yuk.",
+    "Harimu seru atau melelahkan? Cerita dong.",
+    "Kamar ini mulai terasa kayak rumah.",
+    "Aku senang lihat kamu lagi.",
+    "Kita makin jago, ya?",
+    "Masih ingat waktu pertama kita kenalan?"
+  ],
+  [
+    "Kita sudah lama kenal. Aku nyaman banget di sini.",
+    "Aku kangen cerita kecilmu. Hari ini ada apa?",
+    "Tempat sebelahku kosong. Buat kamu!",
+    "Perjalanan kita sudah jauh juga, ya.",
+    "Rencana berubah? Yuk, lihat lagi bareng.",
+    "Aku hafal tos kamu sekarang.",
+    "Teman lama, cerita baru! Aku siap dengerin.",
+    "Targetnya mau diganti? Aku ikut lihat.",
+    "Sedikit-sedikit kita jadi makin paham.",
+    "Kamu sibuk belakangan ini? Senang kamu mampir.",
+    "Lihat kamar kita. Banyak kenangannya!",
+    "Kalau mampir sebentar pun aku senang."
+  ],
+  [
+    "Sudah lebih dari setahun kita bareng. Wah!",
+    "Rencana kita berubah banyak, ya. Seru lihatnya.",
+    "Sini, tempat nyamanmu masih ada.",
+    "Lama berteman, aku tetap senang tiap kamu datang.",
+    "Ada hal baru? Ceritain dong!",
+    "Makasih sudah ngajak aku dalam perjalananmu.",
+    "Bola lama ini tetap favoritku.",
+    "Ingat waktu kamar kita masih kosong?",
+    "Hari lagi berat? Aku duduk di sebelahmu.",
+    "Masih ada banyak hal buat kita coba.",
+    "Teman lama paling enak diajak ngobrol santai.",
+    "Aku tetap macan kecilmu yang suka penasaran."
+  ]
 ];
 export const everydayDialogue = [
-  'Aku ingin dengar satu hal baik dari harimu. Yang kecil pun boleh.', 'Kamu boleh duduk dulu sebelum memilih apa yang perlu dibereskan.', 'Aku baru sadar: meringkuk dan berpikir pelan itu cocok sekali.', 'Kalau harimu penuh, kita tidak harus memenuhi layar ini juga.', 'Aku mencoba memandang jendela seperti petualang. Tapi kursinya terlalu nyaman.', 'Kamu tidak harus produktif di setiap waktu kosong.', 'Aku akan jaga bola ini. Kamu bisa tarik napas dulu.', 'Terima kasih sudah meluangkan sebentar untuk kita.', 'Ada saatnya berencana, ada saatnya menutup buku dan istirahat.', 'Aku suka mendengar kabar kecil. Bahkan kalau kabarnya cuma sudah makan.', 'Kalau kamu sedang bingung, kita boleh memilih langkah paling sederhana.', 'Aku ingin jadi teman untuk hari baik dan hari biasa.', 'Hari yang sunyi juga punya tempat di sini.', 'Aku tadi berpikir ingin jadi macan besar. Lalu teringat bantal kecil ini pas sekali.', 'Kamu boleh bangga pada hal yang belum selesai, tapi sudah kamu mulai.', 'Aku tidak bisa mengerjakan semua hal untukmu. Tapi aku bisa menemani satu langkah.', 'Kamu tidak perlu berusaha terlihat baik-baik saja di setiap saat.', 'Aku akan menyambutmu dengan ritme yang tenang.', 'Aku menata syal seperti sedang bersiap untuk cerita penting. Cerita kecilmu juga penting.', 'Kalau kamu mau diam sebentar, aku ikut duduk manis.', 'Aku senang saat kita bermain tanpa menghitung hadiah.', 'Tidak apa-apa kalau rencana hari ini lebih kecil dari rencana kemarin.', 'Aku ingin kita punya kebiasaan yang muat dalam hidupmu.', 'Ada banyak cara merawat diri. Berhenti sebentar juga salah satunya.', 'Aku penasaran pada dunia, tapi sudut kecil kita punya tempat istimewa.', 'Boleh merasa lelah meskipun harimu terlihat biasa dari luar.', 'Aku suka saat kita tertawa pada hal kecil, seperti bola yang sulit ditangkap.', 'Kalau kamu sudah selesai hari ini, kita tidak perlu mencari tugas baru.', 'Aku tetap di sini meskipun jadwalmu berubah.', 'Kita bisa mencoba sesuatu yang baru tanpa harus meninggalkan semua yang lama.', 'Aku ingin pertemuan kecil kita terasa seperti pulang sebentar.', 'Kamu boleh membuat batas supaya harimu punya ruang untuk bernapas.', 'Aku suka langkahmu sendiri, bukan langkah yang dipaksa orang lain.', 'Aku akan menemani dengan telinga besar dan rasa ingin tahu yang sama.', 'Kita tidak harus mengejar hari yang sempurna. Hari yang cukup juga nyaman.', 'Aku kadang mengantuk di tengah rencana besar. Kita lanjut setelah istirahat, ya?',
+  "Sudah makan? Aku kepikiran camilan.",
+  "Sepatumu habis jalan jauh hari ini?",
+  "Aku baru bangun. Rambut kepalaku rapi nggak?",
+  "Hari ini ramai banget? Sini istirahat.",
+  "Aku jadi petualang jendela hari ini.",
+  "Sore-sore enaknya ngapain, ya?",
+  "Bolanya aman sama aku. Kayaknya.",
+  "Senang kamu meluangkan waktu buat mampir.",
+  "Buku tutup dulu. Kita ngobrol!",
+  "Kabar kecil juga kabar. Cerita dong.",
+  "Bingung pilih yang mana? Kita lihat pelan-pelan.",
+  "Aku suka hari biasa kalau ada kamu.",
+  "Sunyi ya? Aku bisa jadi teman duduk.",
+  "Aku mau jadi macan besar. Tapi bantal kecil ini sayang dilepas.",
+  "Kamu mulai sesuatu yang baru hari ini?",
+  "Aku bantu semangatin, ya!",
+  "Lagi pengin cerita atau diam sebentar?",
+  "Aku sambut kamu pakai tos. Sini!",
+  "Syalku rapi. Siap dengar ceritamu.",
+  "Oke, aku ikut duduk manis.",
+  "Main bola memang seru. Kejar-kejarannya lebih seru!",
+  "Hari ini kita santai saja, yuk.",
+  "Kamu punya lagu favorit? Aku pengin dengar.",
+  "Rehat sebentar, yuk. Ekorku juga lelah.",
+  "Di luar seru, tapi kamar kita nyaman.",
+  "Kalau lelah, duduk dekat aku.",
+  "Tadi bolanya lewat di antara kakiku. Aku bengong!",
+  "Selesai semua? Hore, waktunya santai.",
+  "Jadwalmu berubah? Aku tetap di sini.",
+  "Ada permainan baru yang mau kamu coba?",
+  "Selamat datang lagi di kamar kita!",
+  "Kamu lebih suka pagi atau malam?",
+  "Aku suka saat kamu cerita sambil santai.",
+  "Telingaku besar. Ceritamu pasti kedengaran!",
+  "Hari biasa pun seru bareng teman.",
+  "Aku ngantuk di tengah rencana besar. Hehe."
 ];
 export function reactionLine(kind: keyof typeof mikoReactions, index: number, name: string) { return mikoReactions[kind][index % mikoReactions[kind].length].replaceAll('Miko', name); }
 export function mikoLines(context: { transactions: Transaction[]; goals: Goal[]; contributions: Contribution[]; available: number; day: string; checked: boolean; room: PetRoom; level: number; hour: number; name?: string; checkins?: number }): MikoLine[] {
@@ -87,25 +174,25 @@ export function mikoLines(context: { transactions: Transaction[]; goals: Goal[];
   const bond = checkins >= 365 ? 3 : checkins >= 90 ? 2 : checkins >= 10 ? 1 : 0;
   personal.unshift(...bondDialogue[bond].map(text => ({ text, kind: 'personal' as const })));
   personal.push(...everydayDialogue.map(text => ({ text, kind: 'personal' as const })));
-  personal.unshift({ text: `Aku ${name}. Namaku boleh kamu pilih; rasa ingin tahuku tetap besar.`, kind: 'personal' });
-  if (checkins >= 10) personal.unshift({ text: `Sudah ${checkins} check-in kita kumpulkan. Tidak harus berurutan untuk berarti.`, kind: 'personal' });
-  personal.unshift({ text: hour < 11 ? 'Pagi! Aku sudah merapikan syal. Kita mulai pelan-pelan?' : hour < 17 ? 'Hai! Aku sedang menjaga sudut paling nyaman untuk kita.' : hour < 21 ? 'Sore mulai tenang. Senang bisa menemani kamu sebentar.' : 'Sudah malam. Kamu boleh istirahat; aku tetap di sini besok.', kind: 'personal' });
-  if (room.left === 'plant') personal.unshift({ text: 'Tanaman kecil kita kelihatan nyaman di sini. Aku janji tidak menjadikannya mainan.', kind: 'personal' });
+  personal.unshift({ text: `Hai, aku ${name}! Mau tos dulu?`, kind: 'personal' });
+  if (checkins >= 10) personal.unshift({ text: `Sudah ${checkins} check-in bareng. Wah, banyak juga kenangan kita!`, kind: 'personal' });
+  personal.unshift({ text: hour < 11 ? 'Pagi! Syal sudah rapi. Kamu sudah siap?' : hour < 17 ? 'Hai! Sini, duduk dekat aku.' : hour < 21 ? 'Sore! Harimu gimana? Cerita dong.' : 'Sudah malam. Aku mulai ngantuk. Kamu juga?', kind: 'personal' });
+  if (room.left === 'plant') personal.unshift({ text: 'Tanaman kecil kita tumbuh cantik. Aku suka duduk di dekatnya.', kind: 'personal' });
   if (room.left === 'books') personal.unshift({ text: 'Rak buku ini bikin aku ingin belajar. Kamu mau mulai dari buku yang mana?', kind: 'personal' });
-  if (room.toy === 'yarn') personal.unshift({ text: 'Benang biru itu menggoda sekali. Kita main pelan supaya tidak kusut.', kind: 'personal' });
+  if (room.toy === 'yarn') personal.unshift({ text: 'Benang biru ini menggoda banget. Main, yuk!', kind: 'personal' });
   if (room.head) personal.unshift({ text: 'Penampilan baruku sudah pas? Aku merasa siap untuk petualangan kecil.', kind: 'personal' });
-  if (level > 1) personal.unshift({ text: `Kita sudah level ${level}. Aku suka perjalanan kecil kita, bukan cuma angkanya.`, kind: 'personal' });
+  if (level > 1) personal.unshift({ text: `Level ${level}! Kita lihat hadiah baru di toko, yuk?`, kind: 'personal' });
   // Returning users start at a different personal story each date rather than
   // hearing the same introduction whenever they open the room.
   if (checkins > 0) personal.push(...personal.splice(0, (Number(day.replaceAll('-', '')) + checkins * 7) % personal.length));
-  const records: MikoLine[] = petTips(transactions, goals, contributions, available, day).map(t => ({ text: t.text, action: t.action, route: t.route, kind: 'record' }));
+  const records: MikoLine[] = [];
   const today = transactions.filter(t => t.occurred_on === day);
-  if (today.length) records.unshift({ text: `Hari ini ada ${today.length} catatan. Kalau masih ada yang tertinggal, kita rapikan dulu; tidak perlu menambah belanja.`, action: 'Review catatan', route: 'records', kind: 'record' });
-  if (available >= 0 && transactions.length) records.push({ text: `Dana bebas yang tercatat ${money(available)}. Itu angka dari catatan kita, bukan akses ke rekeningmu.`, action: 'Lihat rincian', route: 'balance', kind: 'record' });
-  records.push({ text: checked ? 'Check-in hari ini sudah beres. Kita boleh main atau istirahat tanpa mengejar XP lagi.' : 'Kalau harimu sudah direview, kita bisa check-in. Hari tanpa belanja juga dihargai.', action: checked ? 'Lihat check-in' : 'Cek hari ini', route: 'checkin', kind: 'record' });
+  if (today.length) records.push({ text: `Hari ini sudah ada ${today.length} catatan. Mau cek bareng?`, action: 'Lihat catatan', route: 'records', kind: 'record' });
+  if (available >= 0 && transactions.length) records.push({ text: `Saldo tersedia di aplikasi ${money(available)}. Mau lihat rinciannya?`, action: 'Lihat saldo', route: 'balance', kind: 'record' });
+  records.push({ text: checked ? 'Check-in hari ini sudah beres! Tos dulu, habis itu main?' : 'Gimana harimu? Yuk, check-in bareng. Kalau nggak belanja, tinggal bilang saja.', action: checked ? 'Lihat check-in' : 'Cek hari ini', route: 'checkin', kind: 'record' });
   for (const goal of goals.filter(g => g.target_amount > 0)) {
     const saved = contributions.filter(c => c.goal_id === goal.id).reduce((n, c) => n + Number(c.amount), 0);
-    if (saved < goal.target_amount) records.push({ text: `Untuk ${goal.title}, masih ${money(goal.target_amount - saved)} dari target tercatat. Kita lanjut sesuai kemampuanmu, tanpa terburu-buru.`, action: 'Lihat target', route: 'goals', kind: 'record' });
+    records.push({ text: saved < goal.target_amount ? `Target ${goal.title}: tinggal ${money(goal.target_amount - saved)} lagi. Semangat, aku temenin!` : `Hore! Target ${goal.title} sudah tercapai. Aku ikut senang!`, action: 'Lihat target', route: 'goals', kind: 'record' });
   }
   // Interleave helpful facts with personality. Deterministic ordering makes the
   // next line different and testable; a session visits every line before repeat.
@@ -115,6 +202,6 @@ export function mikoLines(context: { transactions: Transaction[]; goals: Goal[];
     if (i % 2 === 0 && records[i / 2]) result.push(records[i / 2]);
   }
   if (records.length > Math.ceil(personal.length / 2)) result.push(...records.slice(Math.ceil(personal.length / 2)));
-  if (available < 0) result.unshift({ text: 'Dana bebas tercatat sedang di bawah nol. Kita cek saldo awal dan catatan dulu, ya. Aku menemani, tanpa menyalahkanmu.', action: 'Review saldo', route: 'balance', kind: 'record' });
+  if (available < 0) result.unshift({ text: 'Hmm, saldo tersedia di bawah nol. Yuk cek saldo awal dan catatannya bareng.', action: 'Review saldo', route: 'balance', kind: 'record' });
   return result.map(line => ({ ...line, text: line.text.replaceAll('Miko', name) }));
 }

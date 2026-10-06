@@ -22,3 +22,5 @@ test('large dialogue bank adapts bond and all self references to a renamed pet',
 });
 
 test('returning users hear a different first personal story on the next date',()=>{ const a=mikoLines({...base,name:'Nala',checkins:30}),b=mikoLines({...base,name:'Nala',checkins:30,day:'2026-10-07'}); assert.notEqual(a.find(l=>l.kind==='personal').text,b.find(l=>l.kind==='personal').text); });
+
+test('speech is casual and does not repeat account disclaimers',()=>{const lines=mikoLines({...base,transactions:[{occurred_on:base.day}],available:50000,name:'Nala'});assert(lines.every(l=>! /bukan akses|bukan saldo rekening|dari catatanmu|tanpa menyalahkan|tenggat|namaku boleh/i.test(l.text)));assert(lines.some(l=>l.text.includes('50.000')));});

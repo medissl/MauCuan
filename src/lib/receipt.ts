@@ -79,7 +79,7 @@ export interface ReceiptFragment { text: string; x: number; y: number; width: nu
 export interface ReceiptLayout { width: number; height: number; fragments: ReceiptFragment[]; }
 // OCR block order is not reading order. Deskew centres and join only fragments
 // occupying the same physical row; a footer can never borrow a price above it.
-export function receiptRows(layout: ReceiptLayout): string[] {
+function spatialRows(layout: ReceiptLayout) {
   const valid = layout.fragments.slice(0, 2000).filter(f => f.text.trim() && [f.x, f.y, f.width, f.height].every(Number.isFinite) && f.width > 0 && f.height > 0 && (f.confidence === undefined || f.confidence >= .35));
   const angles = valid.map(f => f.angle || 0).filter(a => Math.abs(a) < .45).sort((a, b) => a - b);
   const angle = angles[Math.floor(angles.length / 2)] || 0;
@@ -94,14 +94,45 @@ export function receiptRows(layout: ReceiptLayout): string[] {
       last.cy = (last.cy * last.parts.length + f.cy) / (last.parts.length + 1); last.parts.push(f); last.height = Math.min(last.height, f.height);
     } else rows.push({ cy: f.cy, height: f.height, parts: [f] });
   }
-  return rows.map(row => row.parts.sort((a, b) => a.cx - b.cx).map(f => f.text.trim()).join(' '));
+  return rows.map(row => ({ ...row, parts: row.parts.sort((a, b) => a.cx - b.cx), text: row.parts.map(f => f.text.trim()).join(' ') }));
+}
+export function receiptRows(layout: ReceiptLayout): string[] {
+  return spatialRows(layout).map(row => row.text);
+}
+// A quantity line belongs to the product directly above it, never becomes a
+// product name itself. Preserve printed extended prices; do not invent prices.
+function itemRows(layout: ReceiptLayout) {
+  const rows = spatialRows(layout), lines = rows.map(row => row.text);
+  const merchant = parseReceipt([lines.join('\n')], false).title;
+  let unmatched = 0;
+  const detail = /^(\d{1,3})\s*(?:(?:lusin|pcs|pc|buah|pack|pak|botol|kotak|bungkus|kg|g|gr|ml|l)\s*|\d+\s*(?:ml|kg|gr|g|l)\s*)?[x×*]\s*(?:Rp\.?\s*)?(\d[\d.,]*)(?:\s+(?:Rp\.?\s*)?(\d[\d.,]*))?\s*$/i;
+  const endingPrice = /\s+(?:Rp\.?\s*)?(\d[\d.,]*)\s*$/i;
+  for (let i = 1; i < rows.length; i++) {
+    const match = rows[i].text.match(detail);
+    if (!match) continue;
+    lines[i] = ''; // Even an orphaned quantity line cannot masquerade as goods.
+    unmatched++;
+    const previous = rows[i - 1], current = rows[i];
+    if (!lines[i - 1] || current.cy - previous.cy > Math.max(previous.height, current.height) * 3 || Math.abs(current.parts[0].x - previous.parts[0].x) > layout.width * .16) continue;
+    const product = previous.text.replace(/^\d{8,14}\s+/, '');
+    if (product === merchant || address.test(product) || footer.test(product) || summary.test(product) || header.test(product) || !/[a-z]{2}/i.test(product)) continue;
+    const onName = product.match(endingPrice);
+    const name = onName ? product.slice(0, onName.index).trim() : product;
+    const amount = receiptAmount(match[3] || '') ?? (onName ? receiptAmount(onName[1]) : undefined);
+    const quantity = Number(match[1]);
+    if (!amount || quantity < 1 || quantity > 999) { lines[i - 1] = ''; continue; }
+    lines[i - 1] = `${quantity} x ${name} ${amount}`;
+    unmatched--;
+  }
+  return { lines: lines.filter(Boolean), unmatched };
 }
 export function parseReceiptLayout(layout: ReceiptLayout): ReceiptSuggestion {
-  const rows = receiptRows(layout);
-  const result = parseReceipt([rows.join('\n')], false);
+  const rows = itemRows(layout);
+  const result = parseReceipt([rows.lines.join('\n')], false);
   // Do not guess the shop from the item list when the logo wasn't recognised.
   if (result.title && /\d|\b(?:qty|harga|jumlah)\b/i.test(result.title)) delete result.title;
   if (!result.items?.length) result.warnings = [...(result.warnings || []), 'Baris barang belum cocok dengan harga. Jangan isi dari alamat atau angka toko; tambah barang dari foto.'];
+  else if (rows.unmatched) result.warnings = [...(result.warnings || []), 'Ada baris jumlah atau harga yang belum cocok dengan nama barang. Periksa daftar barang pada foto.'];
   if (layout.fragments.some(f => f.confidence !== undefined && f.confidence < .5)) result.warnings = [...(result.warnings || []), 'Sebagian teks kurang jelas. Ambil ulang foto atau periksa angka pada foto.'];
   return result;
 }

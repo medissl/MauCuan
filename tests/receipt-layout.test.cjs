@@ -1,6 +1,22 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const {parseReceiptLayout,receiptRows}=require('../src/lib/receipt.ts');
 const fragment=(text,x,y,width=180,height=18)=>({text,x,y,width,height});
+test('two-line goods keep product names and all three printed totals, including pack sizes',()=>{
+ const f=[fragment('TOKO MAJU',40,10),fragment('Nama barang Harga',20,50,480)];
+ const goods=[['Indomie goreng','1 lusin x 36,000',36000],['Fruit apple','1 500 ml x 7000',7000],['Belfood sosis bakar','1 x 27000',27000]];
+ goods.forEach(([name,detail,total],i)=>{const y=90+i*60;f.push(fragment(name,20,y,260),fragment(detail,20,y+24,260),fragment(String(total),430,y+24,80))});
+ f.push(fragment('TOTAL 70.000',20,300,500));
+ const r=parseReceiptLayout({width:600,height:400,fragments:f.reverse()});
+ assert.deepEqual(r.items,goods.map(([name,_detail,amount])=>({name,quantity:1,amount})));assert.equal(r.amount,70000);assert.equal(r.warnings,undefined);
+});
+test('extended price on the name row survives quantity underneath; unit price is not the item total',()=>{
+ const f=[fragment('TOKO MAJU',20,10),fragment('Nama barang Harga',20,50),fragment('Indomie goreng',20,90),fragment('36.000',430,90,80),fragment('2 pcs x 18.000',20,114,260),fragment('TOTAL 36.000',20,160,500)];
+ assert.deepEqual(parseReceiptLayout({width:600,height:250,fragments:f}).items,[{name:'Indomie goreng',quantity:2,amount:36000}]);
+});
+test('orphan quantity lines and missing extended prices never become invented goods',()=>{
+ const f=[fragment('TOKO MAJU',20,10),fragment('Jl. Merdeka',20,50),fragment('1 lusin x 36.000 36.000',20,74,500),fragment('Nama barang Harga',20,110),fragment('Sosis bakar',20,150),fragment('2 x 27.000',20,174,260),fragment('TOTAL 54.000',20,220,500)];
+ const r=parseReceiptLayout({width:600,height:300,fragments:f});assert.equal(r.items,undefined);assert.equal(r.amount,54000);
+});
 function receipt(){
  const rows=[['Susu UHT',2,18000,36000],['Beras 5kg',1,72000,72000],['Indomie goreng',4,3500,14000],['Telur ayam',1,28000,28000],['Roti tawar',1,18000,18000],['Teh celup',1,12000,12000],['Sabun mandi',2,4500,9000],['Air mineral',1,5000,5000]];
  const money=n=>n.toLocaleString('id-ID');
