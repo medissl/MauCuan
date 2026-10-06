@@ -1,9 +1,9 @@
-export type Transaction = { id: string; user_id: string; kind: 'income' | 'expense'; amount: number; title: string; category: string; occurred_on: string; receipt_path: string | null };
+export type Transaction = { id: string; user_id: string; kind: 'income' | 'expense'; amount: number; title: string; category: string; occurred_on: string; receipt_path: string | null; receipt_items?: { name: string; quantity: number; amount: number }[] };
 export type Goal = { id: string; title: string; target_amount: number; target_date: string | null };
 export type Contribution = { id: string; goal_id: string; amount: number; created_at: string };
 export type Checkin = { day: string; no_spend: boolean };
-export type Accessory = { accessory: 'bandana' | 'explorer_hat'; cost: number };
-export type Profile = { id: string; nickname: string; pet_name: string; opening_balance: number; onboarding_complete: boolean; reduce_motion: boolean };
+export type Accessory = { accessory: string; cost: number };
+export type Profile = { id: string; nickname: string; pet_name: string; opening_balance: number; onboarding_complete: boolean; reduce_motion: boolean; pet_room?: Partial<Record<'head' | 'face' | 'wall' | 'floor' | 'left' | 'right' | 'toy', string>> };
 
 export function parseAmount(text: string) {
   const input = text.trim().replace(/^Rp\s*/i, '');

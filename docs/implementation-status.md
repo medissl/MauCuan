@@ -1,6 +1,8 @@
 # MauCuan implementation status
 
-Updated 6 October 2026.
+Updated 6 October 2026. Current source: **0.3.0** — see [release details](release-0.3.0.md). Native date pickers, repaired OCR image paths, persisted receipt item rows, interactive petting, rule-based record tips, finance quiz, 22 rendered cosmetics/decorations and free level gifts are implemented. Purchases and room equipment are server-validated and persisted. New source is not in the older APK.
+
+Historical progress notes below describe earlier versions.
 
 ## Connected services
 

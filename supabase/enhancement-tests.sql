@@ -1,0 +1,40 @@
+-- Read/write verification with synthetic accounts; the transaction rolls back.
+begin;
+insert into auth.users(id,email) values ('44444444-4444-4444-8444-444444444444','maucuan-pet-test@example.invalid'),('55555555-5555-4555-8555-555555555555','maucuan-isolation-test@example.invalid');
+insert into public.checkins(user_id,day,no_spend) select '44444444-4444-4444-8444-444444444444',current_date-n,true from generate_series(1,10) n;
+set local role authenticated;
+select set_config('request.jwt.claims','{"sub":"44444444-4444-4444-8444-444444444444","role":"authenticated"}',true);
+select public.redeem_accessory('explorer_hat');
+select public.redeem_accessory('explorer_hat');
+select public.redeem_accessory('rug_cloud');
+select public.equip_pet_item('head','explorer_hat');
+select public.equip_pet_item('floor','rug_cloud');
+insert into public.transactions(user_id,kind,amount,title,category,occurred_on,receipt_items) values(auth.uid(),'expense',48000,'Kopi Senja','Makan & minum',current_date,'[{"name":"Latte","quantity":2,"amount":48000}]');
+do $$begin
+ if (select count(*) from public.pet_catalog)<>23 then raise exception 'FAIL catalog'; end if;
+ if (select sum(cost) from public.pet_accessories where user_id=auth.uid())<>80 then raise exception 'FAIL duplicate charge'; end if;
+ if (select pet_room->>'head' from public.profiles where id=auth.uid())<>'explorer_hat' then raise exception 'FAIL head persistence'; end if;
+ if (select pet_room->>'floor' from public.profiles where id=auth.uid())<>'rug_cloud' then raise exception 'FAIL level gift'; end if;
+ if (select receipt_items->0->>'name' from public.transactions where user_id=auth.uid())<>'Latte' then raise exception 'FAIL item persistence'; end if;
+ begin perform public.redeem_accessory('plant'); raise exception 'FAIL insufficient funds'; exception when raise_exception then if sqlerrm like 'FAIL%' then raise; end if; end;
+ begin perform public.redeem_accessory('crown'); raise exception 'FAIL level bypass'; exception when raise_exception then if sqlerrm like 'FAIL%' then raise; end if; end;
+ begin perform public.equip_pet_item('face','explorer_hat'); raise exception 'FAIL wrong slot'; exception when raise_exception then if sqlerrm like 'FAIL%' then raise; end if; end;
+ begin perform public.equip_pet_item('left','books'); raise exception 'FAIL unowned item'; exception when raise_exception then if sqlerrm like 'FAIL%' then raise; end if; end;
+ begin update public.profiles set pet_room='{"head":"crown"}' where id=auth.uid(); raise exception 'FAIL direct equip'; exception when insufficient_privilege then null; end;
+ begin update public.pet_catalog set cost=0; raise exception 'FAIL price tampering'; exception when insufficient_privilege then null; end;
+ begin update public.transactions set receipt_items='[{"name":"Latte","quantity":0,"amount":48000}]' where user_id=auth.uid(); raise exception 'FAIL invalid quantity'; exception when check_violation then null; end;
+ begin update public.transactions set receipt_items='[{"name":"Latte","quantity":1,"amount":-1}]' where user_id=auth.uid(); raise exception 'FAIL negative item'; exception when check_violation then null; end;
+end $$;
+select public.equip_pet_item('head',null);
+do $$begin if (select pet_room ? 'head' from public.profiles where id=auth.uid()) then raise exception 'FAIL unequip'; end if; end $$;
+select set_config('request.jwt.claims','{"sub":"55555555-5555-4555-8555-555555555555","role":"authenticated"}',true);
+do $$begin
+ if (select count(*) from public.transactions)<>0 then raise exception 'FAIL items leak'; end if;
+ if (select count(*) from public.pet_accessories where accessory='explorer_hat')<>0 then raise exception 'FAIL ownership leak'; end if;
+ begin perform public.equip_pet_item('head','explorer_hat'); raise exception 'FAIL cross-account equip'; exception when raise_exception then if sqlerrm like 'FAIL%' then raise; end if; end;
+end $$;
+set local role anon;
+do $$begin begin perform public.equip_pet_item('head',null); raise exception 'FAIL anonymous equip'; exception when insufficient_privilege then null; end; end $$;
+reset role;
+select 'PASS: receipt items, catalog prices, leaf balance, duplicate purchase, level gifts, equip slots, ownership, RLS, anonymous denial' as result;
+rollback;

@@ -3,17 +3,20 @@ const React=require('react'),Renderer=require('react-test-renderer'),ts=require(
 global.IS_REACT_ACT_ENVIRONMENT=true;
 const {act}=Renderer;
 const routes=[],calls=[];
+const pickerMock={launchImageLibraryAsync:async()=>({canceled:false,assets:[{uri:'file:///data/cache/receipt%20photo.jpg',base64:'dGVzdA==',mimeType:'image/jpeg'}]})};
+const ocrMock={isSupported:true,extractTextFromImage:async path=>{calls.push(['ocrPath',path]);return ['Jl. Merdeka 15\nKOPI SENJA\n06/10/2026\n2 x LATTE 48.000\nTOTAL Rp 48.000']}};
 const profile={id:'test-user',nickname:'Medi',pet_name:'Miko',opening_balance:1000000,onboarding_complete:true,reduce_motion:true};
 const ledger={profile,transactions:[],goals:[],contributions:[],checkins:[],accessories:[],loading:false,error:'',refresh:async()=>{}};
 const api={auth:{getSession:async()=>({data:{session:{user:{id:'test-user',email:'tester@example.com'}}}}),onAuthStateChange:()=>({data:{listener:{},subscription:{unsubscribe(){}}}}),signUp:async args=>{calls.push(['signup',args]);return{data:{session:null},error:null}},verifyOtp:async args=>{calls.push(['verify',args]);return{data:{},error:null}},resend:async()=>({error:null}),resetPasswordForEmail:async()=>({error:null})}};
-const hosts={};for(const name of ['ActivityIndicator','Image','KeyboardAvoidingView','Pressable','RefreshControl','ScrollView','Switch','Text','TextInput','View'])hosts[name]=name;
-const rn={...hosts,StyleSheet:{create:v=>v},Platform:{OS:'android'},Alert:{alert(){}}};
+const hosts={};for(const name of ['Modal','ActivityIndicator','Image','KeyboardAvoidingView','Pressable','RefreshControl','ScrollView','Switch','Text','TextInput','View'])hosts[name]=name;
+const rn={...hosts,StyleSheet:{create:v=>v},Platform:{OS:'android'},Alert:{alert(){}},useWindowDimensions:()=>({width:400,height:800})};
 const cache={};
 function load(file){file=path.resolve(__dirname,file);if(cache[file])return cache[file].exports;const module={exports:{}};cache[file]=module;
 const code=ts.transpileModule(fs.readFileSync(file,'utf8'),{fileName:file,compilerOptions:{jsx:ts.JsxEmit.ReactJSX,module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;
-const customRequire=name=>{if(/\.(png|ttf)$/.test(name))return 1;if(name==='react-native')return rn;if(name==='react-native-safe-area-context')return{SafeAreaProvider:'SafeAreaProvider',useSafeAreaInsets:()=>({top:24,bottom:24})};if(name==='expo-router')return{router:{navigate:href=>routes.push(href),replace:href=>routes.push(href)}};if(name==='expo-status-bar')return{StatusBar:'StatusBar'};if(name==='expo-linking')return{getInitialURL:async()=>null,addEventListener:()=>({remove(){}}),parse:()=>({}),openURL:async()=>{}};if(name==='expo-image-picker')return{};if(name==='expo-font')return{useFonts:()=>[true,null]};if(name==='@expo/vector-icons/Ionicons')return 'Icon';if(name==='react-native-reanimated')return{__esModule:true,default:{View:'AnimatedView'},cancelAnimation(){},Easing:{inOut:n=>n,ease:0},useReducedMotion:()=>true,useSharedValue:n=>React.useMemo(()=>({get:()=>n,set(){}}),[]),useAnimatedStyle:fn=>fn(),withTiming:n=>n,withRepeat:n=>n};if(name.endsWith('/lib/supabase')||name==='../lib/supabase')return{supabase:api,AUTH_REDIRECT:'maucuan://auth/callback'};if(name==='./hooks/useLedger')return{useLedger:()=>ledger};if(name.startsWith('.')){let resolved=path.resolve(path.dirname(file),name);if(fs.existsSync(resolved+'.tsx'))return load(path.relative(__dirname,resolved+'.tsx'));if(fs.existsSync(resolved+'.ts'))return require(resolved+'.ts')}return require(name)};
+const customRequire=name=>{if(name==='@expo/ui/community/datetime-picker')return{DateTimePicker:'DateTimePicker'};if(name==='react-native-svg')return{__esModule:true,default:'Svg',Circle:'Circle',Ellipse:'Ellipse',G:'G',Path:'Path',Rect:'Rect',Line:'Line'};if(name==='react-native-worklets')return{scheduleOnRN:(fn,...args)=>fn(...args)};if(name==='react-native-gesture-handler'){const pan={hooks:{},activateAfterLongPress(ms){this.delay=ms;return this},onStart(fn){this.hooks.start=fn;return this},onUpdate(fn){this.hooks.update=fn;return this},onFinalize(fn){this.hooks.finalize=fn;return this}};return{Gesture:{Pan:()=>pan},GestureDetector:'GestureDetector',GestureHandlerRootView:'GestureHandlerRootView'}};if(/\.(png|ttf)$/.test(name))return 1;if(name==='react-native')return rn;if(name==='react-native-safe-area-context')return{SafeAreaProvider:'SafeAreaProvider',useSafeAreaInsets:()=>({top:24,bottom:24})};if(name==='expo-router')return{router:{navigate:href=>routes.push(href),replace:href=>routes.push(href)}};if(name==='expo-status-bar')return{StatusBar:'StatusBar'};if(name==='expo-linking')return{getInitialURL:async()=>null,addEventListener:()=>({remove(){}}),parse:()=>({}),openURL:async()=>{}};if(name==='expo-image-picker')return pickerMock;if(name==='expo-text-extractor')return ocrMock;if(name==='expo-font')return{useFonts:()=>[true,null]};if(name==='@expo/vector-icons/Ionicons')return 'Icon';if(name==='react-native-reanimated')return{__esModule:true,default:{View:'AnimatedView'},cancelAnimation(){},Easing:{inOut:n=>n,ease:0},useReducedMotion:()=>true,useSharedValue:n=>React.useMemo(()=>({value:n,get(){return this.value},set(v){this.value=v}}),[]),useAnimatedStyle:fn=>fn(),withTiming:n=>n,withRepeat:n=>n,withSequence:(...n)=>n.at(-1)};if(name.endsWith('/lib/supabase')||name==='../lib/supabase')return{supabase:api,AUTH_REDIRECT:'maucuan://auth/callback'};if(name==='./hooks/useLedger')return{useLedger:()=>ledger};if(name.startsWith('.')){let resolved=path.resolve(path.dirname(file),name);if(fs.existsSync(resolved+'.tsx'))return load(path.relative(__dirname,resolved+'.tsx'));if(fs.existsSync(resolved+'.ts'))return require(resolved+'.ts')}return require(name)};
 vm.runInThisContext('(function(require,module,exports){'+code+'\n})',{filename:file})(customRequire,module,module.exports);return module.exports}
 const Main=load('../src/Main.tsx'),Auth=load('../src/components/Auth.tsx').Auth,UI=load('../src/components/ui.tsx');
+const Dates=load('../src/components/date-field.tsx'),Pets=load('../src/components/pet-habitat.tsx');
 const press=(r,label)=>r.root.findAllByType('Pressable').find(n=>n.props.accessibilityLabel===label);
 const texts=r=>r.root.findAllByType('Text').map(n=>n.children.filter(x=>typeof x==='string').join('')).join('\n');
 function screen(name){return React.createElement(Main.MauCuanProvider,null,React.createElement(Main.MauCuanScreen,{screen:name}))}
@@ -21,3 +24,51 @@ test('home actions open distinct screens; route views render forms rather than r
 test('rupiah field formats without putting separators in saved state',async()=>{let raw='1250000',r;await act(async()=>{r=Renderer.create(React.createElement(UI.Field,{label:'Saldo awal',currency:true,value:raw,onChangeText:v=>raw=v}))});const input=r.root.findByType('TextInput');assert.equal(input.props.value,'1.250.000');assert(texts(r).includes('Rp'));input.props.onChangeText('1.250.0000');assert.equal(raw,'12500000');await act(async()=>r.unmount())});
 test('signup presents a code field and verifies the supplied code through Supabase',async()=>{let r;await act(async()=>{r=Renderer.create(React.createElement(Auth,{onError:()=>{}}))});let action=r.root.findAllByType('Pressable').find(n=>texts({root:n}).includes('Buat akun MauCuan'));await act(async()=>action.props.onPress());await act(async()=>{r.root.findAllByType('TextInput').find(n=>n.props.accessibilityLabel==='EMAIL').props.onChangeText('tester@example.com');r.root.findAllByType('TextInput').find(n=>n.props.accessibilityLabel==='KATA SANDI').props.onChangeText('Test-password-123')});action=r.root.findAllByType('Pressable').find(n=>texts({root:n})==='Buat akun');await act(async()=>action.props.onPress());assert(texts(r).includes('Masukkan kode email'));assert(!texts(r).includes('Buka link'));await act(async()=>r.root.findAllByType('TextInput').find(n=>n.props.accessibilityLabel==='Kode verifikasi').props.onChangeText('123456'));action=r.root.findAllByType('Pressable').find(n=>texts({root:n})==='Verifikasi kode');await act(async()=>action.props.onPress());assert.deepEqual(calls.at(-1),['verify',{email:'tester@example.com',token:'123456',type:'email'}]);await act(async()=>r.unmount())});
 test('manual entry saves whole rupiah and preserves the draft after backend failure',async()=>{let r,payload,fail=true;api.from=table=>{assert.equal(table,'transactions');return{insert:data=>{payload=data;return{select:()=>({single:async()=>fail?{data:null,error:{message:'Connection unavailable'}}:{data:{id:'saved',...data},error:null}})}}}};await act(async()=>{r=Renderer.create(screen('entry'))});const field=label=>r.root.findAllByType('TextInput').find(n=>n.props.accessibilityLabel===label);const save=()=>r.root.findAllByType('Pressable').find(n=>texts({root:n})==='Simpan transaksi');await act(async()=>{field('UNTUK APA?').props.onChangeText('Lunch');field('Nominal, rupiah').props.onChangeText('48.000')});await act(async()=>save().props.onPress());assert.equal(payload.amount,48000);assert.equal(payload.user_id,'test-user');assert.equal(field('Nominal, rupiah').props.value,'48.000');assert(texts(r).includes('Connection unavailable'));fail=false;await act(async()=>save().props.onPress());assert.equal(routes.at(-1),'/saved');await act(async()=>r.unmount());delete api.from});
+test('date picker cancels without changing value, confirms a calendar day, and clears target date',async()=>{
+ let r,value='2026-10-06';await act(async()=>{r=Renderer.create(React.createElement(Dates.DateField,{label:'Tanggal target',value,onChange:v=>value=v,clearable:true}))});
+ assert.equal(r.root.findAllByType('TextInput').length,0);
+ await act(async()=>press(r,'Pilih tanggal target').props.onPress());
+ await act(async()=>r.root.findByType('DateTimePicker').props.onDismiss());assert.equal(value,'2026-10-06');
+ await act(async()=>press(r,'Pilih tanggal target').props.onPress());
+ await act(async()=>r.root.findByType('DateTimePicker').props.onValueChange({},new Date('2027-01-12T00:00:00Z')));assert.equal(value,'2027-01-12');assert.equal(r.root.findAllByType('DateTimePicker').length,0);
+ await act(async()=>press(r,'Hapus tanggal target').props.onPress());assert.equal(value,'');await act(async()=>r.unmount());
+});
+test('shop locks level gifts, equips owned items, and removes equipped items',async()=>{
+ const actions=[];let r;const props={level:2,leaves:20,accessories:[{accessory:'explorer_hat',cost:80}],room:{},busy:false,redeem:id=>actions.push(['buy',id]),equip:(slot,id)=>actions.push(['equip',slot,id])};
+ await act(async()=>{r=Renderer.create(React.createElement(Pets.PetShop,props))});
+ const button=text=>r.root.findAllByType('Pressable').find(n=>texts({root:n})===text);
+ assert(button('Terbuka di level 5').props.disabled);assert(button('Perlu 60 daun').props.disabled);
+ await act(async()=>button('Pasang').props.onPress());assert.deepEqual(actions.at(-1),['equip','head','explorer_hat']);
+ await act(async()=>r.update(React.createElement(Pets.PetShop,{...props,room:{head:'explorer_hat'}})));
+ await act(async()=>button('Lepas').props.onPress());assert.deepEqual(actions.at(-1),['equip','head',null]);
+ await act(async()=>button('Ambil hadiah level').props.onPress());assert.deepEqual(actions.at(-1),['buy','rug_cloud']);await act(async()=>r.unmount());
+});
+test('accessible petting reacts without a reward RPC and quiz can complete',async()=>{
+ let r;await act(async()=>{r=Renderer.create(screen('pet'))});const button=text=>r.root.findAllByType('Pressable').find(n=>texts({root:n})===text);
+ await act(async()=>button('Elus Miko').props.onPress());assert(texts(r).includes('Miko senang!'));
+ await act(async()=>button('Main kuis').props.onPress());
+ const {moneyQuiz}=require('../src/lib/pet.ts');for(const q of moneyQuiz){await act(async()=>button(q.answers[q.correct]).props.onPress());assert(texts(r).includes(q.explanation));await act(async()=>button('Lanjut').props.onPress())}
+ assert(texts(r).includes('5 dari 5 benar'));await act(async()=>r.unmount());
+});
+test('long hold and enough strokes trigger Miko happiness; short movement does not',async()=>{
+ let r;await act(async()=>{r=Renderer.create(screen('pet'))});
+ const gesture=r.root.findByType('GestureDetector').props.gesture;assert.equal(gesture.delay,550);
+ await act(async()=>gesture.hooks.start({x:40,y:80}));assert(texts(r).includes('Miko menikmati elusanmu'));
+ await act(async()=>gesture.hooks.update({x:65,y:80}));assert(!texts(r).includes('Miko senang!'));
+ await act(async()=>gesture.hooks.update({x:230,y:80}));assert(texts(r).includes('Miko senang!'));
+ assert.equal(r.root.findByType('GestureDetector').props.gesture,gesture,'gesture survives expression changes');
+ await act(async()=>gesture.hooks.finalize());await act(async()=>r.unmount());
+});
+test('gallery scan passes a usable Android path, opens editable rows and saves reviewed items',async()=>{
+ let r,payload;api.from=()=>({insert:data=>{payload=data;return{select:()=>({single:async()=>({data:{id:'receipt-saved',...data},error:null})})}}});
+ api.storage={from:()=>({upload:async()=>({error:null})})};
+ await act(async()=>{r=Renderer.create(screen('scan'))});
+ const button=text=>r.root.findAllByType('Pressable').find(n=>texts({root:n})===text);
+ await act(async()=>button('Pilih dari galeri').props.onPress());assert.equal(routes.at(-1),'/receipt');assert(calls.some(c=>c[0]==='ocrPath' && c[1]==='/data/cache/receipt photo.jpg'));
+ await act(async()=>r.update(screen('receipt')));
+ const field=label=>r.root.findAllByType('TextInput').find(n=>n.props.accessibilityLabel===label);
+ assert.equal(field('Nama toko').props.value,'KOPI SENJA');assert.equal(field('Nominal, rupiah').props.value,'48.000');assert.equal(field('Barang 1').props.value,'LATTE');
+ await act(async()=>field('Barang 1').props.onChangeText('Latte besar'));
+ await act(async()=>button('Simpan transaksi').props.onPress());assert.equal(routes.at(-1),'/saved');assert.equal(payload.amount,48000);assert.equal(payload.occurred_on,'2026-10-06');assert.deepEqual(payload.receipt_items,[{name:'Latte besar',quantity:2,amount:48000}]);
+ await act(async()=>r.unmount());delete api.from;delete api.storage;
+});
