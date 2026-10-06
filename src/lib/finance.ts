@@ -51,8 +51,8 @@ export function totals(opening: number, transactions: Transaction[], contributio
   const allocated = contributions.reduce((n, c) => n + Number(c.amount), 0);
   return { balance, allocated, available: balance - allocated };
 }
-export function petProgress(checkins: Checkin[], accessories: Accessory[]) {
+export function petProgress(checkins: Checkin[], accessories: Accessory[], quizzes: { reward: number }[] = []) {
   const xp = checkins.length * 20;
-  return { xp, level: 1 + Math.floor(xp / 200), progress: xp % 200, leaves: checkins.length * 10 - accessories.reduce((n, a) => n + a.cost, 0), checked: checkins.some(c => c.day === jakartaDay()) };
+  return { xp, level: 1 + Math.floor(xp / 200), progress: xp % 200, leaves: checkins.length * 10 + quizzes.reduce((n, q) => n + q.reward, 0) - accessories.reduce((n, a) => n + a.cost, 0), checked: checkins.some(c => c.day === jakartaDay()) };
 }
 export const money = (value: number) => `Rp ${Number(value).toLocaleString('id-ID')}`;

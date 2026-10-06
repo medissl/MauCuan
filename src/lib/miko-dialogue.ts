@@ -1,6 +1,13 @@
 import { money, type Transaction, type Goal, type Contribution } from './finance.ts';
 import { type PetRoom } from './pet.ts';
 export interface MikoLine { text: string; action?: string; route?: string; kind: 'personal' | 'record'; }
+export function dialogueMood(line: MikoLine): 'idle' | 'happy' | 'wink' | 'focused' | 'rest' {
+  if (/hore|tos|senang|seru|semangat|lompat|main bola|kembali/i.test(line.text)) return 'happy';
+  if (/ngantuk|tidur|menguap|rebahan|lelah|rehat/i.test(line.text)) return 'rest';
+  if (/ups|hehe|kusut|galak|bayangan|salah dengar/i.test(line.text)) return 'wink';
+  if (line.kind === 'record' || /belajar|buku|penasaran|cerita|dengerin|dengar/i.test(line.text)) return 'focused';
+  return 'idle';
+}
 // Miko is curious, playful and quietly supportive. She never shames a missed
 // day, claims to see a bank account, or rewards spending or pet-care taps.
 export const mikoPersonality = [

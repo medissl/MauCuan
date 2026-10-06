@@ -1,7 +1,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
 const {petCatalog,petTips}=require('../src/lib/pet.ts');
 test('client catalog matches authoritative database price, slot and level for every item',()=>{
- const sql=['enhancements.sql','catalog-0.3.1.sql'].map(f=>fs.readFileSync(require('node:path').join(__dirname,'../supabase/'+f),'utf8')).join('\n');
+ const sql=['daily-quiz.sql'].map(f=>fs.readFileSync(require('node:path').join(__dirname,'../supabase/'+f),'utf8')).join('\n');
  assert.equal(petCatalog.length,68);assert.equal(new Set(petCatalog.map(i=>i.id)).size,68);
  for(const i of petCatalog)assert(sql.includes(`('${i.id}','${i.slot}',${i.cost},${i.level})`),i.id);
  assert.deepEqual(petCatalog.filter(i=>i.cost===0).map(i=>i.level).sort((a,b)=>a-b),[2,3,4,5,10,20,30,40,50,70,90,110,120]);

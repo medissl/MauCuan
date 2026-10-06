@@ -70,11 +70,12 @@ export function ItemArt({ id, size = 70 }: { id: string; size?: number }) {
 export function RoomArt({ room }: { room: PetRoom }) {
   const night = ['wall_night', 'wall_aurora', 'wall_observatory', 'wall_lighthouse'].includes(room.wall || '');
   const dawn = room.wall === 'wall_dawn', garden = room.wall === 'wall_garden', ocean = room.wall === 'wall_ocean';
-  const wallColor = night ? ink : dawn || room.wall === 'wall_peach' ? '#FFE1C4' : room.wall === 'wall_library' || room.wall === 'wall_studio' || garden ? cream : '#E3F2F3';
+  const wallColor = night ? '#D7E8EB' : dawn || room.wall === 'wall_peach' ? '#FFE1C4' : room.wall === 'wall_library' || room.wall === 'wall_studio' || garden ? cream : '#E3F2F3';
   const rugColor = room.floor === 'rug_sun' || room.floor === 'rug_flower' ? orange : room.floor === 'rug_cloud' ? cream : room.floor === 'rug_moon' || room.floor === 'rug_orbit' ? ink : room.floor === 'rug_teal' || room.floor === 'rug_checker' ? teal : '#C8E1E3';
-  return <Svg width="100%" height="100%" viewBox="0 0 400 376">
-    <Rect width="400" height="376" rx="28" fill={wallColor} />
-    <Path d="M0 295H400V376H0Z" fill={night ? '#123D43' : cream} />
+  return <Svg width="100%" height="100%" viewBox="0 0 400 448">
+    <Rect width="400" height="448" rx="28" fill={wallColor} />
+    {night && <><Rect width="400" height="175" rx="28" fill={ink} /><Path d="M0 28H400V175H0Z" fill={ink} /></>}
+    <Path d="M0 350H400V448H0Z" fill={cream} />
     <Rect x="32" y="30" width="100" height="112" rx="35" fill={night ? '#123D43' : '#D7EFF2'} />
     {(dawn || garden) && <Path d="M33 121Q65 64 98 109Q112 94 131 112V125Q82 158 33 125Z" fill={teal} />}
     {ocean && <><Path d="M33 101Q62 89 83 101Q109 114 131 99V127Q82 158 33 127Z" fill={teal} /><Path d="M63 96H101L94 108H72Z" fill={ink} /><Path d="M84 65V95H99Z" fill={cream} /></>}
@@ -89,14 +90,14 @@ export function RoomArt({ room }: { room: PetRoom }) {
     {room.wall === 'wall_treehouse' && <><Path d="M280 99V161M250 134H309M249 146H310" stroke={ink} strokeWidth="8"/><Circle cx="280" cy="60" r="60" fill={teal}/><Path d="M217 66L280 18L345 66V112H217Z" fill={orange}/><Rect x="270" y="69" width="26" height="43" rx="8" fill={cream}/><Rect x="230" y="71" width="23" height="21" rx="4" fill={ink}/></>}
     {room.wall === 'wall_skyhouse' && <><Path d="M161 124Q139 95 184 87Q199 47 230 71Q262 30 302 71Q352 53 371 97Q396 137 161 124Z" fill={cream}/><Path d="M227 87L276 39L325 87V122H227Z" fill={teal}/><Rect x="268" y="92" width="19" height="30" rx="7" fill={orange}/></>}
     {room.wall === 'wall_lighthouse' && <><Path d="M272 125L280 42H302L311 125Z" fill={cream}/><Rect x="275" y="37" width="31" height="19" rx="4" fill={orange}/><Path d="M266 37L291 19L315 37Z" fill={teal}/><Path d="M269 44L178 25V68Z M313 44L381 25V68Z" fill={teal}/><Path d="M169 145Q199 129 229 145Q260 158 293 145Q329 130 365 145" stroke={cream} strokeWidth="4" fill="none"/></>}
-    <Ellipse cx="200" cy="324" rx="130" ry="28" fill={rugColor} />
+    <G transform="translate(0 81)"><Ellipse cx="200" cy="324" rx="130" ry="28" fill={rugColor} />
     {room.floor && <Ellipse cx="200" cy="324" rx="111" ry="20" stroke={room.floor === 'rug_cloud' ? teal : cream} strokeWidth="3" fill="none" />}
     {room.floor === 'rug_checker' && [130,162,194,226,258].map((x,i)=><G key={x}><Rect x={x} y={i%2?314:324} width="28" height="9" fill={cream} /></G>)}
     {room.floor === 'rug_flower' && [108,144,180,216,252,288].map((x,i)=><Ellipse key={x} cx={x} cy={i%2?334:313} rx="13" ry="6" fill={cream} />)}
     {room.floor === 'rug_moon' && <><Path d="M147 309Q115 322 151 338Q100 342 105 322Q114 306 147 309Z" fill={cream} /><Circle cx="291" cy="324" r="4" fill={orange} /></>}
     {room.floor === 'rug_orbit' && <><Ellipse cx="200" cy="324" rx="65" ry="14" stroke={teal} strokeWidth="3" fill="none"/><Circle cx="200" cy="324" r="9" fill={orange}/><Circle cx="254" cy="316" r="5" fill={cream}/></>}
     {room.floor === 'rug_paw' && <><Ellipse cx="200" cy="327" rx="18" ry="9" fill={cream}/>{[175,192,208,225].map((x,i)=><Ellipse key={x} cx={x} cy={i%3?312:318} rx="6" ry="5" fill={cream}/>)}</>}
-    <Line x1="0" y1="295" x2="400" y2="295" stroke={night ? teal : '#DCE5E6'} strokeWidth="3" />
+    </G><Line x1="0" y1="350" x2="400" y2="350" stroke={night ? teal : '#DCE5E6'} strokeWidth="3" />
   </Svg>;
 }
 

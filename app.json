@@ -2,7 +2,7 @@
   "expo": {
     "name": "MauCuan",
     "slug": "maucuan",
-    "version": "0.3.3",
+    "version": "0.4.0",
     "orientation": "portrait",
     "icon": "./assets/maucuan-icon.png",
     "userInterfaceStyle": "light",

@@ -1,6 +1,6 @@
 # MauCuan implementation status
 
-Updated 6 October 2026. Current source: **0.3.3** — see [release details](release-0.3.3.md). Repairs native quiz answer controls and reserves a fixed dialogue area beneath the decorated room interior. The accepted scanner, 68 rendered collectibles through level 120, habit-aware notifications and Android widget are preserved. The 0.3.2 APK finished successfully; these pet-section fixes require a replacement APK and real-device validation.
+Updated 6 October 2026. Current source: **0.4.0** — see [release details](release-0.4.0.md). Adds a saved daily quiz with five questions, 500 bundled prompts, a five-leaf completion reward and weekly repeat exclusion. The pet room uses fixed slots, the shop explains replacement, and conversation expressions match each line. History offers calendar and monthly list modes. Hosted quiz/reward rules are applied; the app UI requires the new APK. Physical Android checks remain pending.
 
 Historical progress notes below describe earlier versions.
 
