@@ -16,31 +16,46 @@ export function learnedReminderHour(activity: number[], now: number, fallback = 
   return Math.max(8, Math.min(21, best));
 }
 export const returnMessages = [
-  'Aku masih di sudut nyaman kita. Kalau ada waktu, mampir sebentar, ya?',
-  'Syal sudah rapi. Aku ingin dengar kabar harimu, bukan menilai catatanmu.',
-  'Aku kangen teman main bolaku. Kita boleh ngobrol sebentar saja.',
-  'Kamu sedang sibuk? Aku tetap di sini. Catatan kecil bisa menunggu waktu yang pas.',
-  'Aku menyiapkan tempat duduk dekat jendela. Mau singgah?',
-  'Kita bisa mulai dari satu hal kecil hari ini. Aku menemani.',
-  'Hari tanpa belanja juga boleh dicatat. Tidak perlu belanja untuk menemuiku.',
-  'Aku ingin tos lagi. Kalau kamu sudah siap, rumah kecil kita masih di sini.',
-  'Istirahatmu tetap berarti. Kalau sudah ada tenaga, kita rapikan hari bersama.',
-  'Tidak perlu mengejar hari kemarin. Aku senang kalau kamu kembali hari ini.',
-  'Bola jingga kita belum pergi ke mana-mana. Aku juga.',
-  'Aku penasaran kabarmu. Bukan cuma kabar dompetmu.',
-  'Ada hari yang panjang, ada hari yang ringan. Kamu boleh cerita sedikit.',
-  'Rumah kecil kita terasa lebih hangat kalau kamu mampir.',
-  'Aku mau jadi pengingat yang lembut. Kita cek hari ini kalau waktunya nyaman.',
-  'Kamu tidak kehilangan apa-apa karena istirahat. Kita bisa lanjut pelan-pelan.',
-  'Aku tadi membaca sedikit, lalu menunggu dekat jendela. Hai dari sini!',
-  'Boleh mulai lagi tanpa harus menjelaskan kenapa kemarin sibuk.',
-  'Aku siap menemani satu catatan, satu tos, atau satu obrolan kecil.',
-  'Kalau sudah sempat, coba cek catatan hari ini. Setelah itu kita main sebentar.',
-  'Aku punya banyak cerita kecil. Mau dengar satu?',
-  'Selamat datang kapan pun kamu siap. Tempatmu di sini masih nyaman.',
-  'Aku menunggu tanpa menghitung kesalahan. Kita belajar sedikit lagi bersama.',
-  'Kamu boleh kembali dengan hari yang belum rapi. Kita mulai dari sana.',
+  'Eh, lagi sibuk? Kalau sempat, mampir sebentar, ya.',
+  'Aku baru beresin syal. Kamu lagi ngapain?',
+  'Bolanya udah siap. Satu lemparan dulu?',
+  'Hari ini gimana? Mau cerita sebentar?',
+  'Aku lagi duduk dekat jendela. Sini kalau udah senggang.',
+  'Mau cek hari ini? Sebentar aja juga boleh.',
+  'Nggak belanja hari ini? Kamu tetap bisa check-in, lho.',
+  'Tos dulu? Aku udah siap.',
+  'Udah istirahat? Aku tadi ketiduran dikit. Hehe.',
+  'Eh, hai. Kita lanjut hari ini aja, ya.',
+  'Bolanya nyangkut di bawah bantal lagi. Ups.',
+  'Ada cerita baru? Aku pengin dengar.',
+  'Tadi harinya ramai atau santai?',
+  'Aku simpan tempat sebelahku. Mau duduk dulu?',
+  'Kalau udah sempat, kita cek catatan sebentar?',
+  'Lama nggak main. Sekali tos dulu, yuk.',
+  'Aku baca buku tadi. Kebanyakan lihat gambarnya, sih.',
+  'Oh, hai lagi. Lagi istirahat?',
+  'Mau ngobrol, tos, atau main bola?',
+  'Cek hari ini dulu? Habis itu aku lempar bolanya.',
+  'Ada kejadian lucu tadi. Mau dengar?',
+  'Aku masih di sini. Mampir kalau lagi senggang, ya.',
+  'Aku kangen cerita kamu. Hari ini ada apa?',
+  'Nggak perlu buru-buru. Aku lagi santai juga.',
 ];
+const newFriendMessages = [
+  'Hai… mau lihat-lihat kamar lagi?',
+  'Aku lagi latihan tos. Mau coba?',
+  'Oh, hai. Hari ini mau cek catatan sebentar?',
+  'Aku nemu bolanya. Mau coba lempar?',
+  'Lagi senggang? Aku ada di kamar.',
+  'Nggak belanja hari ini? Kamu tetap bisa check-in.',
+  'Syalnya udah rapi. Mau kenalan lagi?',
+  'Aku mulai hafal kamar ini. Kamu mau lihat?',
+  'Mau coba kuis? Aku ikut belajar juga.',
+  'Psst… bolanya di bawah bantal. Hehe.',
+  'Ada waktu sebentar? Mau coba tos lagi?',
+  'Hai. Hari ini gimana?',
+];
+
 export function reminderPlan(state: ReminderState, name: string, now: number, checkins: number) {
   if (!state.enabled || !state.lastOpened) return [];
   const hour = state.automatic ? learnedReminderHour(state.activity, now, state.hour) : state.hour;
@@ -50,7 +65,8 @@ export function reminderPlan(state: ReminderState, name: string, now: number, ch
   return [1,3,7,14,30].flatMap((gap, index) => {
     const date = new Date(opened.getFullYear(), opened.getMonth(), opened.getDate() + gap, hour, 0, 0);
     if (date.getTime() <= now || localDay(date) === today) return [];
-    const body = returnMessages[(checkins + index * 7 + opened.getDate()) % returnMessages.length];
+    const messages = checkins < 90 ? newFriendMessages : returnMessages;
+    const body = messages[(checkins + index * 7 + opened.getDate()) % messages.length];
     return [{ date, title: `${name} ingin menyapa`, body, gap }];
   });
 }

@@ -48,7 +48,7 @@ test('shop locks level gifts, equips owned items, and removes equipped items',as
 });
 test('scene accessibility actions replace the redundant petting button and quiz can complete',async()=>{
  let r;await act(async()=>{r=Renderer.create(screen('pet'))});const button=text=>r.root.findAll(n=>n.type==='Pressable'||n.type==='SheetButton').find(n=>texts({root:n})===text);
- assert.equal(button('Elus Miko'),undefined); const scene=r.root.findAllByType('AnimatedView').find(n=>n.props.onAccessibilityAction); await act(async()=>scene.props.onAccessibilityAction({nativeEvent:{actionName:'pet'}}));assert(texts(r).includes('Hehe, enak banget dielus!'));
+ assert.equal(button('Elus Miko'),undefined); const scene=r.root.findAllByType('AnimatedView').find(n=>n.props.onAccessibilityAction); await act(async()=>scene.props.onAccessibilityAction({nativeEvent:{actionName:'pet'}}));assert(texts(r).includes('Oh… makasih. Pelan-pelan, ya.'));
  await act(async()=>button('Main kuis').props.onPress());
  const {moneyQuiz}=require('../src/lib/pet.ts');for(const q of moneyQuiz){await act(async()=>button(q.answers[q.correct]).props.onPress());assert(texts(r).includes(q.explanation));assert.equal(r.root.findAllByType('BottomSheet').length,0);await act(async()=>press(r,'Lanjut').props.onPress())}
  assert(texts(r).includes('5 dari 5 benar'));await act(async()=>r.unmount());
@@ -56,9 +56,9 @@ test('scene accessibility actions replace the redundant petting button and quiz 
 test('long hold and enough strokes trigger Miko happiness; short movement does not',async()=>{
  let r;await act(async()=>{r=Renderer.create(screen('pet'))});
  const gesture=r.root.findByType('GestureDetector').props.gesture.gestures[0];assert.equal(gesture.delay,550);
- await act(async()=>gesture.hooks.start({x:40,y:80}));assert(texts(r).includes('Mmm… terusin, ya.'));
- await act(async()=>gesture.hooks.update({x:65,y:80}));assert(!texts(r).includes('Aku boleh duduk dekat kamu sebentar?'));
- await act(async()=>gesture.hooks.update({x:230,y:80}));assert(texts(r).includes('Aku boleh duduk dekat kamu sebentar?'));
+ await act(async()=>gesture.hooks.start({x:40,y:80}));assert(texts(r).includes('Oh? Mau elus?'));
+ await act(async()=>gesture.hooks.update({x:65,y:80}));assert(!texts(r).includes('Hmm, ternyata enak juga.'));
+ await act(async()=>gesture.hooks.update({x:230,y:80}));assert(texts(r).includes('Hmm, ternyata enak juga.'));
  assert.equal(r.root.findByType('GestureDetector').props.gesture.gestures[0],gesture,'gesture survives expression changes');
  await act(async()=>gesture.hooks.finalize());await act(async()=>r.unmount());
 });
@@ -99,10 +99,10 @@ test('daily quiz resumes saved answers and reopening completion cannot play for 
  assert.equal(storedQuiz.reward,5);await act(async()=>press(r,'Selesai bermain').props.onPress());await act(async()=>press(r,'Kuis selesai').props.onPress());assert.equal(r.root.findAllByType('BottomSheet').length,0);assert.equal(storedQuiz.answers.length,5);assert.equal(storedQuiz.reward,5);
  }finally{await act(async()=>r.unmount())}
 });
-test('calendar date selection and monthly list show actual records, with native month controls',async()=>{
+test('calendar-only history selects records and the month picker navigates years',async()=>{
  const {TransactionHistory}=load('../src/components/transaction-history.tsx');let r;const entries=[{id:'a',title:'Roti Senin',kind:'expense',amount:10000,occurred_on:'2026-10-05'},{id:'b',title:'Uang saku',kind:'income',amount:100000,occurred_on:'2026-10-06'}];
  await act(async()=>{r=Renderer.create(React.createElement(TransactionHistory,{transactions:entries,today:'2026-10-06',renderEntry:t=>React.createElement('Text',{key:t.id},t.title)}))});try{
  assert(texts(r).includes('Uang saku'));assert(!texts(r).includes('Roti Senin'));await act(async()=>r.root.findByProps({testID:'calendar-2026-10-05'}).props.onPress());assert(texts(r).includes('Roti Senin'));assert(!texts(r).includes('Uang saku'));assert(r.root.findByProps({testID:'calendar-2026-10-07'}).props.disabled);
- await act(async()=>press(r,'Daftar bulan').props.onPress());assert(texts(r).includes('Roti Senin'));assert(texts(r).includes('Uang saku'));await act(async()=>press(r,'Pilih bulan catatan').props.onPress());const sheet=r.root.findByType('BottomSheet');assert.equal(sheet.findAllByType('Pressable').length,0);const button=sheet.findAllByType('SheetButton').find(n=>texts({root:n})==='September');await act(async()=>button.props.onPress());assert(texts(r).includes('September 2026'));assert(!texts(r).includes('Roti Senin'));assert.equal(r.root.findAllByType('BottomSheet').length,0);
+ assert.equal(press(r,'Daftar bulan'),undefined);assert.equal(press(r,'Kalender'),undefined);await act(async()=>press(r,'Pilih bulan catatan').props.onPress());const sheet=r.root.findByType('BottomSheet');assert.equal(sheet.findAllByType('Pressable').length,0);assert.equal(sheet.props.contentColor,'#123D43');assert.equal(r.root.findByProps({testID:'next-year'}).props.disabled,true);await act(async()=>r.root.findByProps({testID:'previous-year'}).props.onPress());assert(texts(r).includes('2025'));await act(async()=>r.root.findByProps({testID:'next-year'}).props.onPress());const button=r.root.findByProps({testID:'month-9'});assert.equal(button.findByType('SheetText').props.textStyle.fontFamily,'JakartaBold');assert.equal(button.findByType('SheetText').props.numberOfLines,1);await act(async()=>button.props.onPress());assert(texts(r).includes('September 2026'));assert(!texts(r).includes('Roti Senin'));assert.equal(r.root.findAllByType('BottomSheet').length,0);
  }finally{await act(async()=>r.unmount())}
 });

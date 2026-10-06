@@ -1,10 +1,10 @@
 const test=require('node:test'),assert=require('node:assert/strict');
-const {mikoLines,mikoPersonality}=require('../src/lib/miko-dialogue.ts');
+const {mikoLines,mikoPersonality,bondStage,reactionLine}=require('../src/lib/miko-dialogue.ts');
 const base={transactions:[],goals:[],contributions:[],available:0,day:'2026-10-06',checked:false,room:{},level:1,hour:9};
 test('personality has sixty distinct non-financial lines, with room and time context',()=>{
  assert.equal(new Set(mikoPersonality).size,60);
  const lines=mikoLines({...base,room:{left:'plant',toy:'yarn'},hour:23});
- assert(lines.some(l=>l.text.includes('Tanaman kecil')));assert(lines.some(l=>l.text.includes('Benang biru')));assert(lines.some(l=>l.text.includes('Sudah malam')));
+ assert(lines.some(l=>l.text.includes('Tanaman kecil')));assert(lines.some(l=>l.text.includes('Benang biru')));assert(lines.some(l=>l.text.includes('Udah malam')));
  assert(lines.filter(l=>l.kind==='personal').length>lines.filter(l=>l.kind==='record').length);
  assert(!lines.some(l=>/harus belanja|kehilangan level/i.test(l.text)));
 });
@@ -24,3 +24,13 @@ test('large dialogue bank adapts bond and all self references to a renamed pet',
 test('returning users hear a different first personal story on the next date',()=>{ const a=mikoLines({...base,name:'Nala',checkins:30}),b=mikoLines({...base,name:'Nala',checkins:30,day:'2026-10-07'}); assert.notEqual(a.find(l=>l.kind==='personal').text,b.find(l=>l.kind==='personal').text); });
 
 test('speech is casual and does not repeat account disclaimers',()=>{const lines=mikoLines({...base,transactions:[{occurred_on:base.day}],available:50000,name:'Nala'});assert(lines.every(l=>! /bukan akses|bukan saldo rekening|dari catatanmu|tanpa menyalahkan|tenggat|namaku boleh/i.test(l.text)));assert(lines.some(l=>l.text.includes('50.000')));});
+test('new pets cannot borrow intimate lines or infer attachment from level',()=>{
+ for(const checkins of [0,1,10,29]){
+  const lines=mikoLines({...base,checkins,level:120,name:'Nala'});
+  assert(lines.every(l=>! /kangen|kenangan|hafal langkah|lama kenal|setahun|dekat aku|tempat sebelahku|nyamanmu|macan kecilmu/i.test(l.text)));
+  assert(reactionLine('pet',0,'Nala',checkins).includes('Pelan-pelan'));
+ }
+ assert.deepEqual([0,29,30,89,90,364,365,1095].map(bondStage),[0,0,1,1,2,2,3,3]);
+ const veteran=mikoLines({...base,checkins:1095,name:'Nala'});assert(veteran.some(l=>/Tiga tahun/.test(l.text)));
+ assert.notEqual(reactionLine('highfive',0,'Nala',0),reactionLine('highfive',0,'Nala',90));
+});

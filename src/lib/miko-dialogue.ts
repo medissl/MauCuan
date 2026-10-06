@@ -12,20 +12,20 @@ export function dialogueMood(line: MikoLine): 'idle' | 'happy' | 'wink' | 'focus
 // day, claims to see a bank account, or rewards spending or pet-care taps.
 export const mikoPersonality = [
   "Eh, aku tadi hitung totolku. Lupa lagi gara-gara ekorku gerak!",
-  "Syal sudah rapi. Siap nemenin kamu!",
+  "Syal udah rapi. Eh, ujungnya masih miring.",
   "Tempat paling enak itu dekat jendela. Hangat banget.",
   "Rencana besarku hari ini: tidur sebentar. Habis itu main!",
   "Dengar itu? Kayaknya bolaku menggelinding sendiri.",
   "Hari kamu gimana? Aku tadi sibuk pilih bantal.",
   "Tos dulu, yuk! Cakarku sudah siap.",
-  "Benangnya kusut. Aku cuma menyentuhnya sedikit… kayaknya.",
+  "Benangnya kusut. Aku cuma colek dikit… kayaknya.",
   "Ada cerita seru hari ini? Aku pasang telinga!",
   "Aku coba pasang muka galak. Malah jadi senyum.",
   "Syal biru ini cocok, kan? Aku suka banget.",
   "Mau ngobrol atau duduk bareng dulu?",
   "Sini, duduk dekat aku.",
   "Capek? Kita rebahan sebentar, yuk.",
-  "Aku mengejar bayanganku tadi. Dia jago kabur!",
+  "Aku kejar bayanganku tadi. Kok ikut lari terus?",
   "Kamu lagi belajar apa? Aku mau ikut lihat.",
   "Aku bisa duduk manis. Coba hitung sampai tiga!",
   "Sudah minum? Aku habis main, jadi haus.",
@@ -37,7 +37,7 @@ export const mikoPersonality = [
   "Kalau hari ini ribet, kita rapikan satu-satu.",
   "Eh, kamu datang! Aku baru mau cari kamu.",
   "Ada totol kecil di telingaku. Lucu, ya?",
-  "Aku menemukan tempat tidur baru. Di atas buku… ups.",
+  "Aku nemu tempat tidur baru. Di atas buku… ups.",
   "Hari ini mau ngapain? Aku ikut!",
   "Aku penasaran sama semua tombol di sini.",
   "Yuk, mulai lagi. Aku sudah siap.",
@@ -48,7 +48,7 @@ export const mikoPersonality = [
   "Aku duduk diam kalau kamu fokus. Ekorku agak susah diatur.",
   "Bantal ini empuk banget. Coba lihat!",
   "Aku menguap dulu. Huaa… selesai!",
-  "Wah, kamu mampir. Hariku jadi lebih seru.",
+  "Oh, kamu mampir. Aku tadi lagi cari bola.",
   "Satu hal dulu, yuk. Habis itu main sebentar.",
   "Aku suka nemenin kamu. Apalagi kalau ada tos.",
   "Kamar kita mau dihias apa lagi?",
@@ -56,7 +56,7 @@ export const mikoPersonality = [
   "Aku baru baca dua halaman. Gambarnya bagus.",
   "Anginnya bikin syalku goyang. Kayak bendera kecil!",
   "Ada yang bikin kamu senyum hari ini?",
-  "Kamu boleh cerita apa saja. Aku dengerin.",
+  "Mau cerita apa aja, boleh. Aku dengerin.",
   "Aku hampir tidur sambil duduk. Hampir!",
   "Ketuk aku buat tos. Mau elus? Tahan, lalu usap.",
   "Hup! Lompatanku tadi lumayan tinggi, kan?",
@@ -69,14 +69,14 @@ export const mikoPersonality = [
   "Kita sisakan waktu buat main, ya?",
   "Bolanya aku jaga. Jangan khawatir!",
   "Aku suka cara kita main bareng.",
-  "Aku kecil, tapi semangatku besar!",
+  "Kakiku pendek. Bolanya kok jauh banget?",
   "Hai lagi! Mau mulai dari mana?"
 ];
 export const mikoReactions = {
   pet: ['Hehe, enak banget dielus!', 'Aku boleh duduk dekat kamu sebentar?', 'Mmm, aku betah banget di sini.', 'Syalku sedikit miring, tapi aku suka.', 'Makasih sudah nemenin aku!'],
   touch: ['Mmm… terusin, ya. Enak banget.', 'Pelan-pelan… bagian atas kepalaku paling nyaman.', 'Pelan-pelan… aku bisa mengantuk kalau begini.'],
-  highfive: ['Tos! Kita kompak banget!', 'Tos berhasil. Cakarku pas dengan tanganmu!', 'Tos! Kompak terus, ya!', 'Tos hangat dari macan kecilmu.'],
-  ball: ['Ketangkap! Bola ini lebih cepat daripada kelihatannya.', 'Bola kembali! Aku mulai paham cara mengarahkannya.', 'Hup! Hampir kena syal. Kita coba lagi kapan-kapan.', 'Aku suka main sebentar. Terima kasih sudah menemani.'],
+  highfive: ['Tos! Kita kompak banget!', 'Hup! Pas. Sekali lagi?', 'Tos! Udah hafal, nih.', 'Tos! Eh, cakarku nggak kena, kan?'],
+  ball: ['Ketangkap! Wih, cepat juga.', 'Aku balikin, ya. Awas bolanya!', 'Hup! Hampir kena syal. Hehe.', 'Hup! Seru. Mau sekali lagi?'],
 };
 export const bondDialogue = [
   [
@@ -84,22 +84,22 @@ export const bondDialogue = [
     "Boleh duduk dekat kamu? Aku agak malu.",
     "Tos pertama kita! Jangan kencang-kencang, ya.",
     "Aku cari sudut buat tidur. Yang ini enak!",
-    "Nama baruku bagus. Kamu yang pilih, kan?",
-    "Pelan-pelan kenalannya, ya. Aku penasaran sama kamu.",
+    "Namaku lucu, ya. Aku masih latihan nyebutnya.",
+    "Aku belum tahu banyak soal kamu. Kita kenalan dulu, ya.",
     "Kamu suka main bola juga?",
     "Mau lihat-lihat dulu? Aku temenin.",
     "Bola di rumah baru bunyinya beda, lho.",
-    "Makasih sudah kasih aku tempat.",
+    "Oh, ini kamarku? Boleh lihat-lihat dulu?",
     "Aku senang kita ketemu.",
-    "Kalau butuh teman, panggil aku saja."
+    "Mau coba tos? Aku masih belajar."
   ],
   [
-    "Aku mulai hafal langkahmu. Eh, kamu lagi!",
+    "Oh, kamu lagi. Aku mulai hafal, nih.",
     "Tos kita makin kompak!",
     "Senang deh kita punya waktu bareng.",
-    "Sudah banyak hari kecil kita lewati.",
-    "Kamu mampir pas aku lagi mikirin kamu.",
-    "Sudut ini favoritku. Tapi dekat kamu lebih enak.",
+    "Udah beberapa kali ketemu, ya. Aku nggak malu kayak awal.",
+    "Pas banget. Aku baru bangun tadi.",
+    "Sudut ini paling enak buat tidur. Kamu udah lihat?",
     "Catatannya kita rapikan bareng, yuk.",
     "Harimu seru atau melelahkan? Cerita dong.",
     "Kamar ini mulai terasa kayak rumah.",
@@ -111,29 +111,29 @@ export const bondDialogue = [
     "Kita sudah lama kenal. Aku nyaman banget di sini.",
     "Aku kangen cerita kecilmu. Hari ini ada apa?",
     "Tempat sebelahku kosong. Buat kamu!",
-    "Perjalanan kita sudah jauh juga, ya.",
+    "Udah lama juga kita kenal, ya.",
     "Rencana berubah? Yuk, lihat lagi bareng.",
     "Aku hafal tos kamu sekarang.",
     "Teman lama, cerita baru! Aku siap dengerin.",
     "Targetnya mau diganti? Aku ikut lihat.",
-    "Sedikit-sedikit kita jadi makin paham.",
+    "Dulu aku suka bingung. Sekarang lumayan ngerti.",
     "Kamu sibuk belakangan ini? Senang kamu mampir.",
     "Lihat kamar kita. Banyak kenangannya!",
     "Kalau mampir sebentar pun aku senang."
   ],
   [
-    "Sudah lebih dari setahun kita bareng. Wah!",
-    "Rencana kita berubah banyak, ya. Seru lihatnya.",
+    "Udah lebih dari setahun! Kok cepat, ya.",
+    "Banyak yang berubah, ya. Bolaku aja masih sama.",
     "Sini, tempat nyamanmu masih ada.",
     "Lama berteman, aku tetap senang tiap kamu datang.",
     "Ada hal baru? Ceritain dong!",
-    "Makasih sudah ngajak aku dalam perjalananmu.",
+    "Makasih udah sering mampir. Aku senang, beneran.",
     "Bola lama ini tetap favoritku.",
     "Ingat waktu kamar kita masih kosong?",
     "Hari lagi berat? Aku duduk di sebelahmu.",
     "Masih ada banyak hal buat kita coba.",
-    "Teman lama paling enak diajak ngobrol santai.",
-    "Aku tetap macan kecilmu yang suka penasaran."
+    "Cerita aja. Aku udah siap dengerin kayak biasa.",
+    "Aku masih suka kepo. Yang itu nggak berubah. Hehe."
   ]
 ];
 export const everydayDialogue = [
@@ -144,13 +144,13 @@ export const everydayDialogue = [
   "Aku jadi petualang jendela hari ini.",
   "Sore-sore enaknya ngapain, ya?",
   "Bolanya aman sama aku. Kayaknya.",
-  "Senang kamu meluangkan waktu buat mampir.",
+  "Eh, sempat mampir! Lagi ngapain?",
   "Buku tutup dulu. Kita ngobrol!",
   "Kabar kecil juga kabar. Cerita dong.",
   "Bingung pilih yang mana? Kita lihat pelan-pelan.",
   "Aku suka hari biasa kalau ada kamu.",
   "Sunyi ya? Aku bisa jadi teman duduk.",
-  "Aku mau jadi macan besar. Tapi bantal kecil ini sayang dilepas.",
+  "Katanya nanti aku makin besar. Bantal ini masih muat nggak, ya?",
   "Kamu mulai sesuatu yang baru hari ini?",
   "Aku bantu semangatin, ya!",
   "Lagi pengin cerita atau diam sebentar?",
@@ -171,23 +171,42 @@ export const everydayDialogue = [
   "Kamu lebih suka pagi atau malam?",
   "Aku suka saat kamu cerita sambil santai.",
   "Telingaku besar. Ceritamu pasti kedengaran!",
-  "Hari biasa pun seru bareng teman.",
+  "Nggak ngapa-ngapain juga enak, ya. Duduk aja dulu.",
   "Aku ngantuk di tengah rencana besar. Hehe."
 ];
-export function reactionLine(kind: keyof typeof mikoReactions, index: number, name: string) { return mikoReactions[kind][index % mikoReactions[kind].length].replaceAll('Miko', name); }
+export function bondStage(checkins: number) {
+  return checkins >= 365 ? 3 : checkins >= 90 ? 2 : checkins >= 30 ? 1 : 0;
+}
+const newFriendReactions = {
+  pet: ['Oh… makasih. Pelan-pelan, ya.', 'Hmm, ternyata enak juga.', 'Aku belum biasa dielus. Sebentar aja, ya.'],
+  touch: ['Oh? Mau elus? Pelan-pelan dulu, ya.', 'Bagian sini aja dulu… boleh?', 'Aku agak geli. Hehe.'],
+  highfive: ['Tos! Eh… gini, kan?', 'Hup! Kena nggak tadi?', 'Tos dulu. Aku coba, ya!'],
+  ball: ['Ketangkap! Eh, seru juga.', 'Hup! Tadi hampir lewat.', 'Bolanya di sini. Mau coba lagi?'],
+};
+const familiarReactions = {
+  pet: ['Hehe, enak. Makasih, ya.', 'Eh, syalku miring. Bentar…', 'Aku mulai biasa sama elusanmu.'],
+  touch: ['Oh, mau elus? Boleh.', 'Pelan dikit, aku geli. Hehe.', 'Iya, sebelah sini.'],
+  highfive: ['Tos! Kali ini pas.', 'Hup! Kita mulai jago.', 'Tos lagi? Aku siap.'],
+  ball: ['Hup, dapat! Sekali lagi?', 'Tadi bolanya lewat bawah kakiku. Hehe.', 'Aku balikin, ya. Siap?'],
+};
+export function reactionLine(kind: keyof typeof mikoReactions, index: number, name: string, checkins = 0) {
+  const bank = bondStage(checkins) === 0 ? newFriendReactions : bondStage(checkins) === 1 ? familiarReactions : mikoReactions;
+  return bank[kind][index % bank[kind].length].replaceAll('Miko', name);
+}
 export function mikoLines(context: { transactions: Transaction[]; goals: Goal[]; contributions: Contribution[]; available: number; day: string; checked: boolean; room: PetRoom; level: number; hour: number; name?: string; checkins?: number }): MikoLine[] {
-  const { transactions, goals, contributions, available, day, checked, room, level, hour, name = 'Miko', checkins = (level - 1) * 10 } = context;
-  const personal: MikoLine[] = mikoPersonality.map(text => ({ text, kind: 'personal' }));
-  const bond = checkins >= 365 ? 3 : checkins >= 90 ? 2 : checkins >= 10 ? 1 : 0;
+  const { transactions, goals, contributions, available, day, checked, room, level, hour, name = 'Miko', checkins = 0 } = context;
+  const bond = bondStage(checkins);
+  // Shared jokes never imply a relationship that has not developed yet.
+  const personal: MikoLine[] = mikoPersonality.filter(text => bond >= 2 || !/dekat aku|kamar kita|nemenin|temenin|tungguin|aku ikut|apa saja|apa aja|bareng|cari kamu|besok ceritain|boleh cerita/i.test(text)).map(text => ({ text, kind: 'personal' }));
   personal.unshift(...bondDialogue[bond].map(text => ({ text, kind: 'personal' as const })));
-  personal.push(...everydayDialogue.map(text => ({ text, kind: 'personal' as const })));
-  personal.unshift({ text: `Hai, aku ${name}! Mau tos dulu?`, kind: 'personal' });
-  if (checkins >= 10) personal.unshift({ text: `Sudah ${checkins} check-in bareng. Wah, banyak juga kenangan kita!`, kind: 'personal' });
-  personal.unshift({ text: hour < 11 ? 'Pagi! Syal sudah rapi. Kamu sudah siap?' : hour < 17 ? 'Hai! Sini, duduk dekat aku.' : hour < 21 ? 'Sore! Harimu gimana? Cerita dong.' : 'Sudah malam. Aku mulai ngantuk. Kamu juga?', kind: 'personal' });
-  if (room.left === 'plant') personal.unshift({ text: 'Tanaman kecil kita tumbuh cantik. Aku suka duduk di dekatnya.', kind: 'personal' });
-  if (room.left === 'books') personal.unshift({ text: 'Rak buku ini bikin aku ingin belajar. Kamu mau mulai dari buku yang mana?', kind: 'personal' });
+  if (bond >= 2) personal.push(...everydayDialogue.map(text => ({ text, kind: 'personal' as const })));
+  personal.unshift({ text: bond === 0 ? `Hai… aku ${name}. Mau coba tos?` : 'Eh, hai lagi! Lagi ngapain?', kind: 'personal' });
+  if (checkins >= 365) personal.unshift({ text: checkins >= 1095 ? 'Tiga tahun lebih! Bolaku masih yang itu. Hehe.' : 'Udah setahun lebih, ya. Aku senang masih ketemu kamu.', kind: 'personal' });
+  personal.unshift({ text: hour < 11 ? 'Pagi! Aku baru beresin syal. Kamu udah bangun lama?' : hour < 17 ? bond < 2 ? 'Oh, hai. Lagi istirahat sebentar?' : 'Eh, kamu! Sini duduk dulu.' : hour < 21 ? 'Sore! Tadi harinya gimana?' : 'Udah malam. Aku mulai ngantuk. Kamu juga?', kind: 'personal' });
+  if (room.left === 'plant') personal.unshift({ text: 'Tanaman kecil ini lucu. Daunnya goyang dikit tadi.', kind: 'personal' });
+  if (room.left === 'books') personal.unshift({ text: 'Buku yang itu ada gambarnya. Aku mau lihat dulu.', kind: 'personal' });
   if (room.toy === 'yarn') personal.unshift({ text: 'Benang biru ini menggoda banget. Main, yuk!', kind: 'personal' });
-  if (room.head) personal.unshift({ text: 'Penampilan baruku sudah pas? Aku merasa siap untuk petualangan kecil.', kind: 'personal' });
+  if (room.head) personal.unshift({ text: 'Ini udah pas belum? Aku nggak bisa lihat atas kepalaku. Hehe.', kind: 'personal' });
   if (level > 1) personal.unshift({ text: `Level ${level}! Kita lihat hadiah baru di toko, yuk?`, kind: 'personal' });
   // Returning users start at a different personal story each date rather than
   // hearing the same introduction whenever they open the room.
@@ -195,11 +214,11 @@ export function mikoLines(context: { transactions: Transaction[]; goals: Goal[];
   const records: MikoLine[] = [];
   const today = transactions.filter(t => t.occurred_on === day);
   if (today.length) records.push({ text: `Hari ini sudah ada ${today.length} catatan. Mau cek bareng?`, action: 'Lihat catatan', route: 'records', kind: 'record' });
-  if (available >= 0 && transactions.length) records.push({ text: `Saldo tersedia di aplikasi ${money(available)}. Mau lihat rinciannya?`, action: 'Lihat saldo', route: 'balance', kind: 'record' });
-  records.push({ text: checked ? 'Check-in hari ini sudah beres! Tos dulu, habis itu main?' : 'Gimana harimu? Yuk, check-in bareng. Kalau nggak belanja, tinggal bilang saja.', action: checked ? 'Lihat check-in' : 'Cek hari ini', route: 'checkin', kind: 'record' });
+  if (available >= 0 && transactions.length) records.push({ text: `Di sini masih ada ${money(available)}. Mau cek rinciannya sebentar?`, action: 'Lihat saldo', route: 'balance', kind: 'record' });
+  records.push({ text: checked ? 'Check-in hari ini sudah beres! Mau tos?' : 'Hari ini gimana? Mau cek sebentar? Nggak belanja juga bisa check-in.', action: checked ? 'Lihat check-in' : 'Cek hari ini', route: 'checkin', kind: 'record' });
   for (const goal of goals.filter(g => g.target_amount > 0)) {
     const saved = contributions.filter(c => c.goal_id === goal.id).reduce((n, c) => n + Number(c.amount), 0);
-    records.push({ text: saved < goal.target_amount ? `Target ${goal.title}: tinggal ${money(goal.target_amount - saved)} lagi. Semangat, aku temenin!` : `Hore! Target ${goal.title} sudah tercapai. Aku ikut senang!`, action: 'Lihat target', route: 'goals', kind: 'record' });
+    records.push({ text: saved < goal.target_amount ? `Buat ${goal.title}, kurang ${money(goal.target_amount - saved)} lagi. Dicicil pelan aja, ya.` : `Hore! Tabungan buat ${goal.title} udah cukup!`, action: 'Lihat target', route: 'goals', kind: 'record' });
   }
   // Interleave helpful facts with personality. Deterministic ordering makes the
   // next line different and testable; a session visits every line before repeat.
