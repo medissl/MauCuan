@@ -1,6 +1,6 @@
 {
   "name": "maucuan",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "expo-router/entry",
   "dependencies": {
     "@expo-google-fonts/plus-jakarta-sans": "0.4.2",

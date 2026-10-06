@@ -1,6 +1,6 @@
 # MauCuan implementation status
 
-Updated 6 October 2026. Current source: **0.3.2** — see [release details](release-0.3.2.md). Adds two-line receipt item association, a fixed in-room speech bubble, casual named-pet dialogue and native quiz answer popup. Earlier spatial OCR, 68 rendered collectibles through level 120, habit-aware notifications and Android widget are preserved. The 0.3.1 APK finished successfully; the latest fixes require a new APK and real-device validation.
+Updated 6 October 2026. Current source: **0.3.3** — see [release details](release-0.3.3.md). Repairs native quiz answer controls and reserves a fixed dialogue area beneath the decorated room interior. The accepted scanner, 68 rendered collectibles through level 120, habit-aware notifications and Android widget are preserved. The 0.3.2 APK finished successfully; these pet-section fixes require a replacement APK and real-device validation.
 
 Historical progress notes below describe earlier versions.
 
