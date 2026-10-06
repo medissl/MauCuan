@@ -8,4 +8,4 @@ Receipt scanning is unchanged from the user's accepted 0.3.2 implementation.
 
 Validation: 46 automated tests, TypeScript and lint; Android and iOS production bundle exports. Quiz coverage includes all correct answers, a wrong answer, closing/reopening the sheet, and keeping the decorated viewport free of dialogue. A regression asserts that the sheet contains native choice controls rather than RN Pressables. A static component-based review shows the sky-house wall, crown, plant and bookshelf with the dialogue beneath them. These checks do not replace physical Android tap testing, which remains pending the replacement APK.
 
-Source version: 0.3.3. A fresh approved EAS one-build allowance is required for the replacement Android preview. No store submission is included.
+Source version: 0.3.3. The approved replacement Android preview was dispatched from 7d2de226372e965c93c7ef34e0daa23c2b66cf4c on 6 October 2026: build 349b13ff-0ffa-4116-a228-111838b587a6, IN_QUEUE at dispatch. The one-build allowance is consumed. No store submission is included. See android-preview.md for the build link.

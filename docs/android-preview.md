@@ -1,6 +1,6 @@
 # Version 0.3.3
 
-Source prepared on 6 October 2026 with native quiz answer controls and a fixed dialogue area beneath the decorated room interior. The operator requested a replacement Android preview. A fresh one-build Expo allowance preview must be approved before dispatch; no store submission is included.
+The approved replacement Android preview was dispatched on 6 October 2026 from commit 7d2de226372e965c93c7ef34e0daa23c2b66cf4c, with native quiz answer controls and a fixed dialogue area beneath the decorated room interior. Build: https://expo.dev/accounts/medizeng/projects/maucuan/builds/349b13ff-0ffa-4116-a228-111838b587a6 . Verified status at dispatch: IN_QUEUE. The one-build allowance 01a1107f-515e-7dba-b209-5c8b138b2a90 has been used. Internal APK only, no store submission. Download becomes available after successful completion; physical tap testing remains required.
 
 # Version 0.3.2
 
