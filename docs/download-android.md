@@ -28,4 +28,4 @@ APK dapat diunduh siapa pun karena repositori ini publik. Tidak perlu membuat ak
 
 ## Screenshot README
 
-Bagian atas README menyediakan tiga tempat: Beranda, Miko, dan Catatan uang. Setelah screenshot asli tersedia, simpan di `docs/screenshots/` dan ganti isi tabel dengan gambar.
+Screenshot asli aplikasi tersimpan di `docs/screenshots/`: `beranda.png`, `miko.png`, dan `catatan-uang.png`. Ketiganya ditampilkan berdampingan di bagian atas README dengan lebar yang sama. Untuk mengganti gambar, perbarui file tersebut dengan screenshot terbaru.

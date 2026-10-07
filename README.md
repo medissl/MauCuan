@@ -2,11 +2,9 @@
 
 Catat uang, bangun kebiasaan, dan tumbuh bareng Miko, teman macan tutulmu.
 
-<!-- SCREENSHOTS: reserved for three real mobile screenshots supplied by the owner. Replace the cells with images from docs/screenshots when available. -->
 | Beranda | Miko | Catatan uang |
 | :---: | :---: | :---: |
-| Screenshot menyusul | Screenshot menyusul | Screenshot menyusul |
-<!-- END SCREENSHOTS -->
+| <img src="docs/screenshots/beranda.png" alt="Beranda MauCuan dengan saldo, check-in, dan tombol catat transaksi" width="250"> | <img src="docs/screenshots/miko.png" alt="Miko di kamarnya dengan interaksi dan kuis harian" width="250"> | <img src="docs/screenshots/catatan-uang.png" alt="Kalender catatan uang dengan ringkasan pemasukan dan pengeluaran" width="250"> |
 
 **[Download Android APK](https://github.com/medissl/MauCuan/releases/download/v0.4.2/MauCuan-0.4.2.apk)** · **[Website](https://maucuan-finance.vercel.app)** · [Semua versi](https://github.com/medissl/MauCuan/releases)
 
