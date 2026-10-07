@@ -1,0 +1,69 @@
+/* Phone and tablet layout for the landing page. */
+@media (max-width: 900px) {
+  .landing .features {padding: 38px 0 30px}
+  .landing .section-head {display: block}
+  .landing .section-head h2 {font-size: 32px; margin: 0 0 22px}
+  .landing .feature-grid {
+    display: flex; gap: 14px; overflow-x: auto; overflow-y: hidden;
+    margin: 0 -25px; padding: 6px 25px 18px; scroll-padding-inline: 25px;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+    overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+  }
+  .landing .feature-grid::-webkit-scrollbar {display: none}
+  .landing .feature-grid::after {content: ''; flex: 0 0 24px}
+  .landing .feature {flex: 0 0 min(calc(100% - 24px), 400px); scroll-snap-align: start; padding: 24px; min-height: 330px}
+  .landing .feature-icon {width: 44px; height: 44px; margin-bottom: 20px; border-radius: 14px}
+  .landing .feature p {font-size: 13px; line-height: 1.75}
+  .landing .feature h3 {font-size: 24px}
+  .landing .feature-grid:focus-visible {outline: 2px solid #228191; outline-offset: -3px}
+  .landing .carousel-controls {display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 0}
+  .carousel-arrow {width: 44px; height: 44px; border: 1px solid #123d4318; border-radius: 50%; color: var(--ink); background: #fff9; font: inherit; font-size: 20px; cursor: pointer}
+  .carousel-arrow:disabled {opacity: .3; cursor: default}
+  .carousel-dots {display: flex; gap: 0}
+  .carousel-dots button {display: grid; place-items: center; width: 36px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer}
+  .carousel-dots button::after {content: ''; width: 7px; height: 7px; border-radius: 8px; background: #123d4330; transition: width .15s ease}
+  .carousel-dots button[aria-current=true]::after {width: 22px; background: #228191}
+}
+@media (max-width: 560px) {
+  .landing .wrap {padding-inline: 20px}
+  .landing header {min-height: 76px; padding: 16px 0; gap: 16px}
+  .landing nav > a:not(.nav-cta) {display: none}
+  .landing nav .nav-cta {display: inline-flex; align-items: center; min-height: 44px; padding: 10px 16px; font-size: 12px; background: #fff6}
+  .nav-desktop {display: none}
+  .nav-mobile {display: inline}
+  .landing .hero {display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; min-height: 0; padding: 18px 0 30px; text-align: center}
+  .landing .hero-copy {display: contents}
+  .landing .hero h1 {grid-row: 1; font-size: clamp(33px, 9.7vw, 48px); line-height: 1.15; letter-spacing: -1.6px; margin: 0 0 14px}
+  .landing .lead {grid-row: 2; max-width: 310px; margin: 0 auto; font-size: 14px; line-height: 1.7}
+  .landing .hero-art {grid-row: 3; height: 240px; margin: 8px auto 6px; max-width: 270px}
+  .landing .miko-companion {width: 250px; max-width: 100%}
+  .landing .miko-hint {font-size: 11px; margin-top: -18px; min-height: 38px}
+  .landing .actions {grid-row: 4; display: flex; flex-direction: column; gap: 4px; margin-top: 0}
+  .landing .actions .button {width: 100%; min-height: 54px; font-size: 14px}
+  .landing .actions .text-link {display: inline-flex; align-items: center; min-height: 44px; font-size: 12px}
+  .landing .little-note {grid-row: 5; margin-top: 6px; font-size: 11px}
+  .landing .feature-grid {margin-inline: -20px; padding-inline: 20px; scroll-padding-inline: 20px}
+  .landing .quiet {display: block; padding: 12px 0 34px}
+  .landing .quiet h2 {font-size: 28px; margin: 0 0 12px}
+  .landing .quiet > div > p:last-child {font-size: 13px; line-height: 1.8; margin-bottom: 20px}
+  .landing .quiet-note {margin: 0; padding: 18px 20px; border-radius: 20px; transform: none; box-shadow: none}
+  .landing .quiet-note .quote {display: none}
+  .landing .quiet-note p {font-size: 18px; line-height: 1.5; margin: 0 0 12px}
+  .landing .quiet-note .pill {display: inline-block; font-size: 9px}
+  .landing .status {padding: 30px 22px; border-radius: 26px}
+  .landing .status h2 {font-size: 30px; letter-spacing: -1px; margin-top: 0}
+  .landing .status > p {font-size: 13px; margin: 14px auto}
+  .landing .status .button {width: 100%}
+  .landing .status .status-small {font-size: 11px}
+  .landing .install-guide {margin: 20px 0}
+  .landing .install-steps {margin: 0 0 18px; gap: 0}
+  .landing .install-steps li {border: 0; border-radius: 0; background: none; padding: 12px 0}
+  .landing .download-links {font-size: 12px; gap: 12px}
+  .landing .download-links a {display: inline-flex; align-items: center; min-height: 44px}
+  .landing footer {gap: 12px; padding: 24px 0; margin-top: 24px}
+  .landing footer > div {justify-content: space-between; gap: 16px}
+  .landing footer > div a {display: inline-flex; align-items: center; min-height: 44px; font-size: 12px}
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-dots button::after {transition: none}
+}

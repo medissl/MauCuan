@@ -54,4 +54,11 @@ header{border-bottom:0}
 @media(prefers-reduced-motion:reduce){.hero-art .miko{animation:none}}
 
 /* Android download and installation guide. */
+.nav-mobile,.carousel-controls{display:none}
+.install-guide{max-width:850px;margin:28px auto;text-align:left;border-top:1px solid #ffffff28;border-bottom:1px solid #ffffff28}
+.install-guide summary{display:flex;justify-content:space-between;align-items:center;min-height:56px;list-style:none;cursor:pointer;font-size:13px;font-weight:600;padding:8px 0}
+.install-guide summary::-webkit-details-marker{display:none}
+.install-guide summary span{font-size:22px;font-weight:400}
+.install-guide[open] summary span{transform:rotate(45deg)}
+.install-guide summary:focus-visible{outline:2px solid #c1e4e8;outline-offset:4px;border-radius:8px}
 .install-steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:850px;margin:38px auto;padding:0;text-align:left}.install-steps li{padding:20px;border-radius:20px;background:#ffffff0b;border:1px solid #ffffff15}.install-step-icon{display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:#c1e4e8;color:#123d43;font-size:18px;margin-bottom:16px}.install-steps strong{display:block;font-size:13px}.install-steps p{font-size:12px;line-height:1.8;color:#c5e1e5;margin:10px 0 0}.download-links{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;font-size:12px;margin-top:24px}.download-links a{text-decoration:underline;text-underline-offset:5px}.status .button.light{font-size:14px;min-height:54px}@media(max-width:560px){.install-steps{grid-template-columns:1fr;gap:12px;margin:28px auto}.install-steps li{padding:16px}.install-step-icon{float:left;margin:0 14px 0 0}.install-steps p{margin:5px 0 0 44px}.download-links{gap:18px}}
