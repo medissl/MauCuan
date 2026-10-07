@@ -1,21 +1,44 @@
-The MIT License (MIT)
+MauCuan Personal Use License
 
-Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)
+Copyright (c) 2026 medissl, for original MauCuan contributions to the extent
+protected by copyright. All rights reserved except as expressly stated below.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Scope
+These terms apply to original MauCuan application code, website code,
+documentation, and original brand assets, to the extent the rights holder
+owns or controls the relevant rights. They do not replace the licenses of
+third-party software, templates, fonts, or other third-party materials.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+2. Personal use of the official app
+You may download, install, and use the official MauCuan application free of
+charge for your own personal, noncommercial use. You may share links to the
+official download page. This does not grant permission to resell the app,
+charge others for access, repackage it, or operate a commercial service
+based on it.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+3. Source and assets
+No permission is granted to reuse, modify, redistribute, sublicense, sell,
+or commercially exploit original MauCuan source code or assets without
+prior written permission from the rights holder. Viewing or forking this
+public repository as permitted by GitHub's terms does not grant additional
+rights to reuse or commercially distribute the project. Rights and
+exceptions required by applicable law are unaffected.
+
+4. Third-party components
+Third-party components remain governed by their respective licenses and
+copyright notices. These restrictions do not restrict rights granted by
+those licenses. The Expo template MIT notice is preserved in
+docs/licenses/expo-template-MIT.txt. The vendored receipt reader's
+attribution is in vendor/expo-text-extractor/NOTICE.md.
+
+5. Previous distributions
+These terms apply prospectively. They do not withdraw any rights validly
+granted under a license accompanying an earlier distribution.
+
+6. Disclaimer
+The software is provided "as is", without warranties, to the extent
+permitted by applicable law. The rights holder is not liable for damages
+arising from use of the software to the extent permitted by applicable law.
+
+For commercial licensing or other permissions:
+mediantozeng@gmail.com

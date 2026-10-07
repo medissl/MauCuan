@@ -44,3 +44,9 @@ Skema dan kebijakan akses tersimpan di `supabase/`. Data akun dibatasi ke pemili
 [Bantuan](https://maucuan-finance.vercel.app/support) · [Kebijakan privasi](https://maucuan-finance.vercel.app/privacy) · [Email bantuan](mailto:mediantozeng@gmail.com)
 
 Catatan dan foto struk disimpan di backend Supabase setelah kamu menyimpannya. Aplikasi membutuhkan internet untuk akun dan penyimpanan. Jangan kirim kata sandi atau kode verifikasi saat meminta bantuan.
+
+## Lisensi
+
+MauCuan gratis untuk penggunaan pribadi. Source dan aset asli MauCuan **tidak dilisensikan sebagai open source**; penggunaan komersial, penjualan ulang, modifikasi, dan redistribusi memerlukan izin tertulis. Kamu tetap boleh membagikan link download resminya. Lihat [ketentuan lisensi](LICENSE).
+
+Lisensi komponen pihak ketiga tetap berlaku, termasuk [template Expo](docs/licenses/expo-template-MIT.txt) dan [receipt reader](vendor/expo-text-extractor/NOTICE.md). Perubahan ini tidak mencabut hak yang sudah diberikan secara sah pada distribusi sebelumnya.
