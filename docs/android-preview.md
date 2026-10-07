@@ -1,3 +1,9 @@
+# Version 0.4.2
+
+Build **FINISHED** successfully on 7 October 2026. Android version 0.4.2, build 9, source commit `57a030f87c754a5e7c54ff2d01a482f8e1d72dee`. This fixes duplicate native outlines on month/year buttons. All 57 tests, lint, type checking, and Android export passed.
+
+[Download APK](https://github.com/medissl/MauCuan/releases/download/v0.4.2/MauCuan-0.4.2.apk) · [GitHub Release](https://github.com/medissl/MauCuan/releases/tag/v0.4.2) · [Expo build](https://expo.dev/accounts/medizeng/projects/maucuan/builds/2b4b94f1-8c99-4229-b47e-b0d9856a60ea). Public APK distribution, no store submission. The GitHub copy avoids depending on the Expo artifact expiry.
+
 # Version 0.4.0
 
 The approved Android preview was dispatched on 6 October 2026 at 17:31 WIB from commit fab4f080df3fa010d5c5681910999586a7b4ab04. Build: https://expo.dev/accounts/medizeng/projects/maucuan/builds/6c06a4c2-e391-4973-b908-6da82276650b . Verified status at dispatch: IN_QUEUE. The one-build allowance 01a110c4-0ca2-7ec9-8f8c-ba932505dd55 has been consumed. Internal APK only, no store submission. Download appears on this page after successful completion; physical-device validation remains pending.
